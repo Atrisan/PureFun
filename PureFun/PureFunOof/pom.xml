@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.monticore.sle19</groupId>
+  <artifactId>PureFunOof</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>PureFun-fe</module>
+    <module>PureFun2cpp</module>
+  </modules>
+
+  <developers>
+    <developer>
+      <name>Adrian Schmitz</name>
+    </developer>
+    <developer>
+      <name>Alexander Gerstenberger</name>
+    </developer>
+    <developer>
+      <name>Pascal Siewert</name>
+    </developer>
+  </developers>
+
+  <properties>
+
+    <!-- .. Libraries ..................................................... -->
+
+    <monticore.version>5.0.0</monticore.version>
+    <se-library.version>1.0.0</se-library.version>
+
+    <guava.version>18.0</guava.version>
+    <junit.version>4.11</junit.version>
+    <antlr.version>4.7.1</antlr.version>
+
+
+    <!-- .. Plugins ....................................................... -->
+
+    <assembly.plugin>2.5.3</assembly.plugin>
+    <compiler.plugin>3.2</compiler.plugin>
+    <source.plugin>2.4</source.plugin>
+
+    <!-- Classifiers -->
+
+    <grammars.classifier>grammars</grammars.classifier>
+
+    <!-- .. Misc .......................................................... -->
+  
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <!-- == REPOSITORIES ============================================ -->
+
+  <repositories>
+    <repository>
+      <id>se-nexus</id>
+      <url>https://nexus.se.rwth-aachen.de/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>se-nexus</id>
+      <url>https://nexus.se.rwth-aachen.de/content/groups/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- MontiCore Generation -->
+        <plugin>
+          <groupId>de.monticore.mojo</groupId>
+          <artifactId>monticore-maven-plugin</artifactId>
+          <version>${monticore.version}</version>
+          <executions>
+            <execution>
+              <configuration>
+                <script>de/monticore/monticore_noemf.groovy</script>
+              </configuration>
+              <goals>
+                <goal>generate</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.monticore.sle19</groupId>
+        <artifactId>se-library</artifactId>
+        <version>${se-library.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>org.antlr</groupId>
+        <artifactId>antlr4-runtime</artifactId>
+        <version>${antlr.version}</version>
+      </dependency>
+    
+      <!-- MontiCore Dependencies -->
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>monticore-runtime</artifactId>
+        <version>${monticore.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>monticore-grammar</artifactId>
+        <version>${monticore.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>monticore-grammar</artifactId>
+        <version>${monticore.version}</version>
+        <classifier>${grammars.classifier}</classifier>
+        <scope>provided</scope>
+      </dependency>
+  
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>monticore-generator</artifactId>
+        <version>${monticore.version}</version>
+      </dependency>
+  
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>javaDSL</artifactId>
+        <version>4.3.11</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>javaDSL</artifactId>
+        <classifier>${grammars.classifier}</classifier>
+        <version>4.3.11</version>
+        <scope>provided</scope>
+      </dependency>
+      
+      <!-- Test Libraries -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      
+      <dependency>
+        <groupId>de.monticore.sle19</groupId>
+        <artifactId>ad-rte</artifactId>
+        <version>${se-library.version}</version>         
+      </dependency>
+    
+      <dependency>
+        <groupId>de.monticore</groupId>
+        <artifactId>monticore-runtime</artifactId>
+        <version>${monticore.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+
+</project>
