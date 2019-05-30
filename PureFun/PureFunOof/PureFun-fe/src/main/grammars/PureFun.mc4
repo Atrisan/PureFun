@@ -1,38 +1,58 @@
 grammar PureFun extends de.monticore.literals.Literals, de.monticore.expressions.CommonExpressions {
 
-Module =
-"module" Name "{"
-    Definition*
-"}";
+interface Type;
 
 interface Definition;
 
 interface Statement;
 
-Variable implements Definition; //TODO
+ReturnType implements Type = "Void" | Type;
 
-Function implements Definition; //TODO
+TypeParameter = "<" (Type || ",") ">"
+
+FunctionParameter = "(" (Type Name || ",") ")";
+
+scope Module =
+	"module" Name "{"
+			Definition*
+	"}";
+
+Variable implements Definition, Statement
+	= Type Name ("=" Expression)?
+
+AssignStatement implements Statement 
+	= left:Name "=" right:Expression
+;
+
+Function implements Definition 
+	= Generic? "fun" Name Arguments BlockStatement
+;
 
 DataStructure implements Definition
- = Generic?
-    "data" Name "{"
-    Variable*
-    "}";
+ = Generic?	"data" Name "{" Variable* "}"
+;
 
 IfStatement implements Statement
-    =   "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:( BlockStatement | IfStatement ) )?
+	= "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:( BlockStatement | IfStatement ) )?
 ;
 
 ForStatement implements Statement; //TODO
 
 WhileStatement implements Statement; //TODO
 
-AsyncStatement implements Statement; //TODO
+AsyncExpression implements Expression
+	= "async" CallExpression
+;
+
+AsyncStatement implements Statement
+	= "async" BlockStatement
+;
 
 BlockStatement implements Statement
- = "{" Statement* "}";
+ = "{" Statement* "}"
+;
 
-Generic; //TODO
+Generic = "template" TypeParameter 
 
 
 /*=================================================================*/
