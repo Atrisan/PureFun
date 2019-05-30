@@ -1,4 +1,4 @@
-grammar ActivityDiagram extends de.monticore.literals.Literals{
+grammar ActivityDiagram extends de.monticore.literals.Literals, de.monticore.expressions.CommonExpressions {
 
 Module =
 "module" Name "{"
@@ -8,8 +8,6 @@ Module =
 interface Definition;
 
 interface Statement;
-
-interface Expression;
 
 interface Variable extends Definition;
 
@@ -28,75 +26,14 @@ IfStatement implements Statement
     =   "if" "(" condition:Expression ")" "{" thenStatement:Statement "}" ("else" elseStatement:( "{" Statement "}" | IfStatement ) )?
 ;
 
-interface InfixExpression = left:Expression operator:"" right:Expression;
 
 /*=================================================================*/
 
-  LessEqualExpression implements Expression <150>, InfixExpression =
-	left:Expression operator:"<=" right:Expression;
-
-  GreaterEqualExpression implements Expression <150>, InfixExpression =
-	left:Expression operator:">=" right:Expression;
-
-  LessThanExpression implements Expression <150>, InfixExpression =
-	left:Expression operator:"<" right:Expression;
-
-  GreaterThanExpression implements Expression <150>, InfixExpression =
-	left:Expression operator:">" right:Expression;
-
-  EqualsExpression implements Expression <130>, InfixExpression =
-	left:Expression operator:"==" right:Expression;
-
-  NotEqualsExpression implements Expression <130>, InfixExpression =
-	left:Expression operator:"!=" right:Expression;
-
-/*=================================================================*/
-/*=================================================================*/
-
-  MultExpression implements Expression <180>, InfixExpression =
-	left:Expression operator:"*" right:Expression;
-
-  DivideExpression implements Expression <180>, InfixExpression =
-	left:Expression operator:"/" right:Expression;
-
-  ModuloExpression implements Expression <180>, InfixExpression =
-	left:Expression operator:"%" right:Expression;
-
-  PlusExpression implements Expression <170>, InfixExpression =
-	left:Expression operator:"+" right:Expression;
-
-  MinusExpression implements Expression <170>, InfixExpression =
-	left:Expression operator:"-" right:Expression;
-
-/*=================================================================*/
-/*=================================================================*/
-
-  BooleanAndOpExpression implements Expression <120>, InfixExpression =
+  BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression =
 	left:Expression operator:"and" right:Expression;
 
-  BooleanOrOpExpression implements Expression <117>, InfixExpression =
+  BooleanOrOpExpressionDiff implements Expression <117>, InfixExpression =
 	left:Expression operator:"or" right:Expression;
 
 /*=================================================================*/
-
-/*=================================================================*/
-
-  ConditionalExpression implements Expression <114> =
-	condition:Expression "?" trueExpression:Expression ":" falseExpression:Expression;
-
-/*=================================================================*/
-
-  SimpleAssignmentExpression implements Expression <111>, InfixExpression = <rightassoc>
-	left:Expression operator:"+=" right:Expression;
-
-/*=================================================================*/
-
- BracketExpression implements Expression <310>
-    =  "(" Expression ")";
-
-  Arguments
-= "(" (Expression || ",")* ")";
-
-    LogicalNotExpression implements Expression <190> =
-"!" Expression;
 }
