@@ -1,0 +1,63 @@
+module Binary{
+
+    [Float64] list = [31.42, 483.56, 69.69]
+    [Float64] list2 = [31.42, 483.56, 69.69]
+
+    (String, Int8) tupel1 = ("Axel stinkt", 69)
+    (String, Int8) tupel2 = ("Axel stinkt", 31)
+
+    [key:Int32, value:[Float64]] map = {69:[31.42, 483.56, 69.69], 31:[23,21]}
+
+    template<Key, Value>
+    data Node{
+        Key key
+        Value value
+        Node<Key, Value> left
+        Node<Key, Value> right
+    }
+    template <Key, Value>
+    fun find(Node<Key, Value> node, Key key):Value{
+        if(node == default){
+            return default;
+        }
+        Value valueLeft = async find(node.left, key)
+        Value valueRight =  find(node.right, key)
+        if(valueLeft != default){
+            return valueLeft
+        } else if(valueRight != default){
+            return valueRight
+        } else {
+            return default
+        }
+    }
+    template<Element>
+    fun sum([Element] list):Element{
+        Element summe = 0
+        for(Int i = 0; i < #list; i++){
+            summe += list[i]
+        }
+        return summe
+    }
+
+    fun tupac((String, Int8) tupel1, (String, Int8) tupel2):Float64{
+        print(tupel1[0])
+        print(tupel2[0])
+        [Float64] list1 = map[tupel1[1]]
+        Float64 res1 = sum(list1)
+        Float64 res2
+        async {
+            [Float64] list2 = map[tupel2[1]]
+            res2 = sum(list2)
+        }
+
+        return (res1 + res2)
+    }
+
+    mainFun(){
+        print(sum(list1) + sum(list2))
+        print(sum(list1 ++ list2))
+        print(sum(map[69]) * 2)
+        print(tupac(tupel1,tupel2)
+    }
+
+}
