@@ -1,4 +1,4 @@
-grammar ActivityDiagram extends de.monticore.literals.Literals, de.monticore.expressions.CommonExpressions {
+grammar PureFun extends de.monticore.literals.Literals, de.monticore.expressions.CommonExpressions {
 
 Module =
 "module" Name "{"
@@ -9,22 +9,30 @@ interface Definition;
 
 interface Statement;
 
-interface Variable extends Definition;
-
-VariableDefinition implements Variable, Statement; //TODO
-
-VariableInstantiation implements Variable, Statement; //TODO
+Variable implements Definition; //TODO
 
 Function implements Definition; //TODO
 
 DataStructure implements Definition
- = "data" Name "{"
-    VariableDefinition*
+ = Generic?
+    "data" Name "{"
+    Variable*
     "}";
 
 IfStatement implements Statement
-    =   "if" "(" condition:Expression ")" "{" thenStatement:Statement "}" ("else" elseStatement:( "{" Statement "}" | IfStatement ) )?
+    =   "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:( BlockStatement | IfStatement ) )?
 ;
+
+ForStatement implements Statement; //TODO
+
+WhileStatement implements Statement; //TODO
+
+AsyncStatement implements Statement; //TODO
+
+BlockStatement implements Statement
+ = "{" Statement* "}";
+
+Generic; //TODO
 
 
 /*=================================================================*/
