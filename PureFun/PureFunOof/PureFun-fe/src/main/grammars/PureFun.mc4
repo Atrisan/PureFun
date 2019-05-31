@@ -8,51 +8,44 @@ interface Statement;
 
 ReturnType implements Type = "Void" | Type;
 
-TypeParameter = "<" (Type || ",") ">"
+TypeParameter = "<" (Type || ",")+ ">";
 
-FunctionParameter = "(" (Type Name || ",") ")";
+FunctionParameters = "(" (FunktionParameter || ",")* ")";
 
-scope Module =
-	"module" Name "{"
-			Definition*
-	"}";
+FunktionParameter = Type TypeParameter? Name;
+
+scope Module
+    = "module" Name "{"	Definition*	"}";
 
 Variable implements Definition, Statement
-	= Type Name ("=" Expression)?
+	= Type Name TypeParameter? ("=" Expression)?;
 
 AssignStatement implements Statement 
-	= left:Name "=" right:Expression
-;
+	= left:Name "=" right:Expression;
 
 Function implements Definition 
-	= Generic? "fun" Name Arguments BlockStatement
-;
+	= Generic? "fun" Name FunctionParameters BlockStatement;
 
 DataStructure implements Definition
- = Generic?	"data" Name "{" Variable* "}"
-;
+ = Generic?	"data" Name "{" Variable* "}";
 
 IfStatement implements Statement
-	= "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:( BlockStatement | IfStatement ) )?
-;
+	= "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:( BlockStatement | IfStatement ) )? ;
 
 ForStatement implements Statement; //TODO
 
 WhileStatement implements Statement; //TODO
 
 AsyncExpression implements Expression
-	= "async" CallExpression
-;
+	= "async" CallExpression;
 
 AsyncStatement implements Statement
-	= "async" BlockStatement
-;
+	= "async" BlockStatement;
 
 BlockStatement implements Statement
- = "{" Statement* "}"
-;
+ = "{" Statement* "}";
 
-Generic = "template" TypeParameter 
+Generic = "template" TypeParameter ;
 
 
 /*=================================================================*/
