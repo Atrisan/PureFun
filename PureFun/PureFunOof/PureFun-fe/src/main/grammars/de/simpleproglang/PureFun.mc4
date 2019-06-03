@@ -7,11 +7,24 @@ grammar PureFun extends de.monticore.literals.Literals,
     symbol scope Module
             = "module" Name "{"	Definition*	"}";
 
-    Type = Name;
+    Type = Name | "[" Type "]"
+                | "[" Type "," Type "]"
+                | "(" (Type || ",")* ")";
 
     interface Definition;
 
     interface Statement;
+
+    ListExpression implements Expression
+        = "[" (Expression || ",")* "]";
+
+    MapExpression implements Expression
+        = "{" (MapValuePair || ",")* "}";
+
+    MapValuePair = key: Expression ":" value:Expression;
+
+    TupleExpression implements Expression
+        = "(" (Expression || ",")* ")";
 
     FunctionParameters = "(" (FunctionParameter || ",")* ")";
 
@@ -30,7 +43,7 @@ grammar PureFun extends de.monticore.literals.Literals,
      = "data" Name "{" Variable* "}";
 
     IfStatement implements Statement
-        = "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:ElseStatement )? ;
+        = "if" condition:Expression thenStatement:BlockStatement ("else" elseStatement:ElseStatement )? ;
 
     ElseStatement
         = BlockStatement | IfStatement;
@@ -46,12 +59,10 @@ grammar PureFun extends de.monticore.literals.Literals,
     interface ForControl;
 
     CommonForControl implements ForControl
-        = ForInit? ";" condition:Expression? ";" (Expression || ",")*
-        ;
+        = ForInit? ";" condition:Expression? ";" (Expression || ",")*;
 
     ForInit
-        = (Expression || ",")+
-        ;
+        = (Expression || ",")+;
 
     WhileStatement implements Statement
         = "while" condition:Expression BlockStatement;
@@ -63,7 +74,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "async" BlockStatement;
 
     BlockStatement implements Statement
-     = "{" Statement* "}";
+     = "{" (Statement | Expression)* "}";
 
 
     /*=================================================================*/
