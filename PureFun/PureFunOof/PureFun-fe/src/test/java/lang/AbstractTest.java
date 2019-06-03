@@ -5,15 +5,14 @@
  */
 package lang;
 
-import activitydiagram._ast.ASTActivityDiagram;
-import activitydiagram._parser.ActivityDiagramParser;
-import activitydiagram._symboltable.ActivityDiagramLanguage;
+import de.purefun._ast.ASTActivityDiagram;
+import de.purefun._parser.ActivityDiagramParser;
+import de.purefun._symboltable.ActivityDiagramLanguage;
 import de.monticore.ModelingLanguage;
 import de.monticore.ModelingLanguageFamily;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.java.lang.JavaDSLLanguage;
 import de.monticore.symboltable.GlobalScope;
-import de.monticore.symboltable.ResolvingConfiguration;
 import de.se_rwth.commons.logging.Log;
 import org.junit.BeforeClass;
 

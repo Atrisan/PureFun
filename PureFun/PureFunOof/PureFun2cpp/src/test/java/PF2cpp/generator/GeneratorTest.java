@@ -1,16 +1,14 @@
 package ad2java.generator;
 
-import activitydiagram._ast.ASTActivityDiagram;
-import activitydiagram._symboltable.ActivityDiagramLanguage;
-import activitydiagram._symboltable.ActivityDiagramSymbol;
-import activitydiagram._symboltable.VariableSymbol;
+import de.purefun._ast.ASTActivityDiagram;
+import de.purefun._symboltable.ActivityDiagramLanguage;
+import de.purefun._symboltable.ActivityDiagramSymbol;
+import de.purefun._symboltable.VariableSymbol;
 import de.monticore.ModelingLanguageFamily;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.java.lang.JavaDSLLanguage;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.Scope;
-import de.monticore.symboltable.types.TypeSymbol;
-import de.monticore.types.types._ast.ASTSimpleReferenceType;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Test;
 

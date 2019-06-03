@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.monticore.sle19</groupId>
+  <groupId>de.simpleproglang</groupId>
   <artifactId>PureFunOof</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
@@ -30,7 +30,7 @@
 
     <!-- .. Libraries ..................................................... -->
 
-    <monticore.version>5.0.0</monticore.version>
+    <monticore.version>5.0.5</monticore.version>
     <se-library.version>1.0.0</se-library.version>
 
     <guava.version>18.0</guava.version>
@@ -98,11 +98,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>de.monticore.sle19</groupId>
-        <artifactId>se-library</artifactId>
-        <version>${se-library.version}</version>
-      </dependency>
       
       <dependency>
         <groupId>com.google.guava</groupId>
@@ -122,7 +117,7 @@
         <artifactId>monticore-runtime</artifactId>
         <version>${monticore.version}</version>
       </dependency>
-    
+
       <dependency>
         <groupId>de.monticore</groupId>
         <artifactId>monticore-grammar</artifactId>
@@ -163,12 +158,6 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
-      </dependency>
-      
-      <dependency>
-        <groupId>de.monticore.sle19</groupId>
-        <artifactId>ad-rte</artifactId>
-        <version>${se-library.version}</version>         
       </dependency>
     
       <dependency>

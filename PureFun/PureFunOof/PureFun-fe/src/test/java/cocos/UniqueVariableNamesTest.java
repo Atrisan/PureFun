@@ -5,8 +5,8 @@
  */
 package cocos;
 
-import activitydiagram._ast.ASTActivityDiagram;
-import activitydiagram._cocos.ActivityDiagramCoCoChecker;
+import de.purefun._ast.ASTActivityDiagram;
+import de.purefun._cocos.ActivityDiagramCoCoChecker;
 import de.se_rwth.commons.logging.Finding;
 import de.se_rwth.commons.logging.Log;
 import lang.AbstractTest;

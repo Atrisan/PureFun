@@ -1,15 +1,12 @@
 package ad2java.generator;
 
-import activitydiagram._ast.*;
-import activitydiagram._symboltable.ActivityDiagramSymbol;
-import activitydiagram._symboltable.JunctionSymbol;
-import activitydiagram._symboltable.Type;
-import activitydiagram._symboltable.VariableSymbol;
+import de.purefun._ast.*;
+import de.purefun._symboltable.ActivityDiagramSymbol;
+import de.purefun._symboltable.JunctionSymbol;
+import de.purefun._symboltable.Type;
+import de.purefun._symboltable.VariableSymbol;
 import de.monticore.generating.GeneratorEngine;
 import de.monticore.generating.GeneratorSetup;
-import de.monticore.oclexpressions._ast.ASTEDeclarationExt;
-import de.monticore.symboltable.Symbol;
-import de.monticore.types.types._ast.ASTReferenceType;
 import de.monticore.types.types._ast.ASTSimpleReferenceType;
 import de.se_rwth.commons.logging.Log;
 
