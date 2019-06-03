@@ -1,0 +1,10 @@
+module DataStructures{
+
+    Int x = 9
+
+    mainFun(){
+        else {
+            print(x)
+        }
+    }
+}

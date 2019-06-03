@@ -1,0 +1,16 @@
+module DataStructures{
+
+    Person test(23, "test")
+
+    data Person{
+        age
+        String name
+    }
+
+    mainFun(){
+        print(test.age)
+
+        (age:Int, name:String) PersAlt(18, "alternate")
+        print(persAlt.name)
+    }
+}
