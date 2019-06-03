@@ -1,0 +1,18 @@
+module DataStructures{
+
+    Int x = 9
+
+    mainFun(){
+        if x < 3{
+            print(x)
+        } else if x < 6{
+            print(x+1)
+        } else {
+            print("large")
+        }
+
+        if x == 9{
+            print(" but perfect!")
+        }
+    }
+}
