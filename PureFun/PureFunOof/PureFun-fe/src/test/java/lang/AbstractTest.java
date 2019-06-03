@@ -5,14 +5,8 @@
  */
 package lang;
 
-import de.purefun._ast.ASTActivityDiagram;
-import de.purefun._parser.ActivityDiagramParser;
-import de.purefun._symboltable.ActivityDiagramLanguage;
-import de.monticore.ModelingLanguage;
-import de.monticore.ModelingLanguageFamily;
-import de.monticore.io.paths.ModelPath;
-import de.monticore.java.lang.JavaDSLLanguage;
-import de.monticore.symboltable.GlobalScope;
+import de.simpleproglang.purefun._ast.ASTModule;
+import de.simpleproglang.purefun._parser.PureFunParser;
 import de.se_rwth.commons.logging.Log;
 import org.junit.BeforeClass;
 
@@ -35,10 +29,10 @@ public abstract class AbstractTest {
     Log.enableFailQuick(false);
   }
   
-  protected ASTActivityDiagram parseModel(String modelFile) {
+  protected ASTModule parseModel(String modelFile) {
     Path model = Paths.get(modelFile);
-    ActivityDiagramParser parser = new ActivityDiagramParser();
-    Optional<ASTActivityDiagram> result;
+    PureFunParser parser = new PureFunParser();
+    Optional<ASTModule> result;
     try {
       result = parser.parse(model.toString());
       assertFalse(parser.hasErrors());
@@ -53,7 +47,7 @@ public abstract class AbstractTest {
     return null;
   }
   
-  protected GlobalScope parseModelWithST(String modelFilePath) {
+  /* protected GlobalScope parseModelWithST(String modelFilePath) {
     ModelPath modelPath = new ModelPath(Paths.get(modelFilePath));
     ModelingLanguage adLang = new ActivityDiagramLanguage();
     ModelingLanguage javaLang = new JavaDSLLanguage();
@@ -61,5 +55,5 @@ public abstract class AbstractTest {
     language.addModelingLanguage(adLang);
     language.addModelingLanguage(javaLang);
     return new GlobalScope(modelPath, language);
-  }
+  }*/
 }

@@ -4,6 +4,9 @@ grammar PureFun extends de.monticore.literals.Literals,
         de.monticore.expressions.ExpressionsBasis,
         de.monticore.expressions.CommonExpressions {
 
+    symbol scope Module
+            = "module" Name "{"	Definition*	"}";
+
     Type = Name;
 
     interface Definition;
@@ -14,9 +17,6 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     FunctionParameter = Type Name;
 
-    symbol scope Module
-        = "module" Name "{"	Definition*	"}";
-
     Variable implements Definition, Statement
         = Type Name ("=" Expression)?;
 
@@ -24,7 +24,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = left:Name "=" right:Expression;
 
     Function implements Definition
-        = "fun" Name FunctionParameters BlockStatement;
+        = "fun" Name FunctionParameters ":" Type BlockStatement;
 
     DataStructure implements Definition
      = "data" Name "{" Variable* "}";
@@ -34,6 +34,9 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     ElseStatement
         = BlockStatement | IfStatement;
+
+    ReturnStatement implements Statement
+        = "return" Expression;
 
     // Loops
 
