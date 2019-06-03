@@ -1,6 +1,20 @@
 module DataStructures{
 
+    fun foo():Int {
+        return 4
+    }
+
     mainFun(){
-        //TODO
+        Int x = async foo()
+
+        Int result
+        async {
+            result = foo() + foo()
+        }
+
+        x = result
+
+        Int erg = foo() + async foo()
+
     }
 }

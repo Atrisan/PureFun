@@ -1,0 +1,8 @@
+module DataStructures{
+
+    (Int, Int, String) tupel = (1, 34, "test")
+
+    mainFun(){
+        Int x = tupel[1]
+    }
+}
