@@ -19,9 +19,9 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "[" (Expression || ",")* "]";
 
     MapExpression implements Expression
-        = "{" (MapValuePair || ",")* "}";
+        = "{" (MapKeyValuePair || ",")* "}";
 
-    MapValuePair = key: Expression ":" value:Expression;
+    MapKeyValuePair = key:Expression ":" value:Expression;
 
     TupleExpression implements Expression
         = "(" (Expression || ",")* ")";
