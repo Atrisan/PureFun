@@ -19,6 +19,36 @@
         <groupId>de.monticore.mojo</groupId>
         <artifactId>monticore-maven-plugin</artifactId>
       </plugin>
+      <!-- Other Configuration -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+
+      <!-- Unit Tests -->
+      <!-- default folder is src/test/java/ -->
+      <!-- default incl. are "**/Test*.java", "**/*Test.java", "**/*TestCase.java" -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.plugin}</version>
+        <configuration>
+          <useSystemClassLoader>false</useSystemClassLoader>
+          <classpathDependencyExcludes>
+            <classpathDependencyExclude>de.monticore:monticore-cli</classpathDependencyExclude>
+          </classpathDependencyExcludes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>${junit.platform.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
     </plugins>
   </build>
   
@@ -50,23 +80,32 @@
       <classifier>${grammars.classifier}</classifier>
       <scope>provided</scope>
     </dependency>
-  
-    <dependency>
-      <groupId>de.monticore</groupId>
-      <artifactId>javaDSL</artifactId>
-      <classifier>${grammars.classifier}</classifier>
-      <scope>provided</scope>
-    </dependency>
-  
-    <dependency>
-      <groupId>de.monticore</groupId>
-      <artifactId>javaDSL</artifactId>
-    </dependency>
     
     <!-- Test Libraries  -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+      <!-- doc: http://junit.org/junit5/ -->
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+      <!-- doc: http://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests -->
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
       <scope>test</scope>
     </dependency>
     

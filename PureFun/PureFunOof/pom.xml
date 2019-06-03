@@ -33,9 +33,19 @@
     <monticore.version>5.0.5</monticore.version>
     <se-library.version>1.0.0</se-library.version>
 
-    <guava.version>18.0</guava.version>
     <junit.version>4.11</junit.version>
+
+    <guava.version>18.0</guava.version>
+    <jsr305.version>3.0.0</jsr305.version>
+    <junit.jupiter.version>5.0.3</junit.jupiter.version>
+    <junit.vintage.version>4.12.3</junit.vintage.version>
+    <junit.platform.version>1.0.3</junit.platform.version>
+    <assertj.version>3.7.0</assertj.version>
     <antlr.version>4.7.1</antlr.version>
+    <logback.version>1.1.2</logback.version>
+    <emf.common.version>2.5.0</emf.common.version>
+    <emf.ecore.version>2.5.0</emf.ecore.version>
+    <emf.ecore.xmi.version>2.5.0</emf.ecore.xmi.version>
 
 
     <!-- .. Plugins ....................................................... -->
@@ -43,6 +53,8 @@
     <assembly.plugin>2.5.3</assembly.plugin>
     <compiler.plugin>3.2</compiler.plugin>
     <source.plugin>2.4</source.plugin>
+    <release.plugin>2.5.1</release.plugin>
+    <surefire.plugin>2.19.1</surefire.plugin>
 
     <!-- Classifiers -->
 
@@ -52,6 +64,8 @@
   
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <java.version>1.8</java.version>
+    <wagon.provider.version>2.6</wagon.provider.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -74,6 +88,14 @@
   </pluginRepositories>
   
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>${wagon.provider.version}</version>
+      </extension>
+    </extensions>
+
     <pluginManagement>
       <plugins>
         <!-- MontiCore Generation -->
@@ -92,6 +114,38 @@
             </execution>
           </executions>
         </plugin>
+
+        <!-- Other Configuration -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler.plugin}</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+
+        <!-- Unit Tests -->
+        <!-- default folder is src/test/java/ -->
+        <!-- default incl. are "**/Test*.java", "**/*Test.java", "**/*TestCase.java" -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.plugin}</version>
+          <configuration>
+            <useSystemClassLoader>false</useSystemClassLoader>
+            <classpathDependencyExcludes>
+              <classpathDependencyExclude>de.monticore:monticore-cli</classpathDependencyExclude>
+            </classpathDependencyExcludes>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.junit.platform</groupId>
+              <artifactId>junit-platform-surefire-provider</artifactId>
+              <version>${junit.platform.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -103,6 +157,12 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>${jsr305.version}</version>
       </dependency>
     
       <dependency>
@@ -137,20 +197,6 @@
         <artifactId>monticore-generator</artifactId>
         <version>${monticore.version}</version>
       </dependency>
-  
-      <dependency>
-        <groupId>de.monticore</groupId>
-        <artifactId>javaDSL</artifactId>
-        <version>4.3.11</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>de.monticore</groupId>
-        <artifactId>javaDSL</artifactId>
-        <classifier>${grammars.classifier}</classifier>
-        <version>4.3.11</version>
-        <scope>provided</scope>
-      </dependency>
       
       <!-- Test Libraries -->
       <dependency>
@@ -158,6 +204,36 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>${junit.vintage.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit.jupiter.version}</version>
+        <scope>test</scope>
+        <!-- doc: http://junit.org/junit5/ -->
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+        <version>${junit.jupiter.version}</version>
+        <scope>test</scope>
+        <!-- doc: http://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests -->
+      </dependency>
+
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${assertj.version}</version>
+        <!-- doc: http://joel-costigliola.github.io/assertj/ -->
       </dependency>
     
       <dependency>
@@ -167,8 +243,33 @@
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-  
+
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>de.monticore.mojo</groupId>
+        <artifactId>monticore-maven-plugin</artifactId>
+        <version>${monticore.version}</version>
+        <inherited>false</inherited>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>reporting-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 
 </project>

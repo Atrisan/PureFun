@@ -21,7 +21,7 @@ import static org.junit.Assert.fail;
 
 public abstract class AbstractTest {
   
-  protected static final String MODEL_PATH = "src/test/models";
+  protected static final String MODEL_PATH = "src/test";
   
   @BeforeClass
   public static void init() {
@@ -49,7 +49,8 @@ public abstract class AbstractTest {
   
   /* protected GlobalScope parseModelWithST(String modelFilePath) {
     ModelPath modelPath = new ModelPath(Paths.get(modelFilePath));
-    ModelingLanguage adLang = new ActivityDiagramLanguage();
+    ModelingLanguage adLang = new PureFunLanguage() {
+    };
     ModelingLanguage javaLang = new JavaDSLLanguage();
     ModelingLanguageFamily language = new ModelingLanguageFamily();
     language.addModelingLanguage(adLang);
