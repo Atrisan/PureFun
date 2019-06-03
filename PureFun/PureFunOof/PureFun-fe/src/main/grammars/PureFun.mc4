@@ -32,9 +32,23 @@ DataStructure implements Definition
 IfStatement implements Statement
 	= "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:( BlockStatement | IfStatement ) )? ;
 
-ForStatement implements Statement; //TODO
+// Loops
 
-WhileStatement implements Statement; //TODO
+ForStatement implements Statement
+    = "for" ForControl BlockStatement;
+
+interface ForControl;
+
+CommonForControl implements ForControl
+    = ForInit? ";" condition:Expression? ";" (Expression || ",")*
+    ;
+
+ForInit
+    = (Expression || ",")+
+    ;
+
+WhileStatement implements Statement
+    = "while" condition:Expression BlockStatement;
 
 AsyncExpression implements Expression
 	= "async" CallExpression;
