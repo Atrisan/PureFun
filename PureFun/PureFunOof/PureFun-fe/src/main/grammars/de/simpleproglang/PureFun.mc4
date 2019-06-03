@@ -10,26 +10,24 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     interface Statement;
 
-    TypeParameter = "<" (Type || ",")+ ">";
+    FunctionParameters = "(" (FunctionParameter || ",")* ")";
 
-    FunctionParameters = "(" (FunktionParameter || ",")* ")";
-
-    FunktionParameter = Type TypeParameter? Name;
+    FunctionParameter = Type Name;
 
     symbol scope Module
         = "module" Name "{"	Definition*	"}";
 
     Variable implements Definition, Statement
-        = Type Name TypeParameter? ("=" Expression)?;
+        = Type Name ("=" Expression)?;
 
     AssignStatement implements Statement
         = left:Name "=" right:Expression;
 
     Function implements Definition
-        = Generic? "fun" Name FunctionParameters BlockStatement;
+        = "fun" Name FunctionParameters BlockStatement;
 
     DataStructure implements Definition
-     = Generic?	"data" Name "{" Variable* "}";
+     = "data" Name "{" Variable* "}";
 
     IfStatement implements Statement
         = "if" "(" condition:Expression ")" thenStatement:BlockStatement ("else" elseStatement:ElseStatement )? ;
@@ -63,8 +61,6 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     BlockStatement implements Statement
      = "{" Statement* "}";
-
-    Generic = "template" TypeParameter ;
 
 
     /*=================================================================*/
