@@ -19,14 +19,18 @@ import static org.junit.Assert.assertTrue;
  */
 public class ParserTest extends AbstractTest {
 
+    public static final String MODEL_SOURCE_PATH = "./src/test/resources/parser/";
+
     @ParameterizedTest
     @CsvSource({
-            "./src/test/resources/parser/Valid/Simple.pf",
-            "./src/test/resources/parser/Valid/Valid_Branches.pf"
+            "Valid/Simple.pf",
+            "Valid/Valid_Branches.pf",
+            "Valid/Valid3.pf",
+            "Valid/Valid_async.pf"
     })
     public void test(String modelStringPath) throws IOException {
         PureFunParser parser = new PureFunParser();
-        final Optional<ASTModule> pureFunModule = parser.parse(modelStringPath);
+        final Optional<ASTModule> pureFunModule = parser.parse(MODEL_SOURCE_PATH + modelStringPath);
         assertTrue(pureFunModule.isPresent());
     }
 }
