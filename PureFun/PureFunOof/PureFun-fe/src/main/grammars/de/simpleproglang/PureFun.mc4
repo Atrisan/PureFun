@@ -1,11 +1,10 @@
 package de.simpleproglang;
 
 grammar PureFun extends de.monticore.literals.Literals,
-        de.monticore.expressions.ExpressionsBasis,
-        de.monticore.expressions.CommonExpressions {
-
+                        de.monticore.expressions.ExpressionsBasis,
+                        de.monticore.expressions.CommonExpressions {
     symbol scope Module
-            = "module" Name "{"	Definition*	"}";
+                = "module" Name "{"	Definition*	"}";
 
     Type = Name | "[" Type "]"
                 | "[" Type "," Type "]"
@@ -96,4 +95,17 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*=================================================================*/
 
     ExtLiteral = Literal;
+
+    LengthExpression implements Expression = "#" Expression;
+
+    InExpression implements Expression = left:Expression "in" right:Expression;
+
+    MapValueExpression implements Expression = "$" Expression;
+
+    MapKeyExpression implements Expression = "!" Expression;
+
+    IndexAccessExpression implements Expression = Expression "[" index:Expression "]";
+
+    ConcatExpression implements Expression = left:Expression "++" (right:Expression)?;
+
 }

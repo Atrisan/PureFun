@@ -1,6 +1,6 @@
 module DataStructures{
 
-    [id:Int, name:String] map = [1:"test", 2:"erster", 3:"ende"]
+    [Int, String] map = {1:"test", 2:"erster", 3:"ende"}
 
     fun main() : Int {
 
@@ -10,9 +10,9 @@ module DataStructures{
 
         [String] Values = $map
 
-        [id:Int, name:String] map2 = [4:"was", 5:"ist", 6:"das"]
+        [Int, String] map2 = { 4:"was", 5:"ist", 6:"das" }
 
-        [id:Int, name:String] map3 = map ++ map2
+        [Int, String] map3 = map ++ map2
 
         Int length = #map3
 
