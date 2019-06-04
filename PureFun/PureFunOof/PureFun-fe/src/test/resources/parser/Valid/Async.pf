@@ -1,10 +1,10 @@
-module DataStructures{
+module DataStructures {
 
-    fun foo():Int {
+    fun foo() : Int {
         return 4
     }
 
-    mainFun(){
+    fun main() : Int {
         Int x = async foo()
 
         Int result

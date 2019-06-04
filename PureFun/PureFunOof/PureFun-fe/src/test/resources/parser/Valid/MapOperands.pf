@@ -2,7 +2,7 @@ module DataStructures{
 
     [id:Int, name:String] map = [1:"test", 2:"erster", 3:"ende"]
 
-    mainFun(){
+    fun main() : Int {
 
         Boolean exist = "etwas" in map
 

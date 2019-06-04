@@ -23,10 +23,18 @@ public class ParserTest extends AbstractTest {
 
     @ParameterizedTest
     @CsvSource({
-        "Valid/Simple.pf",
-        "Valid/Valid_Branches.pf",
-        "Valid/Valid3.pf",
-        "Valid/Valid_async.pf"
+
+            "Valid/Async.pf",
+            "Valid/Branches.pf",
+            "Valid/BranchesExpressions.pf",
+            "Valid/DataStructures.pf",
+            "Valid/FunctionDeclarations.pf",
+            "Valid/GlobalVariables.pf",
+            "Valid/ListOperands.pf",
+            "Valid/Loops.pf",
+            "Valid/MapOperands.pf",
+            "Valid/Simple.pf",
+            "Valid/TupleOperands.pf"
     })
     public void test(String modelStringPath) throws IOException {
         PureFunParser parser = new PureFunParser();

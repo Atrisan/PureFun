@@ -2,7 +2,7 @@ module DataStructures{
 
     [Int] list = [1, 2, 3, 4]
 
-    mainFun(){
+    fun main() : Int {
         Int x = #list
         Int y = list[2]
 

@@ -16,7 +16,7 @@ module DataStructures{
         return sum
     }
 
-    mainFun(){
+    fun main() : Int {
         print(foo(x))
         print(foo2(x, x))
         print(foo3(x, x))
