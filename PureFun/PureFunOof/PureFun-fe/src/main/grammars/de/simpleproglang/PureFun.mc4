@@ -9,7 +9,10 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     Type = Name | "[" Type "]"
                 | "[" Type "," Type "]"
-                | "(" (Type || ",")* ")";
+                | "(" (NamedTuple || ",")* ")";
+
+    NamedTuple
+        = (Name ":")? Type;
 
     interface Definition;
 
@@ -30,10 +33,10 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     FunctionParameter = Type Name;
 
-    Variable implements Definition, Statement
+    Variable implements Definition, Expression
         = Type Name ("=" Expression)?;
 
-    AssignStatement implements Statement
+    AssignStatement implements Expression
         = left:Name "=" right:Expression;
 
     Function implements Definition
@@ -51,7 +54,9 @@ grammar PureFun extends de.monticore.literals.Literals,
     ReturnStatement implements Statement
         = "return" Expression;
 
-    // Loops
+    /*=================================================================*/
+    /*                    CONTROL STATEMENTS                           */
+    /*=================================================================*/
 
     ForStatement implements Statement
         = "for" ForControl BlockStatement;
@@ -60,6 +65,9 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     CommonForControl implements ForControl
         = ForInit? ";" condition:Expression? ";" (Expression || ",")*;
+
+    ForEachControl implements ForControl
+        = Name "in" Expression;
 
     ForInit
         = (Expression || ",")+;

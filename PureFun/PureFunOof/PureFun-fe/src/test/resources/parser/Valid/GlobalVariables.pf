@@ -28,7 +28,7 @@ module GlobalVariables{
     (Int, String) zweitupel = (42, "Antwort")
     (Double, Int64, Boolean) dreitupel = (31.7, 512, False)
 
-    [Int, Char] map = [1:'d', 30:'b', 2:'F']
+    [Int, Char] map = {1:'d', 30:'b', 2:'F'}
 
     fun main() : Int {
 

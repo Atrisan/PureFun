@@ -3,11 +3,11 @@ module DataStructures{
     [Int] list = [1,2,3,4]
 
     fun main() : Int {
-        for Int i = 0; i < 4; i++{
+        for Int i = 0; i < 4; i += 1 {
             Int res += 1
         }
 
-        for each l in list{
+        for l in list {
             print(l)
         }
 
