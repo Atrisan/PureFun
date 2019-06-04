@@ -1,0 +1,19 @@
+module DataStructures{
+
+    [Int] list = [1,2,3,4]
+
+    mainFun(){
+        for Int i = 0; i < 4; i++{
+            Int res += 1
+        }
+
+        for each l in list{
+            print(l)
+        }
+
+        Int x = 0
+        while x < 4{
+            x++
+        }
+    }
+}
