@@ -32,7 +32,7 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     FunctionParameter = Type Name;
 
-    Variable implements Definition, Expression
+    Variable implements Definition
         = Type Name ("=" Expression)?;
 
     AssignStatement implements Expression
@@ -69,7 +69,10 @@ grammar PureFun extends de.monticore.literals.Literals,
         = Name "in" Expression;
 
     ForInit
-        = (Expression || ",")+;
+        = (ForInitEx || ",")+;
+
+    ForInitEx
+        = Expression | Variable;
 
     WhileStatement implements Statement
         = "while" condition:Expression BlockStatement;
@@ -81,7 +84,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "async" BlockStatement;
 
     BlockStatement implements Statement
-     = "{" (Statement | Expression)* "}";
+     = "{" (Statement | Expression | Variable)* "}";
 
 
     /*=================================================================*/
