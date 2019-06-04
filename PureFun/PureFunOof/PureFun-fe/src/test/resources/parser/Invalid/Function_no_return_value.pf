@@ -1,0 +1,10 @@
+module DataStructures{
+
+     fun foo(Int input){
+        return input + 2
+    }
+
+    mainFun(){
+
+    }
+}

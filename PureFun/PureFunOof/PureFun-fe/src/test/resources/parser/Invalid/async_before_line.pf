@@ -1,0 +1,12 @@
+module DataStructures{
+
+    fun foo():Int {
+        return 4
+    }
+
+    mainFun(){
+
+        async Int erg = foo()
+
+    }
+}
