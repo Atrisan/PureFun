@@ -22,7 +22,9 @@ public class ParserTest extends AbstractTest {
     @ParameterizedTest
     @CsvSource({
             "./src/test/resources/parser/Valid/Simple.pf",
-            "./src/test/resources/parser/Valid/Valid_Branches.pf"
+            "./src/test/resources/parser/Valid/Valid_Branches.pf",
+            "./src/test/resources/parser/Valid/Valid_Branches_Expressions.pf",
+            "./src/test/resources/parser/Valid/Valid_Tupeloperants.pf",
     })
     public void test(String modelStringPath) throws IOException {
         PureFunParser parser = new PureFunParser();
