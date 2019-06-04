@@ -2,7 +2,7 @@ module DataStructures{
 
     Int x = 9
 
-    mainFun(){
+    fun main() : Int{
         if {
             print(x)
         }

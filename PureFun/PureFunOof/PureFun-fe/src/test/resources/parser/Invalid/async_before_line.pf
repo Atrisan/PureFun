@@ -4,7 +4,7 @@ module DataStructures{
         return 4
     }
 
-    mainFun(){
+    fun main() : Int{
 
         async Int erg = foo()
 
