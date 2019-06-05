@@ -3,13 +3,15 @@ module DataStructures{
     [Int] list = [1, 2, 3, 4]
 
     fun main() : Int {
-        //Int x = #list
+        Int x = #list
         Int y = list[2]
 
-        [Int] newlist // = list ++ [5, 6]
+        [Int] newlist  = list ++ [5, 6]
 
         Boolean exist = 4 in list
 
         newlist.append(8)
+
+        [[Int32]] list3 = [[0,1],[2,3],[4,5]]
     }
 }

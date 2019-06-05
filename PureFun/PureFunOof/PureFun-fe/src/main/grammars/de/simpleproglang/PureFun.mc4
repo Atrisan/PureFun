@@ -4,7 +4,7 @@ grammar PureFun extends de.monticore.literals.Literals,
                         de.monticore.expressions.ExpressionsBasis,
                         de.monticore.expressions.CommonExpressions {
     symbol scope Module
-                = "module" Name "{"	Definition*	"}";
+         = "module" Name "{" Definition* "}";
 
     Type = Name | "[" Type "]"
                 | "[" Type "," Type "]"
@@ -13,36 +13,44 @@ grammar PureFun extends de.monticore.literals.Literals,
     NamedTuple
         = (Name ":")? Type;
 
-    interface Definition;
-
-    interface Statement;
-
     ListExpression implements Expression
         = "[" (Expression || ",")* "]";
 
     MapExpression implements Expression
         = "{" (MapKeyValuePair || ",")* "}";
 
-    MapKeyValuePair = key:Expression ":" value:Expression;
+    MapKeyValuePair
+        = key:Expression ":" value:Expression;
 
     TupleExpression implements Expression
         = "(" (Expression || ",")* ")";
 
-    FunctionParameters = "(" (FunctionParameter || ",")* ")";
+    interface Definition;
 
-    FunctionParameter = Type Name;
+    interface Statement;
+
+    /*=================================================================*/
+    /*                         DEFINITIONS                             */
+    /*=================================================================*/
 
     Variable implements Definition
         = Type Name ("=" Expression)?;
 
-    AssignStatement implements Expression
-        = left:Name "=" right:Expression;
+    FunctionParameters
+        = "(" (FunctionParameter || ",")* ")";
+
+    FunctionParameter
+        = Type Name;
 
     Function implements Definition
         = "fun" Name FunctionParameters ":" Type BlockStatement;
 
     DataStructure implements Definition
      = "data" Name "{" Variable* "}";
+
+    /*=================================================================*/
+    /*                    CONTROL STATEMENTS                           */
+    /*=================================================================*/
 
     IfStatement implements Statement
         = "if" condition:Expression thenStatement:BlockStatement ("else" elseStatement:ElseStatement )? ;
@@ -52,10 +60,6 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     ReturnStatement implements Statement
         = "return" Expression;
-
-    /*=================================================================*/
-    /*                    CONTROL STATEMENTS                           */
-    /*=================================================================*/
 
     ForStatement implements Statement
         = "for" ForControl BlockStatement;
@@ -83,32 +87,41 @@ grammar PureFun extends de.monticore.literals.Literals,
     AsyncStatement implements Statement
         = "async" BlockStatement;
 
-    BlockStatement implements Statement
-     = "{" (Statement | Expression | Variable)* "}";
-
-
-    /*=================================================================*/
-
-  BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression =
-    left:Expression operator:"and" right:Expression;
-
-  BooleanOrOpExpressionDiff implements Expression <117>, InfixExpression =
-    left:Expression operator:"or" right:Expression;
-
-    /*=================================================================*/
+    symbol scope BlockStatement implements Statement
+        = "{" (Statement | Expression | Variable)* "}";
 
     ExtLiteral = Literal;
 
-    LengthExpression implements Expression = "#" Expression;
+    /*=================================================================*/
+    /*                    OPERATOR EXPRESSIONS                         */
+    /*=================================================================*/
 
-    InExpression implements Expression = left:Expression "in" right:Expression;
+    AssignmentExpression implements Expression
+        = left:Name "=" right:Expression;
 
-    MapValueExpression implements Expression = "$" Expression;
+    BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression
+        = left:Expression operator:"and" right:Expression;
 
-    MapKeyExpression implements Expression = "!" Expression;
+    BooleanOrOpExpressionDiff implements Expression <117>, InfixExpression
+        = left:Expression operator:"or" right:Expression;
 
-    IndexAccessExpression implements Expression = Expression "[" index:Expression "]";
 
-    ConcatExpression implements Expression = left:Expression "++" (right:Expression)?;
+    LengthExpression implements Expression
+        = "#" Expression;
+
+    InExpression implements Expression
+        = left:Expression "in" right:Expression;
+
+    MapValueExpression implements Expression
+        = "$" Expression;
+
+    MapKeyExpression implements Expression
+        = "!" Expression;
+
+    IndexAccessExpression implements Expression
+        = Expression "[" index:Expression "]";
+
+    ConcatExpression implements Expression
+        = left:Expression "++" (right:Expression)?;
 
 }
