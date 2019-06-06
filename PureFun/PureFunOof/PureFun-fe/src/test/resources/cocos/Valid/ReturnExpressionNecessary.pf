@@ -1,0 +1,12 @@
+module ReturnExpressionNecessary {
+
+    fun testNothing() : Void {
+        Int i = 0
+    }
+
+    fun testSomething() : Int {
+        Int i = 0
+
+        return i
+    }
+}
