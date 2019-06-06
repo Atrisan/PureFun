@@ -40,7 +40,7 @@ public class ParserTest extends AbstractTest {
             "Valid/Simple.pf",
             "Valid/TupleOperands.pf"
     })
-    public void testValid(String modelStringPath) throws IOException {
+    public void testValid(String modelStringPath) {
         PureFunParser parser = new PureFunParser();
         parseModel(MODEL_SOURCE_PATH + modelStringPath);
     }
