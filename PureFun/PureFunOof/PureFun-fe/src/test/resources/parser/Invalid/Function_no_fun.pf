@@ -5,6 +5,6 @@ module DataStructures{
     }
 
     mainFun(){
-
+        return 0
     }
 }

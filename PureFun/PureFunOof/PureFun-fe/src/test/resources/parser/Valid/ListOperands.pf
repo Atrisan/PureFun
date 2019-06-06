@@ -13,5 +13,6 @@ module DataStructures{
         newlist.append(8)
 
         [[Int32]] list3 = [[0,1],[2,3],[4,5]]
+        return 0
     }
 }

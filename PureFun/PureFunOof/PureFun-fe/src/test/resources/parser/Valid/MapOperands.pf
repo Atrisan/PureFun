@@ -17,5 +17,7 @@ module DataStructures{
         Int length = #map3
 
         String ele = map[2]
+
+        return 0
     }
 }

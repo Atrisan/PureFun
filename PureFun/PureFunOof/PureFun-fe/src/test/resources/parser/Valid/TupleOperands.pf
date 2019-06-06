@@ -4,5 +4,7 @@ module DataStructures{
 
     fun main() : Int {
         Int x = tupel[1]
+
+        return 0
     }
 }

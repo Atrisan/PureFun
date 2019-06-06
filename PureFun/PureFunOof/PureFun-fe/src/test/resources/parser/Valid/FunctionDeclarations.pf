@@ -20,5 +20,6 @@ module DataStructures{
         print(foo(x))
         print(foo2(x, x))
         print(foo3(x, x))
+        return 0
     }
 }

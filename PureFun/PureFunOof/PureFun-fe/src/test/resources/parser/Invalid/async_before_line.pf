@@ -8,5 +8,7 @@ module DataStructures{
 
         async Int erg = foo()
 
+        return 0
+
     }
 }

@@ -15,5 +15,6 @@ module DataStructures{
         while x < 4{
             x++
         }
+        return 0
     }
 }

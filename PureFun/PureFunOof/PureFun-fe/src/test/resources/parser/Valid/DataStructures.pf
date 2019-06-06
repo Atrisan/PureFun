@@ -12,5 +12,6 @@ module DataStructures{
 
         (age:Int, name:String) PersAlt = (18, "alternate")
         print(persAlt.name)
+        return 0
     }
 }

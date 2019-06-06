@@ -7,7 +7,7 @@ grammar PureFun extends de.monticore.literals.Literals,
          = "module" Name "{" Definition* "}";
 
     Type = Name | "[" Type "]"
-                | "[" Type "," Type "]"
+                | "[" key:Type "," value:Type "]"
                 | "(" (NamedTuple || ",")* ")";
 
     NamedTuple

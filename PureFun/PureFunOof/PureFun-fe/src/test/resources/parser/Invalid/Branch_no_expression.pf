@@ -6,5 +6,6 @@ module DataStructures{
         if {
             print(x)
         }
+        return 0
     }
 }

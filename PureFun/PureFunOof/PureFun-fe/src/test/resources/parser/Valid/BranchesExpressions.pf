@@ -26,5 +26,7 @@ module DataStructures{
         if x == 9 {
             print(" but perfect!")
         }
+
+        return 0
     }
 }
