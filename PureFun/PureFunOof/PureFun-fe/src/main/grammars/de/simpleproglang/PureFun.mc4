@@ -33,7 +33,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                         DEFINITIONS                             */
     /*=================================================================*/
 
-    Variable implements Definition
+    symbol Variable implements Definition
         = Type Name ("=" Expression)?;
 
     FunctionParameters
@@ -59,7 +59,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = BlockStatement | IfStatement;
 
     ReturnStatement implements Statement
-        = "return" Expression;
+        = "return" returnExpression:Expression?;
 
     ForStatement implements Statement
         = "for" ForControl BlockStatement;
