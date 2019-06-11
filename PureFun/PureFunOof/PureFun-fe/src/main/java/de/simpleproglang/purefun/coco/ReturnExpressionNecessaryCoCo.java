@@ -9,11 +9,8 @@ public class ReturnExpressionNecessaryCoCo implements PureFunASTFunctionCoCo {
 
     @Override
     public void check(ASTFunction node) {
-        Log.info(node.getType().getName(), "Return type of " + node.getName());
         node.getBlockStatement().getStatementList().forEach((st) -> {
             if (st instanceof ASTReturnStatement) {
-                // TODO: add proper type checking
-
                 if (!node.getName().equalsIgnoreCase("Void")) {
                     Log.error("Missing return statement in fun " + node.getName());
                 }
