@@ -1,5 +1,0 @@
-<assign functions=ast.getFunctionList()>
-<#list functions as function>
-    ${function.getType()} ${function.getName()}(${include("FunctionParameters.flt",function.getFunctionParameters())})${include("./../statement/BlockStatement.flt",function.getFunctionBody())}
-
-<\#list>
