@@ -5,6 +5,7 @@ import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._ast.ASTVariable;
+import de.simpleproglang.purefun.printer.TypesPrinter;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -50,7 +51,6 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
      */
     @Override
     protected VariableSymbol create_Variable(ASTVariable ast) {
-        // TODO: Use our own TypePrinter to get the type
-        return super.create_Variable(ast);
+        return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()));
     }
 }
