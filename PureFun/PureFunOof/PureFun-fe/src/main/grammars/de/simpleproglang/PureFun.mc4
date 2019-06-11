@@ -6,9 +6,15 @@ grammar PureFun extends de.monticore.literals.Literals,
     symbol scope Module
          = "module" Name "{" Definition* "}";
 
-    Type = Name | "[" Type "]"
-                | "[" key:Type "," value:Type "]"
-                | "(" (NamedTuple || ",")* ")";
+    interface Type;
+
+    TypeName implements Type = Name;
+
+    ListType implements Type = "[" Type "]";
+
+    MapType implements Type= "[" keyType:Type "," valueType:Type "]";
+
+    NamedTupleType implements Type = "(" (NamedTuple || ",")* ")";
 
     NamedTuple
         = (Name ":")? Type;

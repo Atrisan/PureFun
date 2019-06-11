@@ -30,6 +30,8 @@ module GlobalVariables{
 
     [Int, Char] map = {1:'d', 30:'b', 2:'F'}
 
+    (age:Int, name:String) person = (18, "alternate")
+
     fun main() : Int {
         return 0
     }
