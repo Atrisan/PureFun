@@ -11,6 +11,8 @@ public class VariableSymbol extends VariableSymbolTOP {
 
     public VariableSymbol(String name, String type) {
         super(name);
+
+        this.type  = type;
     }
 
     public String getType() {

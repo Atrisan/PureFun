@@ -48,7 +48,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     FunctionParameter
         = Type Name;
 
-    Function implements Definition
+    symbol Function implements Definition
         = "fun" Name FunctionParameters ":" Type BlockStatement;
 
     DataStructure implements Definition
@@ -93,7 +93,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     AsyncStatement implements Statement
         = "async" BlockStatement;
 
-    symbol scope BlockStatement implements Statement
+    scope BlockStatement implements Statement
         = "{" (Statement | Expression | Variable)* "}";
 
     ExtLiteral = Literal;
