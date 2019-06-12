@@ -6,7 +6,7 @@
          ${defineHookPoint("<Expression>")}
     </#if>
     <#if BlockElement.getVariableOpt().isPresent()>
-        ${include("./../definition/Variable.ftl",BlockElement.getVariable())}
+        ${include("./../definition/Variable.ftl",BlockElement.getVariable(),"")}
     </#if>
     <#if BlockElement.getStatementOpt().isPresent()>
         <#assign Statement=BlockElement.getStatement()>

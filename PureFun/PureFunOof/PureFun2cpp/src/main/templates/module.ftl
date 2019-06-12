@@ -29,7 +29,7 @@
 /*********************************************************************/
 <#list mods as variable>
     <#if gh.isGlobalVar(variable)>
-    ${include("definition/Variable.ftl",variable)}
+    ${include("definition/Variable.ftl",variable,"")}
     </#if>
 </#list>
 
