@@ -27,7 +27,7 @@ public class CppTypesPrinter {
         PF2cpp.put("Long", "int64_t");
     }
 
-    protected String cppTypePrinter(ASTType type) {
+    public String cppTypePrinter(ASTType type) {
         String result = "";
         if (type instanceof ASTNamedTupleType){
             result = "std::tuple<";
