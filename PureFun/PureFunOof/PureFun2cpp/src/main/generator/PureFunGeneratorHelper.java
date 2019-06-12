@@ -66,7 +66,7 @@ class PureFunGeneratorHelper{
         return Boolean.FALSE;
     }
 
-    public Boolean isGlobalVar(ASTVariable type){
+    public Boolean isGlobalVar(ASTDefinition type){
         if (type instanceof ASTVariable){
             return Boolean.TRUE;
         }
@@ -87,13 +87,39 @@ class PureFunGeneratorHelper{
         return Boolean.FALSE;
     }
 
-    public String commonForControlString(ASTForEachControl type){
-        String result = "";
-        if(type.ge) {
-            for (int i = 0; i < type.getForInit().getForInitExList().size(); i++){
-                result += type.getForInit().getForInitEx(i).getVariableOpt().isPresent()
-            }
+    public Boolean isAsyncStatement(ASTStatement type){
+        if (type instanceof ASTAsyncStatement){
+            return Boolean.TRUE;
         }
+        return Boolean.FALSE;
+    }
+
+    public Boolean isForStatement(ASTStatement type){
+        if (type instanceof ASTForStatement){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean isIfStatement(ASTStatement type){
+        if (type instanceof ASTIfStatement){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean isReturnStatement(ASTStatement type){
+        if (type instanceof ASTReturnStatement){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean isWHileStatement(ASTStatement type){
+        if (type instanceof ASTWhileStatement){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
 }

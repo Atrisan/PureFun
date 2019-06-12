@@ -94,7 +94,10 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "async" BlockStatement;
 
     scope BlockStatement implements Statement
-        = "{" (Statement | Expression | Variable)* "}";
+        = "{" BlockElement* "}";
+
+    BlockElement
+        = (Statement | Expression | Variable);
 
     ExtLiteral = Literal;
 
