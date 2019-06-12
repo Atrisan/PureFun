@@ -1,0 +1,6 @@
+module InvalidFunctionType {
+
+    fun funWithInvalidType() : #FunctionCall {
+        return something
+    }
+}

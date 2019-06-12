@@ -59,7 +59,8 @@ public class ParserTest extends AbstractTest {
             "Invalid/Function_no_return_value.pf",
             "Invalid/Global_Variables_multiple_no_type.pf",
             "Invalid/Global_Variables_multiple_values.pf",
-            "Invalid/Global_Variables_no_eq.pf"
+            "Invalid/Global_Variables_no_eq.pf",
+            "Invalid/InvalidFunctionType.pf"
     })
     public void testInvalid(String modelStringPath) throws IOException {
         // impossible to detect error?
