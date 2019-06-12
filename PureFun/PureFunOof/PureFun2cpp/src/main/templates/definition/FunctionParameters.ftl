@@ -1,4 +1,4 @@
-<#assign genHelper = glex.getGlobalVar("PFHelper")> <#-- GeneratorHelper -->
+<#assign genHelper = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
 <#assign parameterString="">
 <#assign parameters=ast.getParameterList()>
 <#list parameters as parameterSet>

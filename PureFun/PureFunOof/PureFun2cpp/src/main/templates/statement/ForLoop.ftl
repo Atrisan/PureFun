@@ -1,4 +1,4 @@
-<#assign genHelper = glex.getGlobalVar("PFHelper")> <#-- GeneratorHelper -->
+<#assign genHelper = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
 <#assign loop=ast.get()>
 <#assign loopControl=loop.getForControl()>
 <#if genHelper.isCommonForControl(loopControl)>

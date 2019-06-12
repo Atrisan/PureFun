@@ -7,7 +7,7 @@
 #include <vector>
 #include <tupel>
 #include <cstdint>
-<#assign gh = glex.getGlobalVar("PFHelper")> <#-- GeneratorHelper -->
+<#assign gh = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
 <#assign mods=ast.getDefinitionList()>
 
 

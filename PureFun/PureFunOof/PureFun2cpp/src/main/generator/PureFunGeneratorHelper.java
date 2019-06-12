@@ -115,7 +115,7 @@ class PureFunGeneratorHelper{
         return Boolean.FALSE;
     }
 
-    public Boolean isWHileStatement(ASTStatement type){
+    public Boolean isWhileStatement(ASTStatement type){
         if (type instanceof ASTWhileStatement){
             return Boolean.TRUE;
         }
