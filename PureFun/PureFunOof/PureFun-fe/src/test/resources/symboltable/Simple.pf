@@ -1,0 +1,8 @@
+module Simple {
+
+    Int value = 31
+
+    fun foo() : Int {
+        return value
+    }
+}

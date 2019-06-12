@@ -1,23 +1,22 @@
-package de.simpleproglang.purefun.symboltable;
+package de.simpleproglang.purefun._symboltable;
 
 import de.monticore.ModelingLanguageFamily;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
-import de.simpleproglang.purefun._symboltable.PureFunLanguage;
 
 /**
  * @author Pascal Siewert
  * This class provides methods for symboltable creation.
  */
-public class PureFunSymbolTableCreator {
+public class PureFunScopeCreator {
 
-    private static PureFunSymbolTableCreator creator;
+    private static PureFunScopeCreator creator;
 
-    private PureFunSymbolTableCreator() {}
+    private PureFunScopeCreator() {}
 
-    private static PureFunSymbolTableCreator getInstance() {
+    private static PureFunScopeCreator getInstance() {
         if (creator == null) {
-            creator = new PureFunSymbolTableCreator();
+            creator = new PureFunScopeCreator();
         }
 
         return creator;
