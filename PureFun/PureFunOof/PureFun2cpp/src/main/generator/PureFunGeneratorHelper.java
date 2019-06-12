@@ -52,74 +52,74 @@ class PureFunGeneratorHelper{
         return "";
     }
 
-    public Boolean isDataStruct(ASTDefinition type){
+    public boolean isDataStruct(ASTDefinition type){
         if (type instanceof ASTDataStructure){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isFunction(ASTDefinition type){
+    public boolean isFunction(ASTDefinition type){
         if (type instanceof ASTFunction){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isGlobalVar(ASTDefinition type){
+    public boolean isGlobalVar(ASTDefinition type){
         if (type instanceof ASTVariable){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isCommonForControl(ASTForControl type){
+    public boolean isCommonForControl(ASTForControl type){
         if (type instanceof ASTCommonForControl){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isForEachControl(ASTForControl type){
+    public boolean isForEachControl(ASTForControl type){
         if (type instanceof ASTCommonForControl){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isAsyncStatement(ASTStatement type){
+    public boolean isAsyncStatement(ASTStatement type){
         if (type instanceof ASTAsyncStatement){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isForStatement(ASTStatement type){
+    public boolean isForStatement(ASTStatement type){
         if (type instanceof ASTForStatement){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isIfStatement(ASTStatement type){
+    public boolean isIfStatement(ASTStatement type){
         if (type instanceof ASTIfStatement){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isReturnStatement(ASTStatement type){
+    public boolean isReturnStatement(ASTStatement type){
         if (type instanceof ASTReturnStatement){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isWhileStatement(ASTStatement type){
+    public boolean isWhileStatement(ASTStatement type){
         if (type instanceof ASTWhileStatement){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
 }
