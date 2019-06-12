@@ -7,6 +7,7 @@ import de.monticore.symboltable.GlobalScope;
 import de.monticore.types.types._ast.*;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._ast.ASTType;
+import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ class PureFunGeneratorHelper{
     protected ASTModule ast;
 
     protected GlobalScope symbolTable;
+
+    protected  CppTypesPrinter cppPrint = new CppTypesPrinter();
 
     public static final String CPP_EXTENSION = ".cpp";
 
@@ -36,7 +39,7 @@ class PureFunGeneratorHelper{
      * @return
      */
     public String printType(ASTType type) {
-        return TypesPrinter.printType(type);
+        return cppPrint.cppTypePrinter(type);
     }
 
     /**
