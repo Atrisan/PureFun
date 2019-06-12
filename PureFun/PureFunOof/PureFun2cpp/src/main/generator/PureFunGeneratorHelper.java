@@ -21,7 +21,7 @@ class PureFunGeneratorHelper{
 
     protected GlobalScope symbolTable;
 
-    public static final String CPP_EXTENSION = ".cpp";
+    public static final String CPP_EXTENSION = ".cxx";
 
 
     public PureFunGeneratorHelper(ASTModule ast, GlobalScope symbolTable) {

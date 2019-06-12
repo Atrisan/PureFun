@@ -1,3 +1,3 @@
-${signature(variable, sym)}
+${signature(variable, prefix, sym)}
 
-int32_t ${variable.Name} <#if ${existsHookPoint("<Expression>")>=</#if> ${defineHookPoint("<Expression>")};
+${sym.getType(variable)} ${prefix}${variable.Name}<#if variable.isPresentExpression() && existsHookPoint("<Expression>")> = </#if>${defineHookPoint("<Expression>")};
