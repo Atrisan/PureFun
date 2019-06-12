@@ -3,6 +3,7 @@ package de.simpleproglang.purefun._symboltable;
 import de.monticore.symboltable.ArtifactScope;
 import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
+import de.simpleproglang.purefun._ast.ASTFunction;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._ast.ASTVariable;
 import de.simpleproglang.purefun.printer.TypesPrinter;
@@ -52,5 +53,10 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
     @Override
     protected VariableSymbol create_Variable(ASTVariable ast) {
         return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()));
+    }
+
+    @Override
+    protected FunctionSymbol create_Function(ASTFunction ast) {
+        return new FunctionSymbol(ast.getName(), TypesPrinter.printType(ast.getType()));
     }
 }
