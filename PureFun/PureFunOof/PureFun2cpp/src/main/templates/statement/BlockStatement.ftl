@@ -1,32 +1,33 @@
-<#assign gh = glex.getGlobalVar("PFHelper")> <#-- GeneratorHelper -->
-<#assign BlockElements=ast.get().getBlockElementList()>
-{
+ <#compress>
+${signature("func")}
+<#assign gh = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
+<#assign BlockElements=func.getBlockElementList()> {
 <#list BlockElements as BlockElement>
     <#if BlockElement.getExpressionOpt().isPresent()>
          ${defineHookPoint("<Expression>")}
     </#if>
     <#if BlockElement.getVariableOpt().isPresent()>
-        ${include("./../definition/Variable.ftl",BlockElement.getVariable())}
+        ${includeArgs("definition/Variable.ftl", BlockElement.getVariable(), "")}
     </#if>
     <#if BlockElement.getStatementOpt().isPresent()>
         <#assign Statement=BlockElement.getStatement()>
         <#if gh.isAsyncStatement(Statement)>
-            ${include("AsyncStatement.ftl",Statement)}
+            ${includeArgs("statement/AsyncStatement.ftl",Statement)}
         </#if>
         <#if gh.isForStatement(Statement)>
-            ${include("ForLoop.ftl",Statement)}
+            ${includeArgs("statement/ForLoop.ftl",Statement)}
         </#if>
         <#if gh.isIfStatement(Statement)>
-            ${include("IfStatement.ftl",Statement)}
+            ${includeArgs("statement/IfStatement.ftl",Statement)}
         </#if>
         <#if gh.isReturnStatement(Statement)>
-            ${include("ReturnStatement.ftl",Statement)}
+            ${includeArgs("statement/ReturnStatement.ftl",Statement)}
         </#if>
         <#if gh.isWhileStatement(Statement)>
-            ${include("WhileLoop.ftl",Statement)}
+            ${includeArgs("statement/WhileLoop.ftl",Statement)}
         </#if>
     </#if>
-
 </#list>
+</#compress>
 
 }

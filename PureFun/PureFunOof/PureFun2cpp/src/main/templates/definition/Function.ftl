@@ -1,3 +1,3 @@
-<#assign genHelper = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
-<assign function=ast.get()>
-${printType(function.getType())} ${function.getName()}(${include("FunctionParameters.ftl",function.getFunctionParameters())})${include("./../statement/BlockStatement.ftl",function.getFunctionBody())}
+<#assign gh = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
+${signature("func")}
+${gh.printType(func.getType())} ${func.name}(${includeArgs("definition/FunctionParameters.ftl", func.getFunctionParameters())})${includeArgs("statement/BlockStatement.ftl", func.getBlockStatement())}

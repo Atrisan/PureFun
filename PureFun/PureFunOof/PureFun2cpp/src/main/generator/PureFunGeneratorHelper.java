@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-class PureFunGeneratorHelper{
+public class PureFunGeneratorHelper{
 
     protected ASTModule ast;
 
@@ -81,7 +81,7 @@ class PureFunGeneratorHelper{
     }
 
     public Boolean isForEachControl(ASTForControl type){
-        if (type instanceof ASTCommonForControl){
+        if (type instanceof ASTForEachControl){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

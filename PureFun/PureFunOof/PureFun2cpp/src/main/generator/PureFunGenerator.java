@@ -17,7 +17,7 @@ public class PureFunGenerator {
         GeneratorSetup gs = new GeneratorSetup();
         gs.setCommentStart("/*");
         gs.setCommentEnd("*/");
-        gs.setTracing(true);
+        gs.setTracing(false);
         gs.setDefaultFileExtension("cxx");
 
         GlobalExtensionManagement management = new GlobalExtensionManagement();

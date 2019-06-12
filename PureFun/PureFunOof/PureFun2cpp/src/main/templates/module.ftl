@@ -7,7 +7,7 @@
 #include <vector>
 #include <tupel>
 #include <cstdint>
-<#assign gh = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
+<#assign gh=glex.getGlobalVar("pfHelper", "TEST")> <#-- GeneratorHelper -->
 <#assign mods=ast.getDefinitionList()>
 
 
@@ -17,7 +17,8 @@
 /*********************************************************************/
 <#list mods as definition>
     <#if gh.isDataStruct(definition)>
-    #include <${definition.getName()}.hxx>
+//#include <${definition.getName()}.hxx>
+        ${includeArgs("definition/DataStructures.ftl", definition, ast.getName())}
     </#if>
 </#list>
 
@@ -29,7 +30,7 @@
 /*********************************************************************/
 <#list mods as variable>
     <#if gh.isGlobalVar(variable)>
-    ${include("definition/Variable.ftl",variable)}
+    ${includeArgs("definition/Variable.ftl", variable, "")}
     </#if>
 </#list>
 
@@ -40,6 +41,6 @@
 /*********************************************************************/
 <#list mods as function>
     <#if gh.isFunction(function)>
-    ${include("definition/Function.ftl",function)}
+    ${includeArgs("definition/Function.ftl", function)}
     </#if>
 </#list>

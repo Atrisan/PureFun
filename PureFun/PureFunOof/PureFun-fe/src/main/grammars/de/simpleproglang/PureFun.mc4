@@ -97,7 +97,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "{" BlockElement* "}";
 
     BlockElement
-        = (Statement | Expression | Variable);
+        = (Statement | Variable | Expression);
 
     ExtLiteral = Literal;
 
