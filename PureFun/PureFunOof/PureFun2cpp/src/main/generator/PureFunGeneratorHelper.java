@@ -87,13 +87,13 @@ class PureFunGeneratorHelper{
         return Boolean.FALSE;
     }
 
-    public String commonForControlString(ASTForEachControl type){
+    /*public String commonForControlString(ASTForEachControl type){
         String result = "";
         if(type.ge) {
             for (int i = 0; i < type.getForInit().getForInitExList().size(); i++){
-                result += type.getForInit().getForInitEx(i).getVariableOpt().isPresent()
+                result += type.getForInit().getForInitEx(i).getVariableOpt().isPresent();
             }
         }
-    }
+    }*/
 
 }
