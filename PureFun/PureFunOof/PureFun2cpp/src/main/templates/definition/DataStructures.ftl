@@ -10,12 +10,12 @@ public:
     virtual ~${ast.Name}{}
 
 <#list ast.getVariableList() as variable>
-    int32_t const & get_${variable.Name}() const { return ${variable.Name}; }
+    ${sym.Type} const & get_${variable.Name}() const { return ${variable.Name}; }
 </#list>
 
 private:
 <#list ast.getVariableList() as variable>
-    ${includeArgs("Variable.flt", variable, sym)}
+    ${includeArgs("Variable.ftl", variable, sym)}
 </#list>
 };
 
