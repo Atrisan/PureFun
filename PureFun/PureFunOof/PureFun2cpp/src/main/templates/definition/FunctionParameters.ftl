@@ -6,6 +6,6 @@
         <#assign parameterString="${parameterString}${printType(parameterSet.getType())} ${parameterSet.getName()}, "
     <#else>
         <#assign parameterString="${parameterString}${printType(parameterSet.getType())} ${parameterSet.getName()}"
-    <\#if>
-<\#list>
+    </#if>
+</#list>
 ${parameterString}

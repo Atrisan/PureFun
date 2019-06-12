@@ -5,7 +5,7 @@ import de.monticore.mcexpressions._ast.*;
 import de.monticore.prettyprint.IndentPrinter;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.types.types._ast.*;
-import de.simpleproglang.purefun._ast.ASTModule;
+import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun._ast.ASTType;
 import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
@@ -51,6 +51,27 @@ class PureFunGeneratorHelper{
     public String printExpression(ASTExpression ast) {
         //TODO
         return "";
+    }
+
+    public Boolean isDataStruct(ASTDefinition type){
+        if (type instanceof ASTDataStructure){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean isFunction(ASTDefinition type){
+        if (type instanceof ASTFunction){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean isGlobalVar(ASTVariable type){
+        if (type instanceof ASTVariable){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
 
