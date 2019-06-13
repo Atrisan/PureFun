@@ -18,7 +18,7 @@
 <#list mods as definition>
     <#if gh.isDataStruct(definition)>
 //#include <${definition.getName()}.hxx>
-        ${includeArgs("definition/DataStructures.ftl", definition, ast.getName())}
+${includeArgs("definition/DataStructures.ftl", definition, ast.getName())}
     </#if>
 </#list>
 

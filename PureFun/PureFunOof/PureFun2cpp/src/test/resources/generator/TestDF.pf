@@ -1,6 +1,6 @@
 module TestDF {
 
-Int32 global_int
+Int32 global_in = 0
 
 data TestStruct {
     Int32 age
@@ -9,10 +9,12 @@ data TestStruct {
 }
 
 fun main() : Int32 {
-    Int32 i = 0
-
     for Int32 i = 0; i < 10; i++ {
         print("Bananas are hot")
+    }
+
+    if global_in == 0 {
+        //if case
     }
 }
 
