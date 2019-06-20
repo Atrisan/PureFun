@@ -8,27 +8,27 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     interface Type;
 
-    TypeName implements Type = Name;
+    TypeName implements Type <490> = Name;
 
-    ListType implements Type = "[" Type "]";
+    ListType implements Type <490> = "[" Type "]";
 
-    MapType implements Type= "[" keyType:Type "," valueType:Type "]";
+    MapType implements Type <490> = "[" keyType:Type "," valueType:Type "]";
 
-    NamedTupleType implements Type = "(" (NamedTuple || ",")* ")";
+    NamedTupleType implements Type <480> = "(" (NamedTuple || ",")* ")";
 
     NamedTuple
         = (Name ":")? Type;
 
-    ListExpression implements Expression
+    ListExpression implements Expression <370>
         = "[" (Expression || ",")* "]";
 
-    MapExpression implements Expression
+    MapExpression implements Expression <370>
         = "{" (MapKeyValuePair || ",")* "}";
 
     MapKeyValuePair
         = key:Expression ":" value:Expression;
 
-    TupleExpression implements Expression
+    TupleExpression implements Expression <370>
         = "(" (Expression || ",")* ")";
 
     interface Definition;
@@ -39,8 +39,8 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                         DEFINITIONS                             */
     /*=================================================================*/
 
-    symbol Variable implements Definition
-        = Type Name ("=" Expression)?;
+    symbol Variable implements Definition <800>
+        = Name ":"? Type ("=" Expression)?;
 
     FunctionParameters
         = "(" (FunctionParameter || ",")* ")";
@@ -105,7 +105,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
 
-    AssignmentExpression implements Expression
+    AssignmentExpression implements Expression <200>
         = left:Name "=" right:Expression;
 
     BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression
@@ -127,7 +127,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     MapKeyExpression implements Expression
         = "!" Expression;
 
-    IndexAccessExpression implements Expression
+    IndexAccessExpression implements Expression <1>
         = Expression "[" index:Expression "]";
 
     ConcatExpression implements Expression

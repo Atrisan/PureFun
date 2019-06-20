@@ -1,16 +1,22 @@
 module TestDF {
 
-Int32 global_in = 0
+global_in Int32 = 0
+map [Int32, Int64] = {1:1, 2:2}
+list [Int32] = [1,2,3]
 
 data TestStruct {
-    Int32 age
-    Float64 weight
-    Boolean isFat
+    age : Int32
+    weight Float64
+    bool Boolean
 }
 
 fun main() : Int32 {
-    for Int32 i = 0; i < 10; i++ {
-        print("Bananas are hot")
+    j Int32 = 0
+    map [Int32, Int64] = {1:1, 2:2}
+    list [Int32] = [1,2,3]
+    tuple (Int32, Int64) = (1,2)
+    for i Int32 = 0; i < 10; i++ {
+        print("string")
     }
 
     if global_in == 0 {
