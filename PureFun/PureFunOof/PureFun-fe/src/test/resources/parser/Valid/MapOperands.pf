@@ -1,22 +1,22 @@
 module DataStructures{
 
-    [Int, String] map = {1:"test", 2:"erster", 3:"ende"}
+    map [Int, String] = {1:"test", 2:"erster", 3:"ende"}
 
     fun main() : Int {
 
-        Boolean exist = "etwas" in map
+        exist Boolean = "etwas" in map
 
-        [Int] Keys = !map
+        Keys [Int] = !map
 
-        [String] Values = $map
+        Values [String] = $map
 
-        [Int, String] map2 = { 4:"was", 5:"ist", 6:"das" }
+        map2 [Int, String] = { 4:"was", 5:"ist", 6:"das" }
 
-        [Int, String] map3 = map ++ map2
+        map3 [Int, String] = map ++ map2
 
-        Int length = #map3
+        length Int = #map3
 
-        String ele = map[2]
+        ele String = map[2]
 
         return 0
     }

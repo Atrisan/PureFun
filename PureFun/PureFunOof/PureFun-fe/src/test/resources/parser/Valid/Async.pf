@@ -5,7 +5,7 @@ module DataStructures {
     }
 
     fun main() : Int {
-        Int x = async foo()
+        x Int = async foo()
 
         Int result
         async {
@@ -14,7 +14,7 @@ module DataStructures {
 
         x = result
 
-        Int erg = foo() + async foo()
+        erg Int = foo() + async foo()
 
         return 0
     }

@@ -11,13 +11,19 @@ data TestStruct {
 
 fun test(String key) : Int {
     [String , Int] map = {"String" : 2}
-    return
+    [Int] te = [6]
+
+
+    return map["String"]
+
 }
 
 fun main() : Int32 {
     for Int32 i = 0; i < 10; i++ {
         print("Bananas are hot")
     }
+
+    test("String")
 
     if global_in == 0 {
         //if case

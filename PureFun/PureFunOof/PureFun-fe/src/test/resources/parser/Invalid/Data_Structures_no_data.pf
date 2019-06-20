@@ -3,8 +3,8 @@ module DataStructures{
     Person test(23, "test")
 
     Person{
-        Int age
-        String name
+        age Int
+        name String
     }
 
     mainFun(){

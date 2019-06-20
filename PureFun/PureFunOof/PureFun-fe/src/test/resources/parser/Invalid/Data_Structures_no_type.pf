@@ -4,7 +4,7 @@ module DataStructures{
 
     data Person{
         age
-        String name
+        name String
     }
 
     mainFun(){

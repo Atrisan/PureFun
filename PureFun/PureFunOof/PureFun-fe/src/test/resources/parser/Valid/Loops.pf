@@ -1,9 +1,9 @@
 module DataStructures{
 
-    [Int] list = [1,2,3,4]
+    list [Int] = [1,2,3,4]
 
     fun main() : Int {
-        for Int i = 0; i < 4; i += 1 {
+        for i Int = 0; i < 4; i += 1 {
             Int res += 1
         }
 
@@ -11,7 +11,7 @@ module DataStructures{
             print(l)
         }
 
-        Int x = 0
+        x Int = 0
         while x < 4{
             x++
         }
