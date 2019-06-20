@@ -1,10 +1,10 @@
 module DataStructures{
 
-    Person test = (23, "test")
+    test Person = (23, "test")
 
     data Person{
-        Int age
-        String name
+        age Int
+        name String
     }
 
     fun main() : Int {

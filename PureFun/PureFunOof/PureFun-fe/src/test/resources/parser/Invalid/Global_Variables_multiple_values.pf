@@ -1,5 +1,5 @@
 module Binary{
 
-    Int a = 34 31
+    a Int = 34 31
 
 }

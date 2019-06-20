@@ -1,36 +1,36 @@
 module GlobalVariables{
 
-    Int normalint = 2
-    Int8 smallestint = 31
-    Int16 smallint = 42
-    Int32 mediumint = 69
-    Int64 largeint = 128
-    Long largenumber = 128
+    normalint Int = 2
+    smallestint Int8 = 31
+    smallint Int16 = 42
+    mediumint Int32 = 69
+    largeint Int64 = 128
+    largenumber Long = 128
 
-    UInt unsignednormalint = 3
-    UInt8 unsignedsmallestint = 33
-    UInt16 unsignedsmallint = 42
-    UInt32 unsignedmediumint = 69
-    UInt64 unsignedlargeint = 128
+    unsignednormalint UInt = 3
+    unsignedsmallestint UInt8 = 33
+    unsignedsmallint UInt16 = 42
+    unsignedmediumint UInt32 = 69
+    unsignedlargeint UInt64 = 128
 
-    Double normaldouble = 31.42
-    Float normalfloat = 69.5
-    Float64 largefloat = 31.42
+    normaldouble Double = 31.42
+    normalfloat Float = 69.5
+    largefloat Float64 = 31.42
 
-    Char character = 'F'
-    String name = "das ist ein String."
+    character Char = 'F'
+    name String = "das ist ein String."
 
-    Boolean bo = True
+    bo Boolean = True
 
-    [Int] integerliste = [31,42]
-    [String] stringliste = ["mehrere", "Strings"]
+    integerliste [Int] = [31,42]
+    stringliste [String] = ["mehrere", "Strings"]
 
-    (Int, String) zweitupel = (42, "Antwort")
-    (Double, Int64, Boolean) dreitupel = (31.7, 512, False)
+    zweitupel (Int, String) = (42, "Antwort")
+    dreitupel (Double, Int64, Boolean) = (31.7, 512, False)
 
-    [Int, Char] map = {1:'d', 30:'b', 2:'F'}
+    map [Int, Char] = {1:'d', 30:'b', 2:'F'}
 
-    (age:Int, name:String) person = (18, "alternate")
+    person (age:Int, name:String) = (18, "alternate")
 
     fun main() : Int {
         return 0

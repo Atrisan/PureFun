@@ -1,11 +1,11 @@
 module ReturnExpressionNecessary {
 
     fun testNothing() : Void {
-        Int i = 0
+        i Int = 0
     }
 
     fun testSomething() : Int {
-        Int i = 0
+         i Int = 0
 
         return i
     }

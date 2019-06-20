@@ -1,6 +1,6 @@
 module DataStructures{
 
-    Int x = 9
+    x Int = 9
 
     fun foo(Int input):Int{
         return input + 2
@@ -11,7 +11,7 @@ module DataStructures{
     }
 
     fun foo3(Int input, Int input2):Int{
-        Int sum
+        sum Int
         sum = input + input2
         return sum
     }
