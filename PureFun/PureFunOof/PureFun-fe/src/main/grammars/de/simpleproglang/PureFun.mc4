@@ -101,6 +101,8 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     ExtLiteral = Literal;
 
+    LitExpression implements Expression <380> = Literal;
+
     /*=================================================================*/
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
