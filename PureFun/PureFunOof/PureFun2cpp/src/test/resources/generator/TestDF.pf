@@ -11,9 +11,9 @@ data TestStruct {
 }
 
 
-fun test(String key) : Int {
-    [String , Int] map = {"String" : 2}
-    [Int] te = [6]
+fun test(String key, [Int32, Int64] insert, [Int32] list) : Int {
+    map [String , Int] = {"String" : 2}
+    te [Int] = [6]
 
 
     return map["String"]

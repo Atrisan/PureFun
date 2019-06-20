@@ -3,7 +3,7 @@ module GlobalVariables{
     normalint Int = 2
     smallestint Int8 = 31
     smallint Int16 = 42
-    mediumint Int32 = 69
+    mediumint : Int32 = 69
     largeint Int64 = 128
     largenumber Long = 128
 

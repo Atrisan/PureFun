@@ -12,9 +12,9 @@ public class CppTypesPrinter {
         PF2cpp.put("Double", "double");
         PF2cpp.put("Float64", "double");
         PF2cpp.put("Float", "float");
-        PF2cpp.put("Int", "int");
+        PF2cpp.put("Int", "int32_t");
         PF2cpp.put("Char", "char");
-        PF2cpp.put("String", "string");
+        PF2cpp.put("String", "std::string");
         PF2cpp.put("Boolean", "bool");
         PF2cpp.put("Int8", "int8_t");
         PF2cpp.put("Int16", "int16_t");
