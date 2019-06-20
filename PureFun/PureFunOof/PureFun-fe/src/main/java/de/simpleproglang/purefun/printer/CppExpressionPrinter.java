@@ -167,7 +167,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
     @Override
     protected String doPrintCallExpression(ASTCallExpression exp) {
         String erg = "";
-        erg += exp.geteMethodSymbol().getName();
+        erg += doPrintExpression(exp.getExpression());
         erg += "(";
         for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
             erg += doPrintExpression(exp.getArguments().getExpression(i));
