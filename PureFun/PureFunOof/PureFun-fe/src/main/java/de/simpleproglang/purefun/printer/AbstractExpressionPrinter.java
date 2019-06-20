@@ -1,10 +1,11 @@
 package de.simpleproglang.purefun.printer;
 
-import de.monticore.expressions.commonexpressions._ast.ASTBooleanAndOpExpression;
-import de.monticore.expressions.commonexpressions._ast.ASTBooleanOrOpExpression;
-import de.monticore.expressions.commonexpressions._ast.ASTCallExpression;
+import de.monticore.MCBasicLiteralsPrettyPrinter;
+import de.monticore.expressions.commonexpressions._ast.*;
 
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
+import de.monticore.literals.literals._ast.ASTLiteral;
+import de.monticore.prettyprint.IndentPrinter;
 import de.simpleproglang.purefun._ast.*;
 
 public abstract class AbstractExpressionPrinter {
@@ -44,9 +45,17 @@ public abstract class AbstractExpressionPrinter {
             return this.doPrintConcatExpression((ASTConcatExpression) expression);
         } else if (expression instanceof ASTCallExpression) {
             return this.doPrintCallExpression((ASTCallExpression) expression);
+        } else if (expression instanceof ASTNameExpression) {
+            return this.doPrintNameExpression((ASTNameExpression) expression);
+        } else if (expression instanceof ASTPlusExpression) {
+            return this.doPrintPlusExpression((ASTPlusExpression) expression);
+        } else if (expression instanceof ASTQualifiedNameExpression) {
+            return this.doPrintQualifiedNameExpression((ASTQualifiedNameExpression) expression);
+        } else if (expression instanceof ASTLitExpression) {
+            // TODO: Use LiteralPrinter
         }
 
-        return "Not implemented in ExpressionPrinter: " + expression.toString();
+        return "Not implemented in PureFunExpressionPrinter: " + expression.toString();
     }
 
     protected abstract String doPrintListExpression(ASTListExpression exp);
@@ -80,4 +89,10 @@ public abstract class AbstractExpressionPrinter {
     protected abstract String doPrintConcatExpression(ASTConcatExpression exp);
 
     protected abstract String doPrintCallExpression(ASTCallExpression exp);
+
+    protected abstract String doPrintNameExpression(ASTNameExpression exp);
+
+    protected abstract String doPrintPlusExpression(ASTPlusExpression exp);
+
+    protected abstract String doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp);
 }
