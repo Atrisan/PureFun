@@ -33,6 +33,9 @@ public class CppTypesPrinter {
             result = "std::tuple<";
             for (int i = 0; i < ((ASTNamedTupleType) type).getNamedTupleList().size(); i++) {
                 result += cppTypePrinter(((ASTNamedTupleType) type).getNamedTuple(i).getType());
+                if (i < ((ASTNamedTupleType) type).getNamedTupleList().size() - 1){
+                    result += ", ";
+                }
             }
             result += ">";
         } else if (type instanceof ASTListType) {
@@ -42,6 +45,7 @@ public class CppTypesPrinter {
         } else if (type instanceof ASTMapType) {
             result = "std::map<";
             result += cppTypePrinter(((ASTMapType) type).getKeyType());
+            result += ", ";
             result += cppTypePrinter((((ASTMapType) type).getValueType()));
             result += ">";
         } else if (type instanceof ASTTypeName) {
