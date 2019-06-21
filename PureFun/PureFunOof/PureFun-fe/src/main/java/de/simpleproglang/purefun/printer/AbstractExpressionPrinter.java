@@ -52,11 +52,84 @@ public abstract class AbstractExpressionPrinter {
         } else if (expression instanceof ASTQualifiedNameExpression) {
             return this.doPrintQualifiedNameExpression((ASTQualifiedNameExpression) expression);
         } else if (expression instanceof ASTLitExpression) {
-            // TODO: Use LiteralPrinter
+            return this.doPrintLitExpression((ASTLitExpression) expression);
+        } else if (expression instanceof ASTBooleanNotExpression) {
+            return this.doPrintBooleanNotExpression((ASTBooleanNotExpression) expression);
+        } else if (expression instanceof ASTLogicalNotExpression) {
+            return this.doPrintLogicalNotExpression((ASTLogicalNotExpression) expression);
+        } else if (expression instanceof ASTMultExpression) {
+            return this.doPrintMultExpression((ASTMultExpression) expression);
+        } else if (expression instanceof ASTDivideExpression) {
+            return this.doPrintDivideExpression((ASTDivideExpression) expression);
+        } else if (expression instanceof ASTModuloExpression) {
+            return this.doPrintModuloExpression((ASTModuloExpression) expression);
+        } else if (expression instanceof ASTMinusExpression) {
+            return this.doPrintMinusExpression((ASTMinusExpression) expression);
+        } else if (expression instanceof ASTLessEqualExpression) {
+            return this.doPrintLessEqualExpression((ASTLessEqualExpression) expression);
+        } else if (expression instanceof ASTGreaterEqualExpression) {
+            return this.doPrintGreaterEqualExpression((ASTGreaterEqualExpression) expression);
+        } else if (expression instanceof ASTLessThanExpression) {
+            return this.doPrintLessThanExpression((ASTLessThanExpression) expression);
+        } else if (expression instanceof ASTGreaterThanExpression) {
+            return this.doPrintGreaterThanExpression((ASTGreaterThanExpression) expression);
+        } else if (expression instanceof ASTEqualsExpression) {
+            return this.doPrintEqualsExpression((ASTEqualsExpression) expression);
+        } else if (expression instanceof ASTNotEqualsExpression) {
+            return this.doPrintNotEqualsExpression((ASTNotEqualsExpression) expression);
+        } else if (expression instanceof ASTConditionalExpression) {
+            return this.doPrintConditionalExpression((ASTConditionalExpression) expression);
+        } else if (expression instanceof ASTSimpleAssignmentExpression) {
+            return this.doPrintSimpleAssignmentExpression((ASTSimpleAssignmentExpression) expression);
+        } else if (expression instanceof ASTBracketExpression) {
+            return this.doPrintBracketExpression((ASTBracketExpression) expression);
+        } else if (expression instanceof ASTAssignmentByDecreaseExpression) {
+            return this.doPrintAssignmentByDecreaseExpression((ASTAssignmentByDecreaseExpression) expression);
+        } else if (expression instanceof ASTAssignmentByMultiplyExpression) {
+            return this.doPrintAssignmentByMultiplyExpression((ASTAssignmentByMultiplyExpression) expression);
+        } else if (expression instanceof ASTAssignmentByDivisionExpression) {
+            return this.doPrintAssignmentByDivisionExpression((ASTAssignmentByDivisionExpression) expression);
+        } else if (expression instanceof ASTAssignmentByRemainderExpression) {
+            return this.doPrintAssignmentByRemainderExpression((ASTAssignmentByRemainderExpression) expression);
         }
 
         return "Not implemented in PureFunExpressionPrinter: " + expression.toString();
     }
+
+    protected abstract String doPrintAssignmentByRemainderExpression(ASTAssignmentByRemainderExpression exp);
+
+    protected abstract String doPrintAssignmentByDivisionExpression(ASTAssignmentByDivisionExpression exp);
+
+    protected abstract String doPrintAssignmentByMultiplyExpression(ASTAssignmentByMultiplyExpression exp);
+
+    protected abstract String doPrintAssignmentByDecreaseExpression(ASTAssignmentByDecreaseExpression exp);
+
+    protected abstract String doPrintBracketExpression(ASTBracketExpression exp);
+
+    protected abstract String doPrintSimpleAssignmentExpression(ASTSimpleAssignmentExpression exp);
+
+    protected abstract String doPrintConditionalExpression(ASTConditionalExpression exp);
+
+    protected abstract String doPrintNotEqualsExpression(ASTNotEqualsExpression exp);
+
+    protected abstract String doPrintEqualsExpression(ASTEqualsExpression exp);
+
+    protected abstract String doPrintGreaterThanExpression(ASTGreaterThanExpression exp);
+
+    protected abstract String doPrintLessThanExpression(ASTLessThanExpression exp);
+
+    protected abstract String doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp);
+
+    protected abstract String doPrintLessEqualExpression(ASTLessEqualExpression exp);
+
+    protected abstract String doPrintMinusExpression(ASTMinusExpression exp);
+
+    protected abstract String doPrintModuloExpression(ASTModuloExpression exp);
+
+    protected abstract String doPrintDivideExpression(ASTDivideExpression exp);
+
+    protected abstract String doPrintMultExpression(ASTMultExpression exp);
+
 
     protected abstract String doPrintListExpression(ASTListExpression exp);
 
@@ -95,4 +168,10 @@ public abstract class AbstractExpressionPrinter {
     protected abstract String doPrintPlusExpression(ASTPlusExpression exp);
 
     protected abstract String doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp);
+
+    protected abstract String doPrintLogicalNotExpression(ASTLogicalNotExpression exp);
+
+    protected abstract String doPrintBooleanNotExpression(ASTBooleanNotExpression exp);
+
+    protected abstract String doPrintLitExpression(ASTLitExpression exp);
 }

@@ -135,4 +135,16 @@ grammar PureFun extends de.monticore.literals.Literals,
     ConcatExpression implements Expression
         = left:Expression "++" (right:Expression)?;
 
+    AssignmentByDecreaseExpression implements Expression
+        = left:Expression "-=" right:Expression;
+
+    AssignmentByMultiplyExpression implements Expression
+        = left:Expression "*=" right:Expression;
+
+    AssignmentByDivisionExpression implements Expression
+        = left:Expression "/=" right:Expression;
+
+    AssignmentByRemainderExpression implements Expression
+        = left:Expression "%=" right:Expression;
+
 }
