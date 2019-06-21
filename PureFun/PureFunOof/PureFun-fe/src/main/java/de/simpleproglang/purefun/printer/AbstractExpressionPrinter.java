@@ -96,41 +96,6 @@ public abstract class AbstractExpressionPrinter {
         return "Not implemented in PureFunExpressionPrinter: " + expression.toString();
     }
 
-    protected abstract String doPrintAssignmentByRemainderExpression(ASTAssignmentByRemainderExpression exp);
-
-    protected abstract String doPrintAssignmentByDivisionExpression(ASTAssignmentByDivisionExpression exp);
-
-    protected abstract String doPrintAssignmentByMultiplyExpression(ASTAssignmentByMultiplyExpression exp);
-
-    protected abstract String doPrintAssignmentByDecreaseExpression(ASTAssignmentByDecreaseExpression exp);
-
-    protected abstract String doPrintBracketExpression(ASTBracketExpression exp);
-
-    protected abstract String doPrintSimpleAssignmentExpression(ASTSimpleAssignmentExpression exp);
-
-    protected abstract String doPrintConditionalExpression(ASTConditionalExpression exp);
-
-    protected abstract String doPrintNotEqualsExpression(ASTNotEqualsExpression exp);
-
-    protected abstract String doPrintEqualsExpression(ASTEqualsExpression exp);
-
-    protected abstract String doPrintGreaterThanExpression(ASTGreaterThanExpression exp);
-
-    protected abstract String doPrintLessThanExpression(ASTLessThanExpression exp);
-
-    protected abstract String doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp);
-
-    protected abstract String doPrintLessEqualExpression(ASTLessEqualExpression exp);
-
-    protected abstract String doPrintMinusExpression(ASTMinusExpression exp);
-
-    protected abstract String doPrintModuloExpression(ASTModuloExpression exp);
-
-    protected abstract String doPrintDivideExpression(ASTDivideExpression exp);
-
-    protected abstract String doPrintMultExpression(ASTMultExpression exp);
-
-
     protected abstract String doPrintListExpression(ASTListExpression exp);
 
     protected abstract String doPrintMapExpression(ASTMapExpression exp);
@@ -174,4 +139,38 @@ public abstract class AbstractExpressionPrinter {
     protected abstract String doPrintBooleanNotExpression(ASTBooleanNotExpression exp);
 
     protected abstract String doPrintLitExpression(ASTLitExpression exp);
+
+    protected abstract String doPrintAssignmentByRemainderExpression(ASTAssignmentByRemainderExpression exp);
+
+    protected abstract String doPrintAssignmentByDivisionExpression(ASTAssignmentByDivisionExpression exp);
+
+    protected abstract String doPrintAssignmentByMultiplyExpression(ASTAssignmentByMultiplyExpression exp);
+
+    protected abstract String doPrintAssignmentByDecreaseExpression(ASTAssignmentByDecreaseExpression exp);
+
+    protected abstract String doPrintBracketExpression(ASTBracketExpression exp);
+
+    protected abstract String doPrintSimpleAssignmentExpression(ASTSimpleAssignmentExpression exp);
+
+    protected abstract String doPrintConditionalExpression(ASTConditionalExpression exp);
+
+    protected abstract String doPrintNotEqualsExpression(ASTNotEqualsExpression exp);
+
+    protected abstract String doPrintEqualsExpression(ASTEqualsExpression exp);
+
+    protected abstract String doPrintGreaterThanExpression(ASTGreaterThanExpression exp);
+
+    protected abstract String doPrintLessThanExpression(ASTLessThanExpression exp);
+
+    protected abstract String doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp);
+
+    protected abstract String doPrintLessEqualExpression(ASTLessEqualExpression exp);
+
+    protected abstract String doPrintMinusExpression(ASTMinusExpression exp);
+
+    protected abstract String doPrintModuloExpression(ASTModuloExpression exp);
+
+    protected abstract String doPrintDivideExpression(ASTDivideExpression exp);
+
+    protected abstract String doPrintMultExpression(ASTMultExpression exp);
 }
