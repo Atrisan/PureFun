@@ -79,7 +79,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
     @Override
     protected String doPrintAssignmentExpression(ASTAssignmentExpression exp) {
         String erg = "";
-        erg += exp.getLeft();
+        erg += this.doPrintExpression(exp.getLeft());
         erg += " = ";
         erg += this.doPrintExpression(exp.getRight());
         return erg;
