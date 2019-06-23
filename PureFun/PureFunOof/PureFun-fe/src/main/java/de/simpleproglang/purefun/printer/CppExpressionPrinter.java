@@ -204,7 +204,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
     protected String doPrintPlusExpression(ASTPlusExpression exp) {
         String erg = this.doPrintExpression(exp.getLeft());
         erg += " + ";
-        erg = this.doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
