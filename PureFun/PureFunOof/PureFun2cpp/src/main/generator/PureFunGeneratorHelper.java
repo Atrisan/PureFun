@@ -5,8 +5,10 @@ import de.monticore.mcexpressions._ast.*;
 import de.monticore.prettyprint.IndentPrinter;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.types.types._ast.*;
+import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun._ast.ASTType;
+import de.simpleproglang.purefun.printer.CppExpressionPrinter;
 import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
 
@@ -25,7 +27,6 @@ public class PureFunGeneratorHelper{
     public static final String CPP_EXTENSION = ".cxx";
     protected  CppTypesPrinter cppPrint = new CppTypesPrinter();
 
-
     public PureFunGeneratorHelper(ASTModule ast, GlobalScope symbolTable) {
         this.ast = ast;
         this.symbolTable = symbolTable;
@@ -41,16 +42,7 @@ public class PureFunGeneratorHelper{
         return cppPrint.cppTypePrinter(type);
     }
 
-    /**
-     * Prints an expression
-     *
-     * @param ast
-     * @return
-     */
-    public String printExpression(ASTExpression ast) {
-        //TODO
-        return "";
-    }
+    public String printExpression(ASTExpression expression) { return CppExpressionPrinter.printExpression(expression); }
 
     public boolean isDataStruct(ASTDefinition type){
         if (type instanceof ASTDataStructure){
@@ -71,6 +63,31 @@ public class PureFunGeneratorHelper{
             return true;
         }
         return false;
+    }
+
+    public boolean isListType(ASTType type) {
+        if (type instanceof ASTListType) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMapType(ASTType type) {
+        if (type instanceof ASTMapType) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isTupleType(ASTType type) {
+        if (type instanceof ASTNamedTupleType) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isNotContainerType(ASTType type) {
+        return !isTupleType(type) && !isMapType(type) && !isListType(type);
     }
 
     public boolean isCommonForControl(ASTForControl type){
