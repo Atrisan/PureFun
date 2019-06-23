@@ -210,7 +210,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
 
     @Override
     protected String doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp) {
-        String erg = doPrintExpression(exp.getExpression());
+        String erg = this.doPrintExpression(exp.getExpression());
         erg += ".";
         erg += exp.getName();
         return erg;
@@ -218,12 +218,12 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
 
     @Override
     protected String doPrintLogicalNotExpression(ASTLogicalNotExpression exp) {
-        return "!" + doPrintExpression(exp.getExpression());
+        return "!" + this.doPrintExpression(exp.getExpression());
     }
 
     @Override
     protected String doPrintBooleanNotExpression(ASTBooleanNotExpression exp) {
-        return "~" + doPrintExpression(exp.getExpression());
+        return "~" + this.doPrintExpression(exp.getExpression());
     }
 
     @Override
@@ -233,139 +233,139 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
 
     @Override
     protected String doPrintAssignmentByRemainderExpression(ASTAssignmentByRemainderExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " %= ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintAssignmentByDivisionExpression(ASTAssignmentByDivisionExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " /= ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintAssignmentByMultiplyExpression(ASTAssignmentByMultiplyExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " *= ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintAssignmentByDecreaseExpression(ASTAssignmentByDecreaseExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " -= ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintBracketExpression(ASTBracketExpression exp) {
         String erg = "(";
-        erg += doPrintExpression(exp.getExpression());
+        erg += this.doPrintExpression(exp.getExpression());
         erg += ")";
         return erg;
     }
 
     @Override
     protected String doPrintSimpleAssignmentExpression(ASTSimpleAssignmentExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " += ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintConditionalExpression(ASTConditionalExpression exp) {
-        String erg = doPrintExpression(exp.getCondition());
+        String erg = this.doPrintExpression(exp.getCondition());
         erg += " ? ";
-        erg += doPrintExpression(exp.getTrueExpression());
+        erg += this.doPrintExpression(exp.getTrueExpression());
         erg += " : ";
-        erg += doPrintExpression(exp.getFalseExpression());
+        erg += this.doPrintExpression(exp.getFalseExpression());
         return erg;
     }
 
     @Override
     protected String doPrintNotEqualsExpression(ASTNotEqualsExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " != ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintEqualsExpression(ASTEqualsExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " == ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintGreaterThanExpression(ASTGreaterThanExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " > ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintLessThanExpression(ASTLessThanExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " < ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " >= ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintLessEqualExpression(ASTLessEqualExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " <= ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintMinusExpression(ASTMinusExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " - ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintModuloExpression(ASTModuloExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " % ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintDivideExpression(ASTDivideExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " / ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 
     @Override
     protected String doPrintMultExpression(ASTMultExpression exp) {
-        String erg = doPrintExpression(exp.getLeft());
+        String erg = this.doPrintExpression(exp.getLeft());
         erg += " * ";
-        erg += doPrintExpression(exp.getRight());
+        erg += this.doPrintExpression(exp.getRight());
         return erg;
     }
 }
