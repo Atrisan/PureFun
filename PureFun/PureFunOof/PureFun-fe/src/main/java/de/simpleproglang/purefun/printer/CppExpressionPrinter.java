@@ -159,7 +159,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
     protected String doPrintIndexAccessExpression(ASTIndexAccessExpression exp) {
         String erg = "";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".getAt(";
+        erg += ".at(";
         erg += this.doPrintExpression(exp.getIndex());
         erg += ")";
         return erg;
@@ -170,7 +170,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
         String erg = "";
         if (exp.isPresentRight()) {
             erg += this.doPrintExpression(exp.getLeft());
-            erg += ".getAt(";
+            erg += ".concat(";
             erg += this.doPrintExpression(exp.getRight());
             erg += ")";
         } else {
