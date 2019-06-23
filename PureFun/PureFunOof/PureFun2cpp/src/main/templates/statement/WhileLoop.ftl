@@ -1,2 +1,3 @@
-<#assign loop=ast.get()>
-while ( ${gh.printExpression(loop.getCondition())} ) ${include("BlockStatement.ftl",loop.getBlockStatement())}
+<#assign gh = glex.getGlobalVar("pfHelper")>
+${signature("loop")}
+while ( ${gh.printExpression(loop.getCondition())} ) ${includeArgs("statement/BlockStatement.ftl",loop.getBlockStatement())}

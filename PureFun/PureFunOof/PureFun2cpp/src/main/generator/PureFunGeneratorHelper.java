@@ -86,8 +86,19 @@ public class PureFunGeneratorHelper{
         return false;
     }
 
-    public boolean isNotContainerType(ASTType type) {
-        return !isTupleType(type) && !isMapType(type) && !isListType(type);
+    public boolean isNotContainerType(ASTVariable var) {
+        ASTType type = var.getType();
+
+        if (var.isPresentExpression()) {
+            ASTExpression exp = var.getExpression();
+            if (exp instanceof ASTListExpression
+                    || exp instanceof ASTMapExpression
+                    || exp instanceof ASTTupleExpression) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public boolean isCommonForControl(ASTForControl type){
@@ -99,7 +110,7 @@ public class PureFunGeneratorHelper{
 
     public Boolean isForEachControl(ASTForControl type){
         if (type instanceof ASTForEachControl){
-            return false;
+            return true;
         }
         return false;
     }

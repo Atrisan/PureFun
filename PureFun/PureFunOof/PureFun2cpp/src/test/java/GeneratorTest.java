@@ -17,11 +17,11 @@ public class GeneratorTest extends AbstractTest {
     public void testGeneratorModuleWithDataStructures() {
         ModelPath modelPath = new ModelPath(Paths.get(MODEL_SOURCE_PATH));
         GlobalScope symbolTable = PureFunScopeCreator.createGlobalScope(modelPath);
-        Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve("TestDF", ModuleSymbol.KIND);
+        Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve("model1", ModuleSymbol.KIND);
         Assert.assertTrue(moduleSymbol.isPresent());
         Assert.assertTrue(moduleSymbol.get().getModuleNode().isPresent());
         ASTModule ast = moduleSymbol.get().getModuleNode().get();
         PureFunGenerator gen = new PureFunGenerator();
-        gen.generate(ast, symbolTable,"ModuleWithDestructure.cxx");
+        gen.generate(ast, symbolTable,"sort.cxx");
     }
 }

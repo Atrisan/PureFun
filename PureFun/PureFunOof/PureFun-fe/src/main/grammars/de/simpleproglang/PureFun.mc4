@@ -8,28 +8,28 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     interface Type;
 
-    TypeName implements Type <490> = Name;
+    TypeName implements Type <170> = Name;
 
-    ListType implements Type <490> = "[" Type "]";
+    ListType implements Type <170> = "[" Type "]";
 
-    MapType implements Type <490> = "[" keyType:Type "," valueType:Type "]";
+    MapType implements Type <170> = "[" keyType:Type "," valueType:Type "]";
 
-    NamedTupleType implements Type <480> = "(" (NamedTuple || ",")* ")";
+    NamedTupleType implements Type <170> = "<" (NamedTuple || ",")* ">";
 
     NamedTuple
         = (Name ":")? Type;
 
-    ListExpression implements Expression <370>
+    ListExpression implements Expression <160>
         = "[" (Expression || ",")* "]";
 
-    MapExpression implements Expression <370>
+    MapExpression implements Expression <160>
         = "{" (MapKeyValuePair || ",")* "}";
 
     MapKeyValuePair
         = key:Expression ":" value:Expression;
 
-    TupleExpression implements Expression <370>
-        = "(" (Expression || ",")* ")";
+    TupleExpression implements Expression <160>
+        = "<" (Expression || ",")* ">";
 
     interface Definition;
 
@@ -46,7 +46,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "(" (FunctionParameter || ",")* ")";
 
     FunctionParameter
-        = Type Name;
+        = Name ":"? Type;
 
     symbol Function implements Definition
         = "fun" Name FunctionParameters ":" Type BlockStatement;
@@ -107,8 +107,13 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
 
+    PrintExpression implements Expression
+        = "print" "(" PrintElement* ")";
+
+    PrintElement = StringLiteral | "{" Expression "}";
+
     AssignmentExpression implements Expression <200>
-        = left:Name "=" right:Expression;
+        = left:Expression "=" right:Expression;
 
     BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression
         = left:Expression operator:"and" right:Expression;

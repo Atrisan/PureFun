@@ -5,9 +5,10 @@
 
 #include <map>
 #include <vector>
-#include <tupel>
+#include <tuple>
 #include <cstdint>
 #include <string>
+#include <iostream>
 <#assign gh=glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
 <#assign mods=ast.getDefinitionList()>
 
