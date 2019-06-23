@@ -76,13 +76,13 @@ public class CppLiteralPrinter extends AbstractLiteralPrinter {
 
     @Override
     protected String doPrintStringLiteral(ASTStringLiteral literal) {
-        String erg = "" + literal.getValue();
+        String erg = "\"" + literal.getValue() + "\"";
         return erg;
     }
 
     @Override
     protected String doPrintCharLiteral(ASTCharLiteral literal) {
-        String erg = "" + literal.getValue();
+        String erg = "\'" + literal.getValue() + "\'";
         return erg;
     }
 
