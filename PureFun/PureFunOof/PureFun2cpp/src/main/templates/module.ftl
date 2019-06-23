@@ -31,9 +31,6 @@ ${includeArgs("definition/DataStructures.ftl", definition, ast.getName())}
 /*********************************************************************/
 <#list mods as variable>
     <#if gh.isGlobalVar(variable)>
-    <#if variable.isPresentExpression()>
-        ${glex.bindStringHookPoint("<Expression>", gh.printExpression(variable.getExpression()))}
-    </#if>
     ${includeArgs("definition/Variable.ftl", variable, "")}
     </#if>
 </#list>
