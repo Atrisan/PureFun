@@ -4,7 +4,7 @@ ${signature("func")}
 <#assign BlockElements=func.getBlockElementList()> {
 <#list BlockElements as BlockElement>
     <#if BlockElement.getExpressionOpt().isPresent()>
-         ${defineHookPoint("<Expression>")};
+        ${gh.printExpression(BlockElement.getExpression())}
     </#if>
     <#if BlockElement.getVariableOpt().isPresent()>
         ${includeArgs("definition/Variable.ftl", BlockElement.getVariable(), "")}

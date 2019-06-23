@@ -1,2 +1,2 @@
 <#assign loop=ast.get()>
-while ( ${defineHookPoint("<Expression>")} ) ${include("BlockStatement.ftl",loop.getBlockStatement())}
+while ( ${gh.printExpression(loop.getCondition())} ) ${include("BlockStatement.ftl",loop.getBlockStatement())}

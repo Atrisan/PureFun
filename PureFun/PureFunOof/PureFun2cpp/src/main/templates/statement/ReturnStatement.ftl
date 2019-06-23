@@ -1,2 +1,3 @@
-${signature("returnStatment")}
-return <#if returnStatment.getReturnExpressionOpt().isPresent()> ${defineHookPoint("<Expression>")} </#if>
+<#assign gh = glex.getGlobalVar("pfHelper")>
+${signature("returnStatement")}
+return <#if returnStatement.getReturnExpressionOpt().isPresent()> ${gh.printExpression(returnStatement.getReturnExpression())} </#if>

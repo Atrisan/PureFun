@@ -7,7 +7,7 @@ ${signature("loop")}
     <#if loopControl.isPresentForInit()>
         <#list loopControl.getForInit().getForInitExList() as vars>
             <#if vars.getExpressionOpt().isPresent()>
-                ${defineHookPoint("<Expression>")}
+                ${gh.printExpression(vars.getExpression())}
             </#if>
             <#if vars.getVariableOpt().isPresent()>
                 ${includeArgs("definition/Variable.ftl", vars.getVariable(), "")}
@@ -19,12 +19,15 @@ ${signature("loop")}
         <#assign controlString="">
     </#if>
     <#if loopControl.isPresentCondition()>
-        ${defineHookPoint("<Expression>")};
+        ${gh.printExpression(loopControl.getCondition())};
     </#if>
-    ${defineHookPoint("<Expression>")})</@compress>
+    <#list loopControl.getExpressionList() as exp>
+        ${gh.printExpression(exp)}
+    </#list>
+    </@compress>)
 </#if>
 <#if gh.isForEachControl(loopControl)>
-    for(auto ${loopControl.getName()} : ${defineHookPoint("<Expression>")})
+    for(auto ${loopControl.getName()} : ${gh.printExpression(loopControl.getExpression())})
 </#if>
 </#compress>
 ${includeArgs("statement/BlockStatement.ftl", loop.getBlockStatement())}
