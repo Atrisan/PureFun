@@ -2,7 +2,7 @@ module TestDF {
 
 global_in Int32 = 0
 map [Int32, Int64] = {1:1, 2:2}
-list [Int32] = [1,2,3]
+list [Int32] = [1,2,3,4]
 
 data TestStruct {
     age : Int32

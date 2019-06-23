@@ -17,9 +17,9 @@ ${signature("loop")}
             </#if>
         </#list>
         <#assign controlString="">
-    </#if>;
+    </#if>
     <#if loopControl.isPresentCondition()>
-        ${defineHookPoint("<Expression>")}
+        ${defineHookPoint("<Expression>")};
     </#if>
     ${defineHookPoint("<Expression>")})</@compress>
 </#if>
