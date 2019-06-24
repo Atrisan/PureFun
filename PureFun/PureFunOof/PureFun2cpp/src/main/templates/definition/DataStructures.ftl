@@ -14,7 +14,7 @@ ${signature("ast", "modulename")}
     </#if>
 </#list>
 </#compress>
-namespace ${modulename} {
+//namespace ${modulename} {
 
 class ${ast.getName()} {
 public:
@@ -38,4 +38,4 @@ private:
 </#list>
 };
 
-}
+//}
