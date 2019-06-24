@@ -2,6 +2,7 @@ package de.simpleproglang.purefun.printer;
 
 import de.monticore.expressions.commonexpressions._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
+import de.monticore.literals.literals._ast.ASTLiteral;
 import de.simpleproglang.purefun._ast.*;
 
 import java.util.Iterator;
@@ -14,6 +15,7 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
 
     private PureFunExpressionPrinter() { }
 
+
     protected static AbstractExpressionPrinter getInstance() {
         if (printer == null) {
             printer = new PureFunExpressionPrinter();
@@ -24,6 +26,30 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
 
     public static String printExpression(ASTExpression expression) {
         return PureFunExpressionPrinter.getInstance().doPrintExpression(expression);
+    }
+
+    @Override
+    protected String doPrintDecrementExpression(ASTDecrementExpression exp) {
+        String erg = this.doPrintExpression(exp.getLeft());
+        erg += " --";
+        return erg;
+    }
+
+    @Override
+    protected String doPrintPrintExpression(ASTPrintExpression exp) {
+        String erg = "print(";
+        for (int i = 0; i < exp.sizePrintElements(); i++) {
+            ASTPrintElement akt = exp.getPrintElement(i);
+            if (akt.isPresentExpression()){
+                erg += "{";
+                erg += this.doPrintExpression( akt.getExpression());
+                erg += "}";
+            } else if (akt.isPresentStringLiteral()){
+                erg += LitPrinter.doPrintLiteral( akt.getStringLiteral());
+            }
+        }
+        erg += ")";
+        return erg;
     }
 
     @Override

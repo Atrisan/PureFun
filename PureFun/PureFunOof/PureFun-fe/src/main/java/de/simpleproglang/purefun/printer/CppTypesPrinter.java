@@ -25,6 +25,7 @@ public class CppTypesPrinter {
         PF2cpp.put("UInt32", "uint32_t");
         PF2cpp.put("UInt64", "uint64_t");
         PF2cpp.put("Long", "int64_t");
+        PF2cpp.put("Void", "void");
     }
 
     public String cppTypePrinter(ASTType type) {
