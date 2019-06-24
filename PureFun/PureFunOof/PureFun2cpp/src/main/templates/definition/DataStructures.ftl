@@ -23,7 +23,7 @@ public:
     }
 
     virtual ~${ast.getName()}() = default;
-    ${ast.getName()}(const ${ast.getName()}&) noexcept = default;
+    ${ast.getName()}(const ${ast.getName()}&) = default;
     ${ast.getName()}(${ast.getName()}&&) noexcept = default;
     ${ast.getName()}& operator=(${ast.getName()}&) noexcept = default;
     ${ast.getName()}& operator=(${ast.getName()}&&) noexcept = default;
