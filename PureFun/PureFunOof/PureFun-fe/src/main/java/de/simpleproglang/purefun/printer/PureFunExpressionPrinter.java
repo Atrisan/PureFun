@@ -28,6 +28,12 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
         return PureFunExpressionPrinter.getInstance().doPrintExpression(expression);
     }
 
+    @Override
+    protected String doPrintDecrementExpression(ASTDecrementExpression exp) {
+        String erg = this.doPrintExpression(exp.getLeft());
+        erg += " --";
+        return erg;
+    }
 
     @Override
     protected String doPrintPrintExpression(ASTPrintExpression exp) {
