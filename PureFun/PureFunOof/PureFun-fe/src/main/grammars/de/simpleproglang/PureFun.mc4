@@ -51,7 +51,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     symbol Function implements Definition
         = "fun" Name FunctionParameters ":" Type BlockStatement;
 
-    DataStructure implements Definition
+    symbol DataStructure implements Definition
      = "data" Name "{" Variable* "}";
 
     /*=================================================================*/
@@ -106,6 +106,9 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*=================================================================*/
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
+
+    ConstructorExpression implements Expression
+        = Arguments;
 
     PrintExpression implements Expression
         = "print" "(" PrintElement* ")";

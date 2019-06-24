@@ -6,7 +6,21 @@ import java.util.HashMap;
 
 public class CppTypesPrinter {
 
-    HashMap PF2cpp = new HashMap();
+    private static CppTypesPrinter instance;
+
+    private static CppTypesPrinter getInstance() {
+        if (instance == null) {
+            instance = new CppTypesPrinter();
+        }
+        return instance;
+    }
+
+    public static String cppTypePrinter(ASTType type) {
+        return getInstance().doPrintType(type);
+    }
+
+
+    private HashMap PF2cpp = new HashMap();
 
     public CppTypesPrinter(){
         PF2cpp.put("Double", "double");
@@ -28,7 +42,7 @@ public class CppTypesPrinter {
         PF2cpp.put("Void", "void");
     }
 
-    public String cppTypePrinter(ASTType type) {
+    public String doPrintType(ASTType type) {
         String result = "";
         if (type instanceof ASTNamedTupleType){
             result = "std::tuple<";

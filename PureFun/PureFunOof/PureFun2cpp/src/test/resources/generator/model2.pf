@@ -17,11 +17,13 @@ module model2 {
 
 
 
-    sportsCar Car = Car(260,2,"Audi R8")
-    familyCar Car = Car(120,8,"VW Bully")
+    count Int = 31
 
-    char1 : Person = Person(21,75,180,[familyCar],"Character1")
-    char2 : Person = Person(21,75,180,[sportsCar, familyCar],"Character2")
+    sportsCar Car = (260,2,"Audi R8")
+    familyCar Car = (120,8,"VW Bully")
+
+    char1 : Person = (21,75,180,[familyCar],"Character1")
+    char2 : Person = (21,75,180,[sportsCar, familyCar],"Character2")
 
     fun getName(pers : Person) : String {
         return pers.get_name()

@@ -8,13 +8,13 @@ import de.monticore.types.types._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun._ast.ASTType;
+import de.simpleproglang.purefun._symboltable.DataStructureSymbol;
 import de.simpleproglang.purefun.printer.CppExpressionPrinter;
 import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.awt.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -25,7 +25,6 @@ public class PureFunGeneratorHelper{
     protected GlobalScope symbolTable;
 
     public static final String CPP_EXTENSION = ".cxx";
-    protected  CppTypesPrinter cppPrint = new CppTypesPrinter();
 
     public PureFunGeneratorHelper(ASTModule ast, GlobalScope symbolTable) {
         this.ast = ast;
@@ -38,11 +37,46 @@ public class PureFunGeneratorHelper{
      * @param type
      * @return
      */
+
+
     public String printType(ASTType type) {
-        return cppPrint.cppTypePrinter(type);
+        return CppTypesPrinter.cppTypePrinter(type);
     }
 
     public String printExpression(ASTExpression expression) { return CppExpressionPrinter.printExpression(expression); }
+
+    public boolean isNotClassType (ASTVariable var) {
+        ASTType type = var.getType();
+        boolean erg = true;
+        String[] Types = new String[17];
+        Types[0] = ("Double");
+        Types[1] = ("Float64");
+        Types[2] = ("Float");
+        Types[3] = ("Int");
+        Types[4] = ("Char");
+        Types[5] = ("String");
+        Types[6] = ("Boolean");
+        Types[7] = ("Int8");
+        Types[8] = ("Int16");
+        Types[9] = ("Int32");
+        Types[10] = ("Int64");
+        Types[11] = ("UInt8");
+        Types[12] = ("UInt16");
+        Types[13] = ("UInt32");
+        Types[14] = ("UInt64");
+        Types[15] = ("Long");
+        Types[16] = ("Void");
+        if (type instanceof ASTTypeName) {
+            for (int i = 0; i < Types.length; i++) {
+                if (((ASTTypeName) type).getName().equals(Types[i])) {
+                    return true;
+                }
+            }
+            erg = false;
+        }
+        return erg;
+    }
+
 
     public boolean isDataStruct(ASTDefinition type){
         if (type instanceof ASTDataStructure){
