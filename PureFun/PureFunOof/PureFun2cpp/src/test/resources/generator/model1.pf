@@ -7,7 +7,7 @@ module model1 {
             j : Int64 = i - 1
             while j>= 0 and arr[j] > x {
                 arr[j + 1] = arr[j]
-                j -= 1
+                j--
             }
 
             arr[j + 1] = x
