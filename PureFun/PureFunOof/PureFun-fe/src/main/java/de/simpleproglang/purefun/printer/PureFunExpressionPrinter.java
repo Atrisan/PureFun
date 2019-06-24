@@ -31,7 +31,7 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
     @Override
     protected String doPrintDecrementExpression(ASTDecrementExpression exp) {
         String erg = this.doPrintExpression(exp.getLeft());
-        erg += " --";
+        erg += "--";
         return erg;
     }
 
