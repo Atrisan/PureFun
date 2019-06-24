@@ -17,9 +17,6 @@ ${signature("ast", "modulename")}
 namespace ${modulename} {
 
 class ${ast.getName()} {
-private:
-    static ${ast.getName()}() {}
-
 public:
     ${ast.getName()}(${constructorParam})
         : ${initConstructor} {
@@ -35,13 +32,10 @@ public:
     ${gh.printType(variable.getType())} const & get_${variable.getName()}() const noexcept { return _${variable.getName()}; }
 </#list>
 
-    static const & ${ast.getName()} get_default() const noexcept { return default_obj; }
-
 private:
 <#list ast.getVariableList() as variable>
     ${includeArgs("definition/Variable.ftl", variable, "_")}
 </#list>
-    static ${ast.getName()} const default_obj;
 };
 
 }
