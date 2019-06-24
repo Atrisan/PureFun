@@ -2,6 +2,8 @@ package de.simpleproglang.purefun.printer;
 
 import de.monticore.expressions.commonexpressions._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
+import de.monticore.literals.literals._ast.ASTLiteral;
+import de.monticore.literals.literals._ast.ASTStringLiteral;
 import de.simpleproglang.purefun._ast.*;
 
 
@@ -24,6 +26,25 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
 
     public static String printExpression(ASTExpression expression) {
         return CppExpressionPrinter.getInstance().doPrintExpression(expression);
+    }
+
+
+    @Override
+    protected String doPrintPrintExpression(ASTPrintExpression exp) {
+        String erg = "print(";
+        for (int i = 0; i < exp.sizePrintElements(); i++) {
+            ASTPrintElement akt = exp.getPrintElement(i);
+            if (akt.isPresentExpression()){
+                erg += this.doPrintExpression( akt.getExpression());
+            } else if (akt.isPresentStringLiteral()){
+                erg += LitPrinter.doPrintLiteral( akt.getStringLiteral());
+            }
+            if(i < exp.sizePrintElements() - 1) {
+                erg += ", ";
+            }
+        }
+        erg += ")";
+        return erg;
     }
 
     @Override

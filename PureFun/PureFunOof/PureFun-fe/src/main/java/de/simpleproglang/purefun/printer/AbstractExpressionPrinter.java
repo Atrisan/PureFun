@@ -91,10 +91,14 @@ public abstract class AbstractExpressionPrinter {
             return this.doPrintAssignmentByDivisionExpression((ASTAssignmentByDivisionExpression) expression);
         } else if (expression instanceof ASTAssignmentByRemainderExpression) {
             return this.doPrintAssignmentByRemainderExpression((ASTAssignmentByRemainderExpression) expression);
+        } else if (expression instanceof  ASTPrintExpression) {
+            return this.doPrintPrintExpression((ASTPrintExpression) expression);
         }
 
         return "Not implemented in PureFunExpressionPrinter: " + expression.toString();
     }
+
+    protected abstract String doPrintPrintExpression(ASTPrintExpression exp);
 
     protected abstract String doPrintListExpression(ASTListExpression exp);
 
