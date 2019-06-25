@@ -124,6 +124,12 @@ grammar PureFun extends de.monticore.literals.Literals,
     BooleanOrOpExpressionDiff implements Expression <117>, InfixExpression
         = left:Expression operator:"or" right:Expression;
 
+    BooleanNotOpExpressionDiff implements Expression
+        = "not" Expression;
+
+    RemainderExpressionDiff implements Expression <120>, InfixExpression
+        = left:Expression operator:"mod" right:Expression;
+
 
     LengthExpression implements Expression
         = "#" Expression;
@@ -135,7 +141,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "$" Expression;
 
     MapKeyExpression implements Expression
-        = "!" Expression;
+        = "@" Expression;
 
     IndexAccessExpression implements Expression <1>
         = Expression "[" index:Expression "]";
