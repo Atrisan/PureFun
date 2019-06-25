@@ -5,26 +5,26 @@ import de.monticore.mcexpressions._ast.*;
 import de.monticore.prettyprint.IndentPrinter;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.types.types._ast.*;
+import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun._ast.ASTType;
+import de.simpleproglang.purefun._symboltable.DataStructureSymbol;
+import de.simpleproglang.purefun.printer.CppExpressionPrinter;
 import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.awt.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
-class PureFunGeneratorHelper{
+public class PureFunGeneratorHelper{
 
     protected ASTModule ast;
 
     protected GlobalScope symbolTable;
 
     public static final String CPP_EXTENSION = ".cxx";
-    protected  CppTypesPrinter cppPrint = new CppTypesPrinter();
-
 
     public PureFunGeneratorHelper(ASTModule ast, GlobalScope symbolTable) {
         this.ast = ast;
@@ -37,63 +37,151 @@ class PureFunGeneratorHelper{
      * @param type
      * @return
      */
+
+
     public String printType(ASTType type) {
-        return cppPrint.cppTypePrinter(type);
+        return CppTypesPrinter.cppTypePrinter(type);
     }
 
-    /**
-     * Prints an expression
-     *
-     * @param ast
-     * @return
-     */
-    public String printExpression(ASTExpression ast) {
-        //TODO
-        return "";
+    public String printExpression(ASTExpression expression) { return CppExpressionPrinter.printExpression(expression); }
+
+    public boolean isNotClassType (ASTVariable var) {
+        ASTType type = var.getType();
+        boolean erg = true;
+        String[] Types = new String[17];
+        Types[0] = ("Double");
+        Types[1] = ("Float64");
+        Types[2] = ("Float");
+        Types[3] = ("Int");
+        Types[4] = ("Char");
+        Types[5] = ("String");
+        Types[6] = ("Boolean");
+        Types[7] = ("Int8");
+        Types[8] = ("Int16");
+        Types[9] = ("Int32");
+        Types[10] = ("Int64");
+        Types[11] = ("UInt8");
+        Types[12] = ("UInt16");
+        Types[13] = ("UInt32");
+        Types[14] = ("UInt64");
+        Types[15] = ("Long");
+        Types[16] = ("Void");
+        if (type instanceof ASTTypeName) {
+            for (int i = 0; i < Types.length; i++) {
+                if (((ASTTypeName) type).getName().equals(Types[i])) {
+                    return true;
+                }
+            }
+            erg = false;
+        }
+        return erg;
     }
 
-    public Boolean isDataStruct(ASTDefinition type){
+
+    public boolean isDataStruct(ASTDefinition type){
         if (type instanceof ASTDataStructure){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isFunction(ASTDefinition type){
+    public boolean isFunction(ASTDefinition type){
         if (type instanceof ASTFunction){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isGlobalVar(ASTVariable type){
+    public boolean isGlobalVar(ASTDefinition type){
         if (type instanceof ASTVariable){
-            return Boolean.TRUE;
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public Boolean isCommonForControl(ASTForControl type){
-        if (type instanceof ASTCommonForControl){
-            return Boolean.TRUE;
+    public boolean isListType(ASTType type) {
+        if (type instanceof ASTListType) {
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
+    }
+
+    public boolean isMapType(ASTType type) {
+        if (type instanceof ASTMapType) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isTupleType(ASTType type) {
+        if (type instanceof ASTNamedTupleType) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isNotContainerType(ASTVariable var) {
+        ASTType type = var.getType();
+
+        if (var.isPresentExpression()) {
+            ASTExpression exp = var.getExpression();
+            if (exp instanceof ASTListExpression
+                    || exp instanceof ASTMapExpression
+                    || exp instanceof ASTTupleExpression) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isCommonForControl(ASTForControl type){
+        if (type instanceof ASTCommonForControl){
+            return true;
+        }
+        return false;
     }
 
     public Boolean isForEachControl(ASTForControl type){
-        if (type instanceof ASTCommonForControl){
-            return Boolean.TRUE;
+        if (type instanceof ASTForEachControl){
+            return true;
         }
-        return Boolean.FALSE;
+        return false;
     }
 
-    public String commonForControlString(ASTForEachControl type){
-        String result = "";
-        if(type.ge) {
-            for (int i = 0; i < type.getForInit().getForInitExList().size(); i++){
-                result += type.getForInit().getForInitEx(i).getVariableOpt().isPresent()
-            }
+    public boolean isAsyncStatement(ASTStatement type){
+        if (type instanceof ASTAsyncStatement){
+            return true;
         }
+        return false;
+    }
+
+    public boolean isForStatement(ASTStatement type){
+        if (type instanceof ASTForStatement){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isIfStatement(ASTStatement type){
+        if (type instanceof ASTIfStatement){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isReturnStatement(ASTStatement type){
+        if (type instanceof ASTReturnStatement){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isWhileStatement(ASTStatement type){
+        if (type instanceof ASTWhileStatement){
+            return true;
+        }
+        return false;
     }
 
 }

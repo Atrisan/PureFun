@@ -1,9 +1,9 @@
 module DataStructures{
 
-    (Int, Int, String) tupel = (1, 34, "test")
+    tupel <Int, Int, String> = <1, 34, "test">
 
     fun main() : Int {
-        Int x = tupel[1]
+        x Int = tupel[1]
 
         return 0
     }

@@ -1,0 +1,38 @@
+module TestDF {
+
+global_in Int32 = 0
+map [Int32, Int64] = {1:1, 2:2}
+list [Int32] = [1,2,3,4]
+
+data TestStruct {
+    age : Int32
+    weight Float64
+    bool Boolean
+}
+
+
+fun test(String key, [Int32, Int64] insert, [Int32] list) : Int {
+    map [String , Int] = {"String" : 2}
+    te [Int] = [6]
+
+    return map["String"]
+
+}
+
+fun main() : Int32 {
+    j Int32 = 0
+    map [Int32, Int64] = {1:1, 2:2}
+    list [Int32] = [1,2,3]
+    tuple (Int32, Int64) = (1,2)
+    for i Int32 = 0; i < 10; i++ {
+        print("string")
+    }
+
+    test("String")
+
+    if global_in == 0 {
+        //if case
+    }
+}
+
+}

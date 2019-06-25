@@ -1,4 +1,5 @@
-<#assign genHelper = glex.getGlobalVar("PFHelper")> <#-- GeneratorHelper -->
-${signature(variable, prefix, sym)}
-
-${printType(sym.getType(variable))} ${prefix}${variable.Name}<#if variable.isPresentExpression() && existsHookPoint("<Expression>")> = </#if>${defineHookPoint("<Expression>")};
+<#compress>
+${signature("variable", "prefix")}
+<#assign gh = glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
+${gh.printType(variable.getType())} ${prefix}${variable.getName()}<#if variable.isPresentExpression() && gh.isNotContainerType(variable) && gh.isNotClassType(variable)> = </#if> <#if variable.isPresentExpression()>${gh.printExpression(variable.getExpression())}</#if>;
+</#compress>

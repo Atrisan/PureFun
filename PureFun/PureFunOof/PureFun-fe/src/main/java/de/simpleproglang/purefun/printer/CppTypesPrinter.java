@@ -6,15 +6,29 @@ import java.util.HashMap;
 
 public class CppTypesPrinter {
 
-    HashMap PF2cpp = new HashMap();
+    private static CppTypesPrinter instance;
+
+    private static CppTypesPrinter getInstance() {
+        if (instance == null) {
+            instance = new CppTypesPrinter();
+        }
+        return instance;
+    }
+
+    public static String cppTypePrinter(ASTType type) {
+        return getInstance().doPrintType(type);
+    }
+
+
+    private HashMap PF2cpp = new HashMap();
 
     public CppTypesPrinter(){
         PF2cpp.put("Double", "double");
         PF2cpp.put("Float64", "double");
         PF2cpp.put("Float", "float");
-        PF2cpp.put("Int", "int");
+        PF2cpp.put("Int", "int32_t");
         PF2cpp.put("Char", "char");
-        PF2cpp.put("String", "string");
+        PF2cpp.put("String", "std::string");
         PF2cpp.put("Boolean", "bool");
         PF2cpp.put("Int8", "int8_t");
         PF2cpp.put("Int16", "int16_t");
@@ -25,14 +39,18 @@ public class CppTypesPrinter {
         PF2cpp.put("UInt32", "uint32_t");
         PF2cpp.put("UInt64", "uint64_t");
         PF2cpp.put("Long", "int64_t");
+        PF2cpp.put("Void", "void");
     }
 
-    public String cppTypePrinter(ASTType type) {
+    public String doPrintType(ASTType type) {
         String result = "";
         if (type instanceof ASTNamedTupleType){
             result = "std::tuple<";
             for (int i = 0; i < ((ASTNamedTupleType) type).getNamedTupleList().size(); i++) {
                 result += cppTypePrinter(((ASTNamedTupleType) type).getNamedTuple(i).getType());
+                if (i < ((ASTNamedTupleType) type).getNamedTupleList().size() - 1){
+                    result += ", ";
+                }
             }
             result += ">";
         } else if (type instanceof ASTListType) {
@@ -42,6 +60,7 @@ public class CppTypesPrinter {
         } else if (type instanceof ASTMapType) {
             result = "std::map<";
             result += cppTypePrinter(((ASTMapType) type).getKeyType());
+            result += ", ";
             result += cppTypePrinter((((ASTMapType) type).getValueType()));
             result += ">";
         } else if (type instanceof ASTTypeName) {

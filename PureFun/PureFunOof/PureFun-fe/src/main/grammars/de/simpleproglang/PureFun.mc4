@@ -8,28 +8,28 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     interface Type;
 
-    TypeName implements Type = Name;
+    TypeName implements Type <170> = Name;
 
-    ListType implements Type = "[" Type "]";
+    ListType implements Type <170> = "[" Type "]";
 
-    MapType implements Type= "[" keyType:Type "," valueType:Type "]";
+    MapType implements Type <170> = "[" keyType:Type "," valueType:Type "]";
 
-    NamedTupleType implements Type = "(" (NamedTuple || ",")* ")";
+    NamedTupleType implements Type <170> = "<" (NamedTuple || ",")* ">";
 
     NamedTuple
         = (Name ":")? Type;
 
-    ListExpression implements Expression
+    ListExpression implements Expression <160>
         = "[" (Expression || ",")* "]";
 
-    MapExpression implements Expression
+    MapExpression implements Expression <160>
         = "{" (MapKeyValuePair || ",")* "}";
 
     MapKeyValuePair
         = key:Expression ":" value:Expression;
 
-    TupleExpression implements Expression
-        = "(" (Expression || ",")* ")";
+    TupleExpression implements Expression <160>
+        = "<" (Expression || ",")* ">";
 
     interface Definition;
 
@@ -39,19 +39,19 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                         DEFINITIONS                             */
     /*=================================================================*/
 
-    symbol Variable implements Definition
-        = Type Name ("=" Expression)?;
+    symbol Variable implements Definition <800>
+        = Name ":"? Type ("=" Expression)?;
 
     FunctionParameters
         = "(" (FunctionParameter || ",")* ")";
 
     FunctionParameter
-        = Type Name;
+        = Name ":"? Type;
 
     symbol Function implements Definition
         = "fun" Name FunctionParameters ":" Type BlockStatement;
 
-    DataStructure implements Definition
+    symbol DataStructure implements Definition
      = "data" Name "{" Variable* "}";
 
     /*=================================================================*/
@@ -94,22 +94,41 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "async" BlockStatement;
 
     scope BlockStatement implements Statement
-        = "{" (Statement | Expression | Variable)* "}";
+        = "{" BlockElement* "}";
+
+    BlockElement
+        = (Statement | Variable | Expression);
 
     ExtLiteral = Literal;
+
+    LitExpression implements Expression <380> = Literal;
 
     /*=================================================================*/
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
 
-    AssignmentExpression implements Expression
-        = left:Name "=" right:Expression;
+    ConstructorExpression implements Expression
+        = Arguments;
+
+    PrintExpression implements Expression
+        = "print" "(" PrintElement* ")";
+
+    PrintElement = StringLiteral | "{" Expression "}";
+
+    AssignmentExpression implements Expression <200>
+        = left:Expression "=" right:Expression;
 
     BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression
         = left:Expression operator:"and" right:Expression;
 
     BooleanOrOpExpressionDiff implements Expression <117>, InfixExpression
         = left:Expression operator:"or" right:Expression;
+
+    BooleanNotOpExpressionDiff implements Expression
+        = "not" Expression;
+
+    RemainderExpressionDiff implements Expression <120>, InfixExpression
+        = left:Expression operator:"mod" right:Expression;
 
 
     LengthExpression implements Expression
@@ -122,12 +141,27 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "$" Expression;
 
     MapKeyExpression implements Expression
-        = "!" Expression;
+        = "@" Expression;
 
-    IndexAccessExpression implements Expression
+    IndexAccessExpression implements Expression <1>
         = Expression "[" index:Expression "]";
 
     ConcatExpression implements Expression
         = left:Expression "++" (right:Expression)?;
+
+    DecrementExpression implements Expression
+        = left:Expression "--";
+
+    AssignmentByDecreaseExpression implements Expression
+        = left:Expression "-=" right:Expression;
+
+    AssignmentByMultiplyExpression implements Expression
+        = left:Expression "*=" right:Expression;
+
+    AssignmentByDivisionExpression implements Expression
+        = left:Expression "/=" right:Expression;
+
+    AssignmentByRemainderExpression implements Expression
+        = left:Expression "%=" right:Expression;
 
 }

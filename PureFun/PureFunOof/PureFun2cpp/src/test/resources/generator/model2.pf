@@ -1,0 +1,43 @@
+module model2 {
+
+
+    data Car {
+            PS : Int16
+            seats : Int8
+            model : String
+    }
+
+    data Person {
+        age : Int8
+        weight : Int16
+        size : Int16
+        cars : [Car]
+        name : String
+    }
+
+
+
+    count Int = 31
+
+    sportsCar Car = (260,2,"Audi R8")
+    familyCar Car = (120,8,"VW Bully")
+
+    char1 : Person = (21,75,180,[familyCar],"Character1")
+    char2 : Person = (21,75,180,[sportsCar, familyCar],"Character2")
+
+    fun getName(pers : Person) : String {
+        return pers.get_name()
+    }
+
+    fun getMainCar(pers : Person) : String {
+        return pers.get_cars()[0].get_model()
+    }
+
+    fun main() : Int32 {
+        print("Name: "{getName(char1)})
+        print()
+        print("Main Car: "{getMainCar(char2)})
+
+        return 0
+    }
+}

@@ -1,0 +1,36 @@
+module model1 {
+
+    fun insertionSort(arr : [Int64]) : [Int64] {
+        i : Int64 = 1
+        while i < #arr {
+            x : Int64 = arr[i]
+            j : Int64 = i - 1
+            while j>= 0 and arr[j] > x {
+                arr[j + 1] = arr[j]
+                j--
+            }
+
+            arr[j + 1] = x
+            i++
+        }
+
+        return arr
+    }
+
+    fun identity(x : Int64) : Int64 {
+        return x
+    }
+
+    fun main() : Int32 {
+        arr : [Int64] = [10, 2, 1, 101, 22, 42, 31, 69]
+        sorted : [Int64] = insertionSort(arr)
+        for i in sorted {
+            print("Number:" {i})
+            identity (i)
+            tpl : <Int32, Int64> = <1, 2>
+        }
+        print()
+
+        return 0
+    }
+}

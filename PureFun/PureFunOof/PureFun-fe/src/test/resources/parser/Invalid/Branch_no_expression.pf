@@ -1,6 +1,6 @@
 module DataStructures{
 
-    Int x = 9
+    x Int = 9
 
     fun main() : Int{
         if {

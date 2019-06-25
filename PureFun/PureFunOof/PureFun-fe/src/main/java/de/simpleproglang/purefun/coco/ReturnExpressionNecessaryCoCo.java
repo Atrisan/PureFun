@@ -1,6 +1,7 @@
 package de.simpleproglang.purefun.coco;
 
 import de.se_rwth.commons.logging.Log;
+import de.simpleproglang.purefun._ast.ASTBlockElement;
 import de.simpleproglang.purefun._ast.ASTFunction;
 import de.simpleproglang.purefun._ast.ASTReturnStatement;
 import de.simpleproglang.purefun._ast.ASTStatement;
@@ -14,9 +15,9 @@ public class ReturnExpressionNecessaryCoCo implements PureFunASTFunctionCoCo {
         boolean hasReturnStatement = false;
         String type = TypesPrinter.printType(node.getType());
 
-        for (ASTStatement st : node.getBlockStatement().getStatementList()) {
-            if (st instanceof ASTReturnStatement) {
-                ASTReturnStatement returnSt = (ASTReturnStatement) st;
+        for (ASTBlockElement st : node.getBlockStatement().getBlockElementList()) {
+            if (st.isPresentStatement() && st.getStatement() instanceof ASTReturnStatement) {
+                ASTReturnStatement returnSt = (ASTReturnStatement) st.getStatement();
 
                 hasReturnStatement = true;
 
