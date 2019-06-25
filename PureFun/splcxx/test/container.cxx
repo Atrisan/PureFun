@@ -18,10 +18,27 @@ class test_container : public ::testing::Test {
 		std::unordered_map<int32_t, char> map_;
 };
 
+TEST_F(test_container, check_is_in_vec_double_success) {
+  std::vector<float> vec {2.4, 3.1, 6.9, 2.4, 3.1, 6.9};
+	ASSERT_TRUE(check_in(3.1, vec));
+	for (auto i : vec) {
+		ASSERT_TRUE(check_in(i, vec));
+	}
+}
+
+TEST_F(test_container, check_is_in_vec_double_no_duplicate_success) {
+  std::vector<float> vec {2.4, 3.1, 6.9};
+	ASSERT_TRUE(check_in(3.1, vec));
+	for (auto i : vec) {
+		ASSERT_TRUE(check_in(i, vec));
+	}
+}
+
 TEST_F(test_container, check_is_in_vec_success) {
 	for (auto i : vec_) {
 		ASSERT_TRUE(check_in(i, vec_));
 	}
+	ASSERT_TRUE(check_in(0, vec_));
 }
 
 TEST_F(test_container, check_is_in_vec_failure) {

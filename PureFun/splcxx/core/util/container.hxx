@@ -47,11 +47,9 @@ std::unordered_map<K, V> concat(std::unordered_map<K, V> const& left, std::unord
 	return res;
 }
 
-template<typename T, typename Container>
-bool check_in(T const& left, Container const& right) {
-	auto it = std::find(right.begin(), right.end(), left);
-	if(it == right.end()) { return false; }
-	return true;
+template<typename Container>
+bool check_in(typename Container::value_type const& left, Container const& right) {
+	return std::find(right.cbegin(), right.cend(), left) != right.cend();
 }
 
 template<typename K, typename V>
