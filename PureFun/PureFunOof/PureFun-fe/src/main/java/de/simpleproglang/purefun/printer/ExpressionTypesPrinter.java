@@ -19,6 +19,11 @@ public class ExpressionTypesPrinter extends AbstractExpressionPrinter {
     private ExpressionTypesPrinter() {}
 
     @Override
+    protected Object doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        return null;
+    }
+
+    @Override
     protected String doPrintDecrementExpression(ASTDecrementExpression exp) {
         return null;
     }
@@ -35,7 +40,7 @@ public class ExpressionTypesPrinter extends AbstractExpressionPrinter {
     }
 
     public static String printExpressionType(ASTExpression exp) {
-        return getInstance().doPrintExpression(exp);
+        return "";
     }
 
     @Override

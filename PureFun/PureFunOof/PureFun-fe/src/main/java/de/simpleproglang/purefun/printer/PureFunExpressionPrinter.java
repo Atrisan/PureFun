@@ -7,7 +7,7 @@ import de.simpleproglang.purefun._ast.*;
 
 import java.util.Iterator;
 
-public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
+public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     private static PureFunExpressionPrinter printer;
 
@@ -18,7 +18,7 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
 
 
 
-    protected static AbstractExpressionPrinter getInstance() {
+    protected static AbstractExpressionPrinter<String> getInstance() {
         if (printer == null) {
             printer = new PureFunExpressionPrinter();
         }
@@ -28,6 +28,14 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
 
     public static String printExpression(ASTExpression expression) {
         return PureFunExpressionPrinter.getInstance().doPrintExpression(expression);
+    }
+
+    @Override
+    protected String doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        String erg = this.doPrintExpression(exp.getLeft());
+        erg += " mod ";
+        erg += this.doPrintExpression(exp.getRight());
+        return erg;
     }
 
     @Override

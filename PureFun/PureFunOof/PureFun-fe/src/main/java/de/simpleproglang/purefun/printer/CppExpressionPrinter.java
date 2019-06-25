@@ -16,9 +16,6 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     private CppExpressionPrinter() { }
 
-
-
-
     protected static AbstractExpressionPrinter<String> getInstance() {
         if (printer == null) {
             printer = new CppExpressionPrinter();
@@ -29,6 +26,14 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     public static String printExpression(ASTExpression expression) {
         return CppExpressionPrinter.getInstance().doPrintExpression(expression);
+    }
+
+    @Override
+    protected String doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        String erg = this.doPrintExpression(exp.getLeft());
+        erg += " % ";
+        erg += this.doPrintExpression(exp.getRight());
+        return erg;
     }
 
     @Override
