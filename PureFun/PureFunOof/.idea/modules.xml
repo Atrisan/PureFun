@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PureFun-fe/PureFun-fe.iml" filepath="$PROJECT_DIR$/PureFun-fe/PureFun-fe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PureFun2cpp/PureFun2cpp.iml" filepath="$PROJECT_DIR$/PureFun2cpp/PureFun2cpp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PureFunOof.iml" filepath="$PROJECT_DIR$/PureFunOof.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: de.monticore.lang:cd4analysis:1.3.18">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/monticore/lang/cd4analysis/1.3.18/cd4analysis-1.3.18.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/de/monticore/lang/cd4analysis/1.3.18/cd4analysis-1.3.18-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/monticore/lang/cd4analysis/1.3.18/cd4analysis-1.3.18-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

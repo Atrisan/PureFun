@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: de.monticore:monticore-runtime:test-jar:tests:5.0.5">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/monticore/monticore-runtime/5.0.5/monticore-runtime-5.0.5-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/de/monticore/monticore-runtime/5.0.5/monticore-runtime-5.0.5-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/monticore/monticore-runtime/5.0.5/monticore-runtime-5.0.5-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
