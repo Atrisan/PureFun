@@ -14,14 +14,14 @@ module model3 {
         sizes[2] = #map
         bigList [Float] = list ++ list
 
-        exist Boolean = 2.4 in bigList
+        exists Boolean = 2.4 in bigList
 
         if (exists) {
             print("Happy" {map[1]})
             for i in list {
                 print({i})
                 }
-            for i in biglist {
+            for i in bigList {
                 print({i})
             }
             print()

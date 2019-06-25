@@ -215,8 +215,9 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintConcatExpression(ASTConcatExpression exp) {
-        String erg = "concat(";
+        String erg = "";
         if (exp.isPresentRight()) {
+            erg += "concat(";
             erg += this.doPrintExpression(exp.getLeft());
             erg += ", ";
             erg += this.doPrintExpression(exp.getRight());
