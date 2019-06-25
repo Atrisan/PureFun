@@ -8,7 +8,7 @@ import de.simpleproglang.purefun._ast.*;
 
 
 
-public class CppExpressionPrinter extends AbstractExpressionPrinter{
+public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     private static CppExpressionPrinter printer;
 
@@ -19,7 +19,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter{
 
 
 
-    protected static AbstractExpressionPrinter getInstance() {
+    protected static AbstractExpressionPrinter<String> getInstance() {
         if (printer == null) {
             printer = new CppExpressionPrinter();
         }

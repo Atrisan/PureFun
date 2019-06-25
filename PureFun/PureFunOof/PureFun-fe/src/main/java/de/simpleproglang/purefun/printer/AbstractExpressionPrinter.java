@@ -8,11 +8,11 @@ import de.monticore.literals.literals._ast.ASTLiteral;
 import de.monticore.prettyprint.IndentPrinter;
 import de.simpleproglang.purefun._ast.*;
 
-public abstract class AbstractExpressionPrinter {
+public abstract class AbstractExpressionPrinter<T> {
 
     protected AbstractExpressionPrinter() { }
 
-    protected String doPrintExpression(ASTExpression expression) {
+    protected T doPrintExpression(ASTExpression expression) {
         if (expression instanceof ASTListExpression) {
             return this.doPrintListExpression((ASTListExpression) expression);
         } else if (expression instanceof ASTMapExpression) {
@@ -99,90 +99,90 @@ public abstract class AbstractExpressionPrinter {
             return this.doPrintConstructorExpression((ASTConstructorExpression) expression);
         }
 
-        return "Not implemented in PureFunExpressionPrinter: " + expression.toString();
+        throw new RuntimeException( "Not implemented in PureFunExpressionPrinter: " + expression.toString());
     }
 
-    protected abstract String doPrintConstructorExpression(ASTConstructorExpression exp);
+    protected abstract T doPrintConstructorExpression(ASTConstructorExpression exp);
 
-    protected abstract String doPrintDecrementExpression(ASTDecrementExpression exp);
+    protected abstract T doPrintDecrementExpression(ASTDecrementExpression exp);
 
-    protected abstract String doPrintPrintExpression(ASTPrintExpression exp);
+    protected abstract T doPrintPrintExpression(ASTPrintExpression exp);
 
-    protected abstract String doPrintListExpression(ASTListExpression exp);
+    protected abstract T doPrintListExpression(ASTListExpression exp);
 
-    protected abstract String doPrintMapExpression(ASTMapExpression exp);
+    protected abstract T doPrintMapExpression(ASTMapExpression exp);
 
-    protected abstract String doPrintTupleExpression(ASTTupleExpression exp);
+    protected abstract T doPrintTupleExpression(ASTTupleExpression exp);
 
-    protected abstract String doPrintAsyncExpression(ASTAsyncExpression exp);
+    protected abstract T doPrintAsyncExpression(ASTAsyncExpression exp);
 
-    protected abstract String doPrintAssignmentExpression(ASTAssignmentExpression exp);
+    protected abstract T doPrintAssignmentExpression(ASTAssignmentExpression exp);
 
-    protected abstract String doPrintBooleanAndOpExpression(ASTBooleanAndOpExpression exp);
+    protected abstract T doPrintBooleanAndOpExpression(ASTBooleanAndOpExpression exp);
 
-    protected abstract String doPrintBooleanAndOpExpressionDiff(ASTBooleanAndOpExpressionDiff exp);
+    protected abstract T doPrintBooleanAndOpExpressionDiff(ASTBooleanAndOpExpressionDiff exp);
 
-    protected abstract String doPrintBooleanOrOpExpression(ASTBooleanOrOpExpression exp);
+    protected abstract T doPrintBooleanOrOpExpression(ASTBooleanOrOpExpression exp);
 
-    protected abstract String doPrintBooleanOrOpExpressionDiff(ASTBooleanOrOpExpressionDiff exp);
+    protected abstract T doPrintBooleanOrOpExpressionDiff(ASTBooleanOrOpExpressionDiff exp);
 
-    protected abstract String doPrintLengthExpression(ASTLengthExpression exp);
+    protected abstract T doPrintLengthExpression(ASTLengthExpression exp);
 
-    protected abstract String doPrintInExpression(ASTInExpression exp);
+    protected abstract T doPrintInExpression(ASTInExpression exp);
 
-    protected abstract String doPrintMapValueExpression(ASTMapValueExpression exp);
+    protected abstract T doPrintMapValueExpression(ASTMapValueExpression exp);
 
-    protected abstract String doPrintMapKeyExpression(ASTMapKeyExpression exp);
+    protected abstract T doPrintMapKeyExpression(ASTMapKeyExpression exp);
 
-    protected abstract String doPrintIndexAccessExpression(ASTIndexAccessExpression exp);
+    protected abstract T doPrintIndexAccessExpression(ASTIndexAccessExpression exp);
 
-    protected abstract String doPrintConcatExpression(ASTConcatExpression exp);
+    protected abstract T doPrintConcatExpression(ASTConcatExpression exp);
 
-    protected abstract String doPrintCallExpression(ASTCallExpression exp);
+    protected abstract T doPrintCallExpression(ASTCallExpression exp);
 
-    protected abstract String doPrintNameExpression(ASTNameExpression exp);
+    protected abstract T doPrintNameExpression(ASTNameExpression exp);
 
-    protected abstract String doPrintPlusExpression(ASTPlusExpression exp);
+    protected abstract T doPrintPlusExpression(ASTPlusExpression exp);
 
-    protected abstract String doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp);
+    protected abstract T doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp);
 
-    protected abstract String doPrintLogicalNotExpression(ASTLogicalNotExpression exp);
+    protected abstract T doPrintLogicalNotExpression(ASTLogicalNotExpression exp);
 
-    protected abstract String doPrintBooleanNotExpression(ASTBooleanNotExpression exp);
+    protected abstract T doPrintBooleanNotExpression(ASTBooleanNotExpression exp);
 
-    protected abstract String doPrintLitExpression(ASTLitExpression exp);
+    protected abstract T doPrintLitExpression(ASTLitExpression exp);
 
-    protected abstract String doPrintAssignmentByRemainderExpression(ASTAssignmentByRemainderExpression exp);
+    protected abstract T doPrintAssignmentByRemainderExpression(ASTAssignmentByRemainderExpression exp);
 
-    protected abstract String doPrintAssignmentByDivisionExpression(ASTAssignmentByDivisionExpression exp);
+    protected abstract T doPrintAssignmentByDivisionExpression(ASTAssignmentByDivisionExpression exp);
 
-    protected abstract String doPrintAssignmentByMultiplyExpression(ASTAssignmentByMultiplyExpression exp);
+    protected abstract T doPrintAssignmentByMultiplyExpression(ASTAssignmentByMultiplyExpression exp);
 
-    protected abstract String doPrintAssignmentByDecreaseExpression(ASTAssignmentByDecreaseExpression exp);
+    protected abstract T doPrintAssignmentByDecreaseExpression(ASTAssignmentByDecreaseExpression exp);
 
-    protected abstract String doPrintBracketExpression(ASTBracketExpression exp);
+    protected abstract T doPrintBracketExpression(ASTBracketExpression exp);
 
-    protected abstract String doPrintSimpleAssignmentExpression(ASTSimpleAssignmentExpression exp);
+    protected abstract T doPrintSimpleAssignmentExpression(ASTSimpleAssignmentExpression exp);
 
-    protected abstract String doPrintConditionalExpression(ASTConditionalExpression exp);
+    protected abstract T doPrintConditionalExpression(ASTConditionalExpression exp);
 
-    protected abstract String doPrintNotEqualsExpression(ASTNotEqualsExpression exp);
+    protected abstract T doPrintNotEqualsExpression(ASTNotEqualsExpression exp);
 
-    protected abstract String doPrintEqualsExpression(ASTEqualsExpression exp);
+    protected abstract T doPrintEqualsExpression(ASTEqualsExpression exp);
 
-    protected abstract String doPrintGreaterThanExpression(ASTGreaterThanExpression exp);
+    protected abstract T doPrintGreaterThanExpression(ASTGreaterThanExpression exp);
 
-    protected abstract String doPrintLessThanExpression(ASTLessThanExpression exp);
+    protected abstract T doPrintLessThanExpression(ASTLessThanExpression exp);
 
-    protected abstract String doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp);
+    protected abstract T doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp);
 
-    protected abstract String doPrintLessEqualExpression(ASTLessEqualExpression exp);
+    protected abstract T doPrintLessEqualExpression(ASTLessEqualExpression exp);
 
-    protected abstract String doPrintMinusExpression(ASTMinusExpression exp);
+    protected abstract T doPrintMinusExpression(ASTMinusExpression exp);
 
-    protected abstract String doPrintModuloExpression(ASTModuloExpression exp);
+    protected abstract T doPrintModuloExpression(ASTModuloExpression exp);
 
-    protected abstract String doPrintDivideExpression(ASTDivideExpression exp);
+    protected abstract T doPrintDivideExpression(ASTDivideExpression exp);
 
-    protected abstract String doPrintMultExpression(ASTMultExpression exp);
+    protected abstract T doPrintMultExpression(ASTMultExpression exp);
 }
