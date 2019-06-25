@@ -1,0 +1,30 @@
+module model3 {
+
+    list [Float] = [2.4, 3.1, 6.9]
+    tupel <String, Char> = <"Mittwoch", 'M'>
+    map [Int, String] = {1: "Montag", 2: "Dienstag"}
+
+    fun main() : Int {
+        list1 [Int] = @ map
+        list2 [String] = $ map
+
+        sizes [Int] = [0,0,0]
+        sizes[0] = #list
+        sizes[1] = #tupel
+        sizes[2] = #map
+        bigList [Float] = list ++ list
+
+        exist Boolean = 2.4 in bigList
+
+        if (exists) {
+            print("Happy" {map[1]})
+            for i in list {
+                print({i})
+                }
+            for i in biglist {
+                print({i})
+            }
+            print()
+        }
+    }
+}

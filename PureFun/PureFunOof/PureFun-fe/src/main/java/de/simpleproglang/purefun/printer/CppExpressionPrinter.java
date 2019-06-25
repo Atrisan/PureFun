@@ -171,17 +171,17 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintLengthExpression(ASTLengthExpression exp) {
-        String erg = "";
+        String erg = "size(";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".size()";
+        erg += ")";
         return erg;
     }
 
     @Override
     protected String doPrintInExpression(ASTInExpression exp) {
-        String erg = "";
+        String erg = "check_in(";
         erg += this.doPrintExpression(exp.getRight());
-        erg += ".existsIn(";
+        erg += ", ";
         erg += this.doPrintExpression(exp.getLeft());
         erg += ")";
         return erg;
@@ -189,17 +189,17 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintMapValueExpression(ASTMapValueExpression exp) {
-        String erg = "";
+        String erg = "map_values(";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".getValueList()";
+        erg += ")";
         return erg;
     }
 
     @Override
     protected String doPrintMapKeyExpression(ASTMapKeyExpression exp) {
-        String erg = "";
+        String erg = "map_keys(";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".getKeyList()";
+        erg += ")";
         return erg;
     }
 
@@ -215,10 +215,10 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintConcatExpression(ASTConcatExpression exp) {
-        String erg = "";
+        String erg = "concat(";
         if (exp.isPresentRight()) {
             erg += this.doPrintExpression(exp.getLeft());
-            erg += ".concat(";
+            erg += ", ";
             erg += this.doPrintExpression(exp.getRight());
             erg += ")";
         } else {
