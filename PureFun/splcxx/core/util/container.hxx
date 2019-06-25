@@ -4,7 +4,22 @@
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
-#include <type_traits>
+#include <tuple>
+
+template<typename T>
+size_t size(std::vector<T> const& right) {
+	return right.size();
+}
+
+template<typename K, typename V>
+size_t size(std::unordered_map<K, V> const& right) {
+	return right.size();
+}
+
+template<typename... Args>
+size_t size(std::tuple<Args...> right) {
+	return std::tuple_size<std::tuple<Args...>>::value;
+}
 
 template<typename T>
 std::vector<T> concat(std::vector<T> const& left, std::vector<T> const& right) {

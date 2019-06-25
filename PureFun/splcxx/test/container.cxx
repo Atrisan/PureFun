@@ -13,6 +13,7 @@ class test_container : public ::testing::Test {
 			map_.insert({{0, 'a'},{1, 'b'},{2, 'c'},{3, 'd'},{4, 'e'},{5, 'f'},{6, 'g'},{7, 'h'}});
 		}
 
+		std::tuple<int32_t, int32_t, int32_t, int32_t, int32_t, int32_t, int32_t> tup_ {1,2,3,4,5,6,7};
 		std::vector<int32_t> vec_;
 		std::unordered_map<int32_t, char> map_;
 };
@@ -82,6 +83,13 @@ TEST_F(test_container, map_keys) {
 	for(int32_t i = 0; i < 8; i++) {
 		ASSERT_TRUE(check_in(i, res));
 	}
+}
+
+
+TEST_F(test_container, size_success) {
+	ASSERT_EQ(size(tup_), 7);
+	ASSERT_EQ(size(vec_), 10);
+	ASSERT_EQ(size(map_), 8);
 }
 
 int32_t main(int32_t argc, char** argv) {
