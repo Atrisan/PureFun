@@ -37,7 +37,7 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         Optional<PureFunType> leftType = resolveType(exp.getLeft());
 
         if (leftType.isPresent() && PureFunCommonType.isNumber(leftType.get())) {
-            return Optional.of(leftType.get());
+            return leftType;
         }
 
         return Optional.empty();
@@ -156,30 +156,6 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         }
 
         return leftType;
-    }
-
-    private Optional<PureFunType> printBooleanExpressionType(ASTInfixExpression exp) {
-        Optional<PureFunType> leftType = resolveType(exp.getLeft());
-
-        if (!leftType.isPresent()) {
-            return Optional.empty();
-        }
-
-        if (!PureFunCommonType.isBoolean(leftType.get())) {
-            return Optional.empty();
-        }
-
-        Optional<PureFunType> rightType = resolveType(exp.getRight());
-
-        if (!rightType.isPresent()) {
-            return Optional.empty();
-        }
-
-        if (!PureFunCommonType.isBoolean(rightType.get())) {
-            return Optional.empty();
-        }
-
-        return Optional.of(PureFunPrimitiveType.BOOLEAN);
     }
 
     @Override
@@ -343,28 +319,6 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         return Optional.empty();
     }
 
-    @SafeVarargs
-    private static Optional<PureFunType> getTypeForBoolOperation(Optional<PureFunType>... types) {
-        for (Optional<PureFunType> type : types) {
-            if (!(type.isPresent() && type.get().equals(PureFunPrimitiveType.BOOLEAN))) {
-                return Optional.empty();
-            }
-        }
-
-        return Optional.of(PureFunPrimitiveType.BOOLEAN);
-    }
-
-    @SafeVarargs
-    private static Optional<PureFunType> getTypeForNumberOperation(Optional<PureFunType>... types) {
-        for (Optional<PureFunType> type : types) {
-            if (!(type.isPresent() && PureFunCommonType.isNumber(type.get()))) {
-                return Optional.empty();
-            }
-        }
-
-        return Optional.of(PureFunPrimitiveType.INT);
-    }
-
     @Override
     protected Optional<PureFunType> doPrintLogicalNotExpression(ASTLogicalNotExpression exp) {
         return getTypeForBoolOperation(resolveType(exp.getExpression()));
@@ -451,27 +405,6 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         return Optional.empty();
     }
 
-    @SafeVarargs
-    private static Optional<PureFunType> getTypeForEqualExpression(Optional<PureFunType>... types) {
-        if (types.length == 0) {
-            return Optional.empty();
-        }
-
-        Optional<PureFunType> refType = types[0];
-        if (!refType.isPresent()) {
-            return Optional.empty();
-        }
-
-        for (int i = 1; i < types.length; i++) {
-            Optional<PureFunType> curType = types[i];
-            if (!(curType.isPresent() && refType.get().equals(curType.get()))) {
-                return Optional.empty();
-            }
-        }
-
-        return Optional.of(PureFunPrimitiveType.BOOLEAN);
-    }
-
     @Override
     protected Optional<PureFunType> doPrintNotEqualsExpression(ASTNotEqualsExpression exp) {
         return getTypeForEqualExpression(resolveType(exp.getLeft()), resolveType(exp.getRight()));
@@ -480,21 +413,6 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
     @Override
     protected Optional<PureFunType> doPrintEqualsExpression(ASTEqualsExpression exp) {
         return getTypeForEqualExpression(resolveType(exp.getLeft()), resolveType(exp.getRight()));
-    }
-
-    @SafeVarargs
-    private static Optional<PureFunType> getInequalityExpType(Optional<PureFunType>... types) {
-        if (types.length == 0) {
-            return Optional.empty();
-        }
-
-        for (Optional<PureFunType> type : types) {
-            if (!(type.isPresent() && PureFunCommonType.isNumber(type.get()))) {
-                return Optional.empty();
-            }
-        }
-
-        return Optional.of(PureFunPrimitiveType.BOOLEAN);
     }
 
     @Override
@@ -537,4 +455,90 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         return getTypeForNumberOperation(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
+    @Override
+    protected Optional<PureFunType> doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        return getTypeForNumberOperation(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+    }
+
+    private static Optional<PureFunType> printBooleanExpressionType(ASTInfixExpression exp) {
+        Optional<PureFunType> leftType = resolveType(exp.getLeft());
+
+        if (!leftType.isPresent()) {
+            return Optional.empty();
+        }
+
+        if (!PureFunCommonType.isBoolean(leftType.get())) {
+            return Optional.empty();
+        }
+
+        Optional<PureFunType> rightType = resolveType(exp.getRight());
+
+        if (!rightType.isPresent()) {
+            return Optional.empty();
+        }
+
+        if (!PureFunCommonType.isBoolean(rightType.get())) {
+            return Optional.empty();
+        }
+
+        return Optional.of(PureFunPrimitiveType.BOOLEAN);
+    }
+
+    @SafeVarargs
+    private static Optional<PureFunType> getTypeForBoolOperation(Optional<PureFunType>... types) {
+        for (Optional<PureFunType> type : types) {
+            if (!(type.isPresent() && type.get().equals(PureFunPrimitiveType.BOOLEAN))) {
+                return Optional.empty();
+            }
+        }
+
+        return Optional.of(PureFunPrimitiveType.BOOLEAN);
+    }
+
+    @SafeVarargs
+    private static Optional<PureFunType> getTypeForNumberOperation(Optional<PureFunType>... types) {
+        for (Optional<PureFunType> type : types) {
+            if (!(type.isPresent() && PureFunCommonType.isNumber(type.get()))) {
+                return Optional.empty();
+            }
+        }
+
+        return Optional.of(PureFunPrimitiveType.INT);
+    }
+
+    @SafeVarargs
+    private static Optional<PureFunType> getTypeForEqualExpression(Optional<PureFunType>... types) {
+        if (types.length == 0) {
+            return Optional.empty();
+        }
+
+        Optional<PureFunType> refType = types[0];
+        if (!refType.isPresent()) {
+            return Optional.empty();
+        }
+
+        for (int i = 1; i < types.length; i++) {
+            Optional<PureFunType> curType = types[i];
+            if (!(curType.isPresent() && refType.get().equals(curType.get()))) {
+                return Optional.empty();
+            }
+        }
+
+        return Optional.of(PureFunPrimitiveType.BOOLEAN);
+    }
+
+    @SafeVarargs
+    private static Optional<PureFunType> getInequalityExpType(Optional<PureFunType>... types) {
+        if (types.length == 0) {
+            return Optional.empty();
+        }
+
+        for (Optional<PureFunType> type : types) {
+            if (!(type.isPresent() && PureFunCommonType.isNumber(type.get()))) {
+                return Optional.empty();
+            }
+        }
+
+        return Optional.of(PureFunPrimitiveType.BOOLEAN);
+    }
 }
