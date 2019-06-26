@@ -1,6 +1,7 @@
 package de.simpleproglang.purefun.types;
 
-public enum PureFunPrimitiveType {
+public enum PureFunPrimitiveType implements PureFunType {
+
     DOUBLE("Double"),
     FLOAT64("Float64"),
     FLOAT("Float"),
@@ -16,8 +17,7 @@ public enum PureFunPrimitiveType {
     UINT16("UInt16"),
     UINT32("UInt32"),
     UINT64("UInt64"),
-    LONG("Long"),
-    VOID("Void");
+    LONG("Long");
 
     private String typeStr;
 
@@ -26,17 +26,7 @@ public enum PureFunPrimitiveType {
     }
 
     @Override
-    public String toString() {
-        return this.typeStr;
-    }
-
-    public static boolean contains(String type) {
-        for (PureFunPrimitiveType pureFunType : values()) {
-            if (pureFunType.toString().equalsIgnoreCase(type)) {
-                return true;
-            }
-        }
-
-        return false;
+    public String getTypeString() {
+        return typeStr;
     }
 }
