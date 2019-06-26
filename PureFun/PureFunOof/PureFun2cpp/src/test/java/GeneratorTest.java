@@ -15,7 +15,7 @@ public class GeneratorTest extends AbstractTest {
 
     @Test
     public void testGeneratorModuleWithDataStructures() {
-        String modelname = "model1";
+        String modelname = "model2";
         ModelPath modelPath = new ModelPath(Paths.get(MODEL_SOURCE_PATH));
         GlobalScope symbolTable = PureFunScopeCreator.createGlobalScope(modelPath);
         Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve(modelname, ModuleSymbol.KIND);
