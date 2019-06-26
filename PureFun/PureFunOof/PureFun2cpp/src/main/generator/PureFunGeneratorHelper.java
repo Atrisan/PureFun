@@ -13,7 +13,6 @@ import de.simpleproglang.purefun.printer.CppExpressionPrinter;
 import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
 
-import java.awt.List;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,12 +37,33 @@ public class PureFunGeneratorHelper{
      * @return
      */
 
-
     public String printType(ASTType type) {
         return CppTypesPrinter.cppTypePrinter(type);
     }
 
     public String printExpression(ASTExpression expression) { return CppExpressionPrinter.printExpression(expression); }
+
+    public String toCAPS(String in){
+        return in.toUpperCase();
+    }
+
+    public List<ASTDefinition> getPrevDefs(ASTDataStructure def, ASTModule parent) {
+        List<ASTDefinition> erg = new ArrayList<ASTDefinition>();
+        for (ASTDefinition element : parent.getDefinitionList()) {
+            if (element instanceof ASTDataStructure){
+                if (isSameStruct(element, def)) {
+                    break;
+                } else {
+                    erg.add(element);
+                }
+            }
+        }
+        return erg;
+    }
+
+    public boolean isSameStruct(ASTDefinition left, ASTDefinition right) {
+        return ((ASTDataStructure)left).getName().equals(((ASTDataStructure)right).getName());
+    }
 
     public boolean isNotClassType (ASTVariable var) {
         ASTType type = var.getType();

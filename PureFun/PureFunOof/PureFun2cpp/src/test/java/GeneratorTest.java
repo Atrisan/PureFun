@@ -15,13 +15,14 @@ public class GeneratorTest extends AbstractTest {
 
     @Test
     public void testGeneratorModuleWithDataStructures() {
+        String modelname = "model2";
         ModelPath modelPath = new ModelPath(Paths.get(MODEL_SOURCE_PATH));
         GlobalScope symbolTable = PureFunScopeCreator.createGlobalScope(modelPath);
-        Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve("model2", ModuleSymbol.KIND);
+        Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve(modelname, ModuleSymbol.KIND);
         Assert.assertTrue(moduleSymbol.isPresent());
         Assert.assertTrue(moduleSymbol.get().getModuleNode().isPresent());
         ASTModule ast = moduleSymbol.get().getModuleNode().get();
         PureFunGenerator gen = new PureFunGenerator();
-        gen.generate(ast, symbolTable,"pers.cxx");
+        gen.generate(ast, symbolTable,modelname + ".cxx");
     }
 }

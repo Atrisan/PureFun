@@ -137,7 +137,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     InExpression implements Expression
         = left:Expression "in" right:Expression;
 
-    MapValueExpression implements Expression
+    MapValueExpression implements Expression<360>
         = "$" Expression;
 
     MapKeyExpression implements Expression

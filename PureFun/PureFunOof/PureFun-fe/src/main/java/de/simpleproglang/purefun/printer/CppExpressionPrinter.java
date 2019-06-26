@@ -16,9 +16,6 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     private CppExpressionPrinter() { }
 
-
-
-
     protected static AbstractExpressionPrinter<String> getInstance() {
         if (printer == null) {
             printer = new CppExpressionPrinter();
@@ -29,6 +26,14 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     public static String printExpression(ASTExpression expression) {
         return CppExpressionPrinter.getInstance().doPrintExpression(expression);
+    }
+
+    @Override
+    protected String doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        String erg = this.doPrintExpression(exp.getLeft());
+        erg += " % ";
+        erg += this.doPrintExpression(exp.getRight());
+        return erg;
     }
 
     @Override
@@ -166,17 +171,17 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintLengthExpression(ASTLengthExpression exp) {
-        String erg = "";
+        String erg = "size(";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".size()";
+        erg += ")";
         return erg;
     }
 
     @Override
     protected String doPrintInExpression(ASTInExpression exp) {
-        String erg = "";
+        String erg = "check_in(";
         erg += this.doPrintExpression(exp.getRight());
-        erg += ".existsIn(";
+        erg += ", ";
         erg += this.doPrintExpression(exp.getLeft());
         erg += ")";
         return erg;
@@ -184,17 +189,17 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintMapValueExpression(ASTMapValueExpression exp) {
-        String erg = "";
+        String erg = "map_values(";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".getValueList()";
+        erg += ")";
         return erg;
     }
 
     @Override
     protected String doPrintMapKeyExpression(ASTMapKeyExpression exp) {
-        String erg = "";
+        String erg = "map_keys(";
         erg += this.doPrintExpression(exp.getExpression());
-        erg += ".getKeyList()";
+        erg += ")";
         return erg;
     }
 
@@ -212,8 +217,9 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
     protected String doPrintConcatExpression(ASTConcatExpression exp) {
         String erg = "";
         if (exp.isPresentRight()) {
+            erg += "concat(";
             erg += this.doPrintExpression(exp.getLeft());
-            erg += ".concat(";
+            erg += ", ";
             erg += this.doPrintExpression(exp.getRight());
             erg += ")";
         } else {

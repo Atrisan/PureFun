@@ -58,7 +58,7 @@ public class CppTypesPrinter {
             result += cppTypePrinter(((ASTListType) type).getType());
             result += ">";
         } else if (type instanceof ASTMapType) {
-            result = "std::map<";
+            result = "std::unordered_map<";
             result += cppTypePrinter(((ASTMapType) type).getKeyType());
             result += ", ";
             result += cppTypePrinter((((ASTMapType) type).getValueType()));

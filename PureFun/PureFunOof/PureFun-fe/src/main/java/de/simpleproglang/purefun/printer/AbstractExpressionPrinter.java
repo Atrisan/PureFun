@@ -97,10 +97,14 @@ public abstract class AbstractExpressionPrinter<T> {
             return this.doPrintDecrementExpression((ASTDecrementExpression) expression);
         } else if (expression instanceof  ASTConstructorExpression) {
             return this.doPrintConstructorExpression((ASTConstructorExpression) expression);
+        } else if (expression instanceof  ASTRemainderExpressionDiff) {
+            return this.doPrintRemainderExpressionDiff((ASTRemainderExpressionDiff) expression);
         }
 
         throw new RuntimeException( "Not implemented in PureFunExpressionPrinter: " + expression.toString());
     }
+
+    protected abstract T doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp);
 
     protected abstract T doPrintConstructorExpression(ASTConstructorExpression exp);
 

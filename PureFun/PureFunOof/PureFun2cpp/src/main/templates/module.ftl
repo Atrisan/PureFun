@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <string>
 #include <iostream>
+#include "../../../splcxx/purefun.hxx"
 <#assign gh=glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
 <#assign mods=ast.getDefinitionList()>
 
@@ -19,8 +20,7 @@
 /*********************************************************************/
 <#list mods as definition>
     <#if gh.isDataStruct(definition)>
-//#include <${definition.getName()}.hxx>
-${includeArgs("definition/DataStructures.ftl", definition, ast.getName())}
+#include "includes/${definition.getName()}.hxx"
     </#if>
 </#list>
 

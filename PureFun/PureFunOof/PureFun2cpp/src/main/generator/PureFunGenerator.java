@@ -2,8 +2,6 @@
 import de.monticore.generating.GeneratorSetup;
 import de.monticore.generating.GeneratorEngine;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import de.monticore.generating.templateengine.GlobalExtensionManagement;
@@ -27,5 +25,19 @@ public class PureFunGenerator {
 
         GeneratorEngine engine = new GeneratorEngine(gs);
         engine.generate("module.ftl", Paths.get(filename), ast);
+
+
+        //Generate include
+        gs.setDefaultFileExtension("hxx");
+
+        engine = new GeneratorEngine(gs);
+        for (ASTDefinition definition: ast.getDefinitionList()) {
+            if (definition instanceof ASTDataStructure) {
+                engine.generate("definition/DataStructures.ftl", Paths.get("includes",((ASTDataStructure) definition).getName() + ".hxx"), definition, definition, ast.getName(), ast);
+            }
+        }
+
+
+
     }
 }

@@ -1,0 +1,3 @@
+[submodule "PureFun/splcxx/test/googletest"]
+	path = PureFun/splcxx/test/googletest
+	url = https://github.com/google/googletest/

@@ -28,6 +28,14 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> 
     }
 
     @Override
+    protected String doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        String erg = this.doPrintExpression(exp.getLeft());
+        erg += " mod ";
+        erg += this.doPrintExpression(exp.getRight());
+        return erg;
+    }
+
+    @Override
     protected String doPrintConstructorExpression(ASTConstructorExpression exp) {
         // TODO
         String erg = "(";
