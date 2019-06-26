@@ -7,18 +7,15 @@ import de.simpleproglang.purefun._ast.*;
 
 import java.util.Iterator;
 
-public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
+public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     private static PureFunExpressionPrinter printer;
 
-    protected AbstractLiteralPrinter LitPrinter = new CppLiteralPrinter();
+    protected AbstractLiteralPrinter<String> LitPrinter = new CppLiteralPrinter();
 
     private PureFunExpressionPrinter() { }
 
-
-
-
-    protected static AbstractExpressionPrinter getInstance() {
+    protected static AbstractExpressionPrinter<String> getInstance() {
         if (printer == null) {
             printer = new PureFunExpressionPrinter();
         }
@@ -32,6 +29,7 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter {
 
     @Override
     protected String doPrintConstructorExpression(ASTConstructorExpression exp) {
+        // TODO
         String erg = "(";
         for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
             erg += this.doPrintExpression(exp.getArguments().getExpression(i));

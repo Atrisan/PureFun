@@ -1,10 +1,9 @@
 package de.simpleproglang.purefun.printer;
 
-import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.monticore.literals.literals._ast.*;
 import de.simpleproglang.purefun.types.PureFunPrimitiveType;
 
-public class LiteralTypesPrinter extends AbstractLiteralPrinter {
+public class LiteralTypesPrinter extends AbstractLiteralPrinter<String> {
     private static LiteralTypesPrinter instance;
 
     private LiteralTypesPrinter() {}
@@ -23,56 +22,56 @@ public class LiteralTypesPrinter extends AbstractLiteralPrinter {
 
     @Override
     protected String doPrintSignedDoubleLiteral(ASTSignedDoubleLiteral literal) {
-        return PureFunPrimitiveType.DOUBLE.toString();
+        return PureFunPrimitiveType.DOUBLE.getTypeString();
     }
 
     @Override
     protected String doPrintDoubleLiteral(ASTDoubleLiteral literal) {
-        return PureFunPrimitiveType.DOUBLE.toString();
+        return PureFunPrimitiveType.DOUBLE.getTypeString();
     }
 
     @Override
     protected String doPrintSignedFloatLiteral(ASTSignedFloatLiteral literal) {
-        return PureFunPrimitiveType.FLOAT.toString();
+        return PureFunPrimitiveType.FLOAT.getTypeString();
     }
 
     @Override
     protected String doPrintFloatLiteral(ASTFloatLiteral literal) {
-        return PureFunPrimitiveType.FLOAT.toString();
+        return PureFunPrimitiveType.FLOAT.getTypeString();
     }
 
     @Override
     protected String doPrintSignedLongliteral(ASTSignedLongLiteral literal) {
-        return PureFunPrimitiveType.LONG.toString();
+        return PureFunPrimitiveType.LONG.getTypeString();
     }
 
     @Override
     protected String doPrintLongLiteral(ASTLongLiteral literal) {
-        return PureFunPrimitiveType.LONG.toString();
+        return PureFunPrimitiveType.LONG.getTypeString();
     }
 
     @Override
     protected String doPrintSignedIntLiteral(ASTSignedIntLiteral literal) {
-        return PureFunPrimitiveType.INT.toString();
+        return PureFunPrimitiveType.INT.getTypeString();
     }
 
     @Override
     protected String doPrintIntLiteral(ASTIntLiteral literal) {
-        return PureFunPrimitiveType.INT.toString();
+        return PureFunPrimitiveType.INT.getTypeString();
     }
 
     @Override
     protected String doPrintStringLiteral(ASTStringLiteral literal) {
-        return PureFunPrimitiveType.STRING.toString();
+        return PureFunPrimitiveType.STRING.getTypeString();
     }
 
     @Override
     protected String doPrintCharLiteral(ASTCharLiteral literal) {
-        return PureFunPrimitiveType.CHAR.toString();
+        return PureFunPrimitiveType.CHAR.getTypeString();
     }
 
     @Override
     protected String doPrintBooleanLiteral(ASTBooleanLiteral literal) {
-        return PureFunPrimitiveType.BOOLEAN.toString();
+        return PureFunPrimitiveType.BOOLEAN.getTypeString();
     }
 }

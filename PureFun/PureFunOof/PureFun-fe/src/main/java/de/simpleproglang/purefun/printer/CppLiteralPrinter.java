@@ -7,13 +7,13 @@ import de.simpleproglang.purefun._ast.*;
 
 import java.util.Iterator;
 
-public class CppLiteralPrinter extends AbstractLiteralPrinter {
+public class CppLiteralPrinter extends AbstractLiteralPrinter<String> {
 
     private static CppLiteralPrinter printer;
 
     protected CppLiteralPrinter() { }
 
-    protected static AbstractLiteralPrinter getInstance() {
+    protected static AbstractLiteralPrinter<String> getInstance() {
         if (printer == null) {
             printer = new CppLiteralPrinter();
         }

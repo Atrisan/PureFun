@@ -5,11 +5,11 @@ import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.monticore.literals.literals._ast.*;
 import de.simpleproglang.purefun._ast.*;
 
-public abstract class AbstractLiteralPrinter {
+public abstract class AbstractLiteralPrinter<T> {
 
     protected AbstractLiteralPrinter() { }
 
-    protected String doPrintLiteral(ASTLiteral literal) {
+    protected T doPrintLiteral(ASTLiteral literal) {
         if (literal instanceof ASTBooleanLiteral) {
             return this.doPrintBooleanLiteral((ASTBooleanLiteral) literal);
         } else  if (literal instanceof ASTCharLiteral) {
@@ -34,28 +34,28 @@ public abstract class AbstractLiteralPrinter {
             return this.doPrintSignedDoubleLiteral((ASTSignedDoubleLiteral) literal);
         }
         
-        return "Not implemented in PureFunLiteralPrinter: " + literal.toString();
+        throw new RuntimeException("Not implemented in PureFunLiteralPrinter: " + literal.toString());
     }
 
-    protected abstract String doPrintSignedDoubleLiteral(ASTSignedDoubleLiteral literal);
+    protected abstract T doPrintSignedDoubleLiteral(ASTSignedDoubleLiteral literal);
 
-    protected abstract String doPrintDoubleLiteral(ASTDoubleLiteral literal);
+    protected abstract T doPrintDoubleLiteral(ASTDoubleLiteral literal);
 
-    protected abstract String doPrintSignedFloatLiteral(ASTSignedFloatLiteral literal);
+    protected abstract T doPrintSignedFloatLiteral(ASTSignedFloatLiteral literal);
 
-    protected abstract String doPrintFloatLiteral(ASTFloatLiteral literal);
+    protected abstract T doPrintFloatLiteral(ASTFloatLiteral literal);
 
-    protected abstract String doPrintSignedLongliteral(ASTSignedLongLiteral literal);
+    protected abstract T doPrintSignedLongliteral(ASTSignedLongLiteral literal);
 
-    protected abstract String doPrintLongLiteral(ASTLongLiteral literal);
+    protected abstract T doPrintLongLiteral(ASTLongLiteral literal);
 
-    protected abstract String doPrintSignedIntLiteral(ASTSignedIntLiteral literal);
+    protected abstract T doPrintSignedIntLiteral(ASTSignedIntLiteral literal);
 
-    protected abstract String doPrintIntLiteral(ASTIntLiteral literal);
+    protected abstract T doPrintIntLiteral(ASTIntLiteral literal);
 
-    protected abstract String doPrintStringLiteral(ASTStringLiteral literal);
+    protected abstract T doPrintStringLiteral(ASTStringLiteral literal);
 
-    protected abstract String doPrintCharLiteral(ASTCharLiteral literal);
+    protected abstract T doPrintCharLiteral(ASTCharLiteral literal);
 
-    protected abstract String doPrintBooleanLiteral(ASTBooleanLiteral literal);
+    protected abstract T doPrintBooleanLiteral(ASTBooleanLiteral literal);
 }
