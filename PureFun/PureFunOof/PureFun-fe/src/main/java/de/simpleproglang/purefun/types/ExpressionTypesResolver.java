@@ -537,4 +537,9 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         return getTypeForNumberOperation(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
+    @Override
+    protected Optional<PureFunType> doPrintRemainderExpressionDiff(ASTRemainderExpressionDiff exp) {
+        return getTypeForNumberOperation(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+    }
+
 }
