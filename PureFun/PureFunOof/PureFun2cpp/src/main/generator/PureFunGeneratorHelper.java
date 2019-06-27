@@ -1,14 +1,17 @@
 
 
+import de.monticore.expressions.commonexpressions._ast.ASTNameExpression;
 import de.monticore.expressions.prettyprint.MCExpressionsPrettyPrinter;
 import de.monticore.mcexpressions._ast.*;
 import de.monticore.prettyprint.IndentPrinter;
 import de.monticore.symboltable.GlobalScope;
+import de.monticore.symboltable.Scopes;
 import de.monticore.types.types._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun._ast.ASTType;
 import de.simpleproglang.purefun._symboltable.DataStructureSymbol;
+import de.simpleproglang.purefun._symboltable.VariableSymbol;
 import de.simpleproglang.purefun.printer.CppExpressionPrinter;
 import de.simpleproglang.purefun.printer.CppTypesPrinter;
 import de.simpleproglang.purefun.printer.TypesPrinter;
@@ -23,6 +26,7 @@ public class PureFunGeneratorHelper{
 
     protected GlobalScope symbolTable;
 
+    private int num = 0;
     public static final String CPP_EXTENSION = ".cxx";
 
     public PureFunGeneratorHelper(ASTModule ast, GlobalScope symbolTable) {
@@ -97,6 +101,19 @@ public class PureFunGeneratorHelper{
         return erg;
     }
 
+    public String printAsync(ASTExpression expression, Boolean assign) {
+        String res = "";
+        if(!assign) {
+            res += "std::shared_future async" + this.num;
+            num++;
+        }
+
+        return res += this.printExpression(expression);
+    }
+
+    public boolean isAsyncExpression(ASTExpression expression) {
+        return (expression instanceof ASTAsyncExpression);
+    }
 
     public boolean isDataStruct(ASTDefinition type){
         if (type instanceof ASTDataStructure){

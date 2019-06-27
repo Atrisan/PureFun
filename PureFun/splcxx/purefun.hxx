@@ -2,6 +2,7 @@
 #define PUREFUN_HXX
 
 #include "core/async/safe_queue.hxx"
+#include "core/async/thread.hxx"
 #include "core/util/container.hxx"
 #include "core/util/print.hxx"
 

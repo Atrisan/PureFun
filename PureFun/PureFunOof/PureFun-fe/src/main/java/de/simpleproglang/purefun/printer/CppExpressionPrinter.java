@@ -5,7 +5,9 @@ import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.monticore.literals.literals._ast.ASTLiteral;
 import de.monticore.literals.literals._ast.ASTStringLiteral;
 import de.simpleproglang.purefun._ast.*;
+import de.simpleproglang.purefun._symboltable.VariableSymbol;
 
+import java.util.Optional;
 
 
 public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
@@ -119,8 +121,16 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintAsyncExpression(ASTAsyncExpression exp) {
-        String erg = "";
-        //TODO
+        String erg = "std::async(std::launch::async, [=]() { return ";
+        erg += this.doPrintExpression(exp.getExpression());
+        erg += "(";
+        for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
+            erg += this.doPrintExpression(exp.getArguments().getExpression(i));
+            if (i < exp.getArguments().sizeExpressions() - 1) {
+                erg += ", ";
+            }
+        }
+        erg += ");})";
         return erg;
     }
 
@@ -246,6 +256,11 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     @Override
     protected String doPrintNameExpression(ASTNameExpression exp) {
+        Optional<VariableSymbol> sym = exp.getEnclosingScope().resolve(exp.getName(), VariableSymbol.KIND);
+        if(sym.isPresent() && sym.get().getHasAsync()) {
+            return exp.getName() + ".get()";
+        }
+
         return exp.getName();
     }
 

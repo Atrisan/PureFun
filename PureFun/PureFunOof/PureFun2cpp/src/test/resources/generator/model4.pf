@@ -1,0 +1,27 @@
+module model4 {
+
+    et : Int32 = 0
+
+    fun increment(counter : Int32) : Int32 {
+        return counter + 1
+    }
+
+    fun main() : Int32 {
+        counter : Int32 = async increment(0)
+        async sleep(10)
+
+        if counter > 0 {
+            print("done.")
+        }
+
+        async {
+            print("async 1")
+            print("async 2")
+            print("async 3")
+        }
+
+        print({counter})
+        return 0
+    }
+
+}

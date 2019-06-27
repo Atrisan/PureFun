@@ -12,7 +12,9 @@ ${signature("func")}
     <#if BlockElement.getStatementOpt().isPresent()>
         <#assign Statement=BlockElement.getStatement()>
         <#if gh.isAsyncStatement(Statement)>
-            ${includeArgs("statement/AsyncStatement.ftl",Statement)}
+            std::shared_future async_statement${glex.getGlobalVar("asyncnum")} = std::async(std::launch::async, [=]()
+            ${glex.changeGlobalVar("asyncnum", glex.getGlobalVar("asyncnum") + 1)}
+            ${includeArgs("statement/BlockStatement.ftl", Statement.getBlockStatement())});
         </#if>
         <#if gh.isForStatement(Statement)>
             ${includeArgs("statement/ForLoop.ftl",Statement)}

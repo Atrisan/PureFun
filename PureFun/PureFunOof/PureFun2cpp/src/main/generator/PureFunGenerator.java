@@ -20,6 +20,7 @@ public class PureFunGenerator {
 
         GlobalExtensionManagement management = new GlobalExtensionManagement();
         management.setGlobalValue("pfHelper", pfHelper);
+        management.setGlobalValue("asyncnum", 0);
 
         gs.setGlex(management);
 
