@@ -4,7 +4,7 @@ package de.simpleproglang.purefun._symboltable;
 public class VariableSymbol extends VariableSymbolTOP {
 
     private String type;
-    private Boolean async;
+    private boolean async;
 
     public VariableSymbol(String name) {
         super(name);

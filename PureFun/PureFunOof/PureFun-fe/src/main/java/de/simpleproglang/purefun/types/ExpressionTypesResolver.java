@@ -140,7 +140,8 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
 
     @Override
     protected Optional<PureFunType> doPrintAsyncExpression(ASTAsyncExpression exp) {
-        return resolveType(exp.getName());
+        // TODO: need symboltable
+        return Optional.empty();
     }
 
     @Override

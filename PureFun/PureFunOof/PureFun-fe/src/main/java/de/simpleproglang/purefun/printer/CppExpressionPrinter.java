@@ -257,8 +257,10 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
     @Override
     protected String doPrintNameExpression(ASTNameExpression exp) {
         Optional<VariableSymbol> sym = exp.getEnclosingScope().resolve(exp.getName(), VariableSymbol.KIND);
-        if(sym.isPresent() && sym.get().getHasAsync()) {
-            return exp.getName() + ".get()";
+        if(sym.isPresent()) {
+            if (sym.get().getHasAsync()) {
+                return exp.getName() + ".get()";
+            }
         }
 
         return exp.getName();
@@ -275,7 +277,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
     @Override
     protected String doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp) {
         String erg = this.doPrintExpression(exp.getExpression());
-        erg += "_";
+        erg += ".get_";
         erg += exp.getName();
         erg += "()";
         return erg;

@@ -107,7 +107,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
 
-    ConstructorExpression implements Expression
+    ConstructorExpression implements Expression <500>
         = Arguments;
 
     PrintExpression implements Expression
