@@ -33,6 +33,19 @@ module model2 {
         return pers.get_cars()[0].get_model()
     }
 
+    fun foo (Param1 : Int) : [Int] {
+        res [Int] = []
+        while Param1 < 42 {
+            res = res ++ [Param1]
+            Param1++
+        }
+        for i in res {
+            i++
+        }
+        return res
+      }
+
+
     fun main() : Int32 {
         print("Name: "{getName(char1)})
         print()

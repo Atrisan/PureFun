@@ -14,7 +14,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
 
     private static CppExpressionPrinter printer;
 
-    protected AbstractLiteralPrinter LitPrinter = new CppLiteralPrinter();
+    protected AbstractLiteralPrinter<String> LitPrinter = new CppLiteralPrinter();
 
     private CppExpressionPrinter() { }
 

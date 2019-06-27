@@ -11,12 +11,9 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> 
 
     private static PureFunExpressionPrinter printer;
 
-    protected AbstractLiteralPrinter LitPrinter = new CppLiteralPrinter();
+    protected AbstractLiteralPrinter<String> LitPrinter = new CppLiteralPrinter();
 
     private PureFunExpressionPrinter() { }
-
-
-
 
     protected static AbstractExpressionPrinter<String> getInstance() {
         if (printer == null) {
@@ -40,6 +37,7 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> 
 
     @Override
     protected String doPrintConstructorExpression(ASTConstructorExpression exp) {
+        // TODO
         String erg = "(";
         for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
             erg += this.doPrintExpression(exp.getArguments().getExpression(i));
