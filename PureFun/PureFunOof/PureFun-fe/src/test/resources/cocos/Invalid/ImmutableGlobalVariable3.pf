@@ -1,0 +1,14 @@
+module ImmutableGlobalVariable {
+
+    data Test {
+        count : Int
+    }
+
+    i Test = (0)
+
+    fun testSomething() : Int {
+         i.count = 0
+
+        return i
+    }
+}

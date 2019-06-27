@@ -20,7 +20,7 @@ public class ImmutableGlobalVariableCocoTest extends AbstractTest {
 
     @ParameterizedTest
     @CsvSource(
-        "Invalid/ImmutableGlobalVariable.pf"
+        "Valid/ImmutableGlobalVariable.pf"
     )
     public void test(String modelPath) {
         ASTModule moduleNode = parseModel(COCO_MODELS_ROOT_PATH + modelPath);

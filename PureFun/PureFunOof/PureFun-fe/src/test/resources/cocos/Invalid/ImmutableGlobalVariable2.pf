@@ -1,0 +1,10 @@
+module ImmutableGlobalVariable {
+
+    i [Int] = [0]
+
+    fun testSomething() : Int {
+         i[0] = 0
+
+        return i
+    }
+}
