@@ -3,10 +3,7 @@ package de.simpleproglang.purefun._symboltable;
 import de.monticore.symboltable.ArtifactScope;
 import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
-import de.simpleproglang.purefun._ast.ASTAsyncExpression;
-import de.simpleproglang.purefun._ast.ASTFunction;
-import de.simpleproglang.purefun._ast.ASTModule;
-import de.simpleproglang.purefun._ast.ASTVariable;
+import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun.printer.TypesPrinter;
 
 import java.util.ArrayList;
@@ -16,6 +13,8 @@ import java.util.Optional;
 import static java.util.Objects.requireNonNull;
 
 public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
+
+    protected ASTModule module;
 
     public PureFunSymbolTableCreator(ResolvingConfiguration resolvingConfig, Scope enclosingScope) {
         super(resolvingConfig, enclosingScope);
@@ -34,6 +33,7 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
     @Override
     public Scope createFromAST(ASTModule rootNode) {
         requireNonNull(rootNode);
+        module = rootNode;
 
         final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());
         putOnStack(artifactScope);
@@ -53,6 +53,11 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
      */
     @Override
     protected VariableSymbol create_Variable(ASTVariable ast) {
+        for (ASTDefinition def: module.getDefinitionList()) {
+            if (ast == def) {
+                return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()), false, true);
+            }
+        }
         if(ast.getExpressionOpt().isPresent() && ast.getExpression() instanceof ASTAsyncExpression) {
             return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()), true);
         }

@@ -1,0 +1,11 @@
+module ImmutableGlobalVariable {
+
+    i Int = 0
+
+    fun testSomething() : Int {
+         i Int = 0
+         a Int = 0
+
+        return i
+    }
+}
