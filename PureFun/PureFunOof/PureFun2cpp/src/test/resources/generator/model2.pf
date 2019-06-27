@@ -26,11 +26,12 @@ module model2 {
     char2 : Person = (21,75,180,[sportsCar, familyCar],"Character2")
 
     fun getName(pers : Person) : String {
-        return pers.get_name()
+        return pers.name
     }
 
     fun getMainCar(pers : Person) : String {
-        return pers.get_cars()[0].get_model()
+        Autos : [Car] = pers.cars
+        return Autos[0].model
     }
 
     fun foo (Param1 : Int) : [Int] {

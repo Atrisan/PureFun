@@ -50,10 +50,6 @@ public class TypesPrinter {
             ASTNamedTuple curTuple = (ASTNamedTuple) it.next();
             strBuilder.append(sep);
 
-            if (curTuple.isPresentName()) {
-                strBuilder.append(curTuple.getName() + ": ");
-            }
-
             strBuilder.append(this.doPrintType(curTuple.getType()));
         }
 

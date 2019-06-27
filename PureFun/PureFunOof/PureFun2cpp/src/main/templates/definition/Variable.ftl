@@ -7,6 +7,6 @@ ${signature("variable", "prefix")}
         return ${gh.printExpression(variable.getExpression())};
     });--> ${gh.printExpression(variable.getExpression())};
 <#else>
-    ${gh.printType(variable.getType())} ${prefix}${variable.getName()}<#if variable.isPresentExpression() && gh.isNotContainerType(variable) && gh.isNotClassType(variable)> = </#if> <#if variable.isPresentExpression()>${gh.printExpression(variable.getExpression())}</#if>;
+    ${gh.printType(variable.getType())} ${prefix}${variable.getName()}<#if variable.isPresentExpression() && gh.isNotContainerType(variable) && gh.isNotClassType(variable) && variable.isPresentExpression()> = ${gh.printExpression(variable.getExpression())}</#if>;
 </#if>
 </#compress>

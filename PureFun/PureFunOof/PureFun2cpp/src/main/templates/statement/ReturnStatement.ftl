@@ -1,3 +1,3 @@
 <#assign gh = glex.getGlobalVar("pfHelper")>
 ${signature("returnStatement")}
-return <#if returnStatement.getReturnExpressionOpt().isPresent()> ${gh.printExpression(returnStatement.getReturnExpression())} </#if>;
+return <#if returnStatement.isPresentReturnExpression()> ${gh.printExpression(returnStatement.getReturnExpression())} </#if>;

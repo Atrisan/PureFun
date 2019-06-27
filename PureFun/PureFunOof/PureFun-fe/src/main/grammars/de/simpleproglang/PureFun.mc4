@@ -17,7 +17,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     NamedTupleType implements Type <170> = "<" (NamedTuple || ",")* ">";
 
     NamedTuple
-        = (Name ":")? Type;
+        = Type;
 
     ListExpression implements Expression <160>
         = "[" (Expression || ",")* "]";
@@ -88,7 +88,7 @@ grammar PureFun extends de.monticore.literals.Literals,
         = "while" condition:Expression BlockStatement;
 
     AsyncExpression implements Expression
-        = "async" Expression Arguments;
+        = "async" Name Arguments;
 
     AsyncStatement implements Statement
         = "async" BlockStatement;
@@ -143,7 +143,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     MapKeyExpression implements Expression
         = "@" Expression;
 
-    IndexAccessExpression implements Expression <1>
+    IndexAccessExpression implements Expression <180>
         = Expression "[" index:Expression "]";
 
     ConcatExpression implements Expression

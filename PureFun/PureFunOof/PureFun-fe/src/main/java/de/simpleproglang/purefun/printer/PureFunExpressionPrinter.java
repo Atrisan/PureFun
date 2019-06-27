@@ -121,7 +121,7 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> 
     protected String doPrintAsyncExpression(ASTAsyncExpression exp) {
         StringBuilder res = new StringBuilder();
         res.append("async ");
-        res.append(this.doPrintExpression(exp.getExpression()));
+        res.append(exp.getName());
         String sep = "";
         res.append("(");
 

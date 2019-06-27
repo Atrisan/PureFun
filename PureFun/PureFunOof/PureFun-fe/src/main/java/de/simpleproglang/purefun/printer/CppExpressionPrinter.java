@@ -122,7 +122,7 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
     @Override
     protected String doPrintAsyncExpression(ASTAsyncExpression exp) {
         String erg = "std::async(std::launch::async, [=]() { return ";
-        erg += this.doPrintExpression(exp.getExpression());
+        erg += exp.getName();
         erg += "(";
         for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
             erg += this.doPrintExpression(exp.getArguments().getExpression(i));
@@ -275,8 +275,9 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
     @Override
     protected String doPrintQualifiedNameExpression(ASTQualifiedNameExpression exp) {
         String erg = this.doPrintExpression(exp.getExpression());
-        erg += ".";
+        erg += "_";
         erg += exp.getName();
+        erg += "()";
         return erg;
     }
 
