@@ -24,20 +24,23 @@ public class ImmutableGlobalVariableCoCo implements PureFunASTAssignmentExpressi
 
         if( node.getLeft() instanceof ASTNameExpression) {
             ASTNameExpression exp = (ASTNameExpression) node.getLeft();
-
-            sym = node.getEnclosingScope().resolve(exp.getName(), VariableSymbol.KIND);
+            if (node.isPresentEnclosingScope()) {
+                sym = node.getEnclosingScope().resolve(exp.getName(), VariableSymbol.KIND);
+            }
         } else if( node.getLeft() instanceof ASTQualifiedNameExpression) {
             ASTQualifiedNameExpression exp = (ASTQualifiedNameExpression) node.getLeft();
-
-            sym = node.getEnclosingScope().resolve(PureFunExpressionPrinter.printExpression(exp.getExpression()), VariableSymbol.KIND);
+            if (node.isPresentEnclosingScope()) {
+                sym = node.getEnclosingScope().resolve(PureFunExpressionPrinter.printExpression(exp.getExpression()), VariableSymbol.KIND);
+            }
         }else if( node.getLeft() instanceof ASTIndexAccessExpression) {
             ASTIndexAccessExpression exp = (ASTIndexAccessExpression) node.getLeft();
-
-            sym = node.getEnclosingScope().resolve(PureFunExpressionPrinter.printExpression(exp.getExpression()), VariableSymbol.KIND);
+            if (node.isPresentEnclosingScope()) {
+                sym = node.getEnclosingScope().resolve(PureFunExpressionPrinter.printExpression(exp.getExpression()), VariableSymbol.KIND);
+            }
         }
         if (sym.isPresent()){
             if (sym.get().getIsGlobal()) {
-                Log.error("Reassignement of global variable " + sym.get().getName());
+                Log.error("Reassignment of global variable " + sym.get().getName());
             }
         }
 

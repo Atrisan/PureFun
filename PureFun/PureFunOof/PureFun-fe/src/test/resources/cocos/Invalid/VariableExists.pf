@@ -1,0 +1,8 @@
+module VariableExists {
+
+    fun testSomething() : Int {
+        i Int = 0
+         
+        return bjhkhgv
+    }
+}
