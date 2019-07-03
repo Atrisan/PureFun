@@ -146,7 +146,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     IndexAccessExpression implements Expression <180>
         = Expression "[" index:Expression "]";
 
-    ConcatExpression implements Expression
+    ConcatExpression implements Expression <250>
         = left:Expression "++" (right:Expression)?;
 
     DecrementExpression implements Expression
