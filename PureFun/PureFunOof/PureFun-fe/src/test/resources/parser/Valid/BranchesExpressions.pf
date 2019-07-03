@@ -4,23 +4,23 @@ module DataStructures{
 
     fun main() : Int {
         if x < 3 && x >= 2{
-            print(x)
+            print({x})
         }
 
         if x < 3 and x >= 2{
-            print(x)
+            print({x})
         }
 
         if x < 3 || x >= 2{
-            print(x)
+            print({x})
                 }
 
         if x < 3 or x >= 2{
-            print(x)
+            print({x})
         }
 
         if (x < 9 and x > 5) or x == 2{
-            print(x)
+            print({x})
         }
 
         if x == 9 {

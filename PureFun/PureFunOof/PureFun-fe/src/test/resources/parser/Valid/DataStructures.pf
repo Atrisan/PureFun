@@ -8,10 +8,10 @@ module DataStructures{
     }
 
     fun main() : Int {
-        print(test.age)
+        print({test.age})
 
-        PersAlt (age:Int, name:String) = (18, "alternate")
-        print(persAlt.name)
+        PersAlt (Int, String) = (18, "alternate")
+        print({persAlt.name})
         return 0
     }
 }

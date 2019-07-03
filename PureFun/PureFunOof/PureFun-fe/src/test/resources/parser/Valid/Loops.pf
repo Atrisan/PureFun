@@ -8,7 +8,7 @@ module DataStructures{
         }
 
         for l in list {
-            print(l)
+            print({l})
         }
 
         x Int = 0

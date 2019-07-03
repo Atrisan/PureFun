@@ -1,12 +1,12 @@
-module DataStructures{
+module DataStructures {
 
     x Int = 9
 
     fun main() : Int {
         if x < 3 {
-            print(x)
+            print({x})
         } else if x < 6 {
-            print(x + 1)
+            print({x + 1})
         } else {
             print("large")
         }
