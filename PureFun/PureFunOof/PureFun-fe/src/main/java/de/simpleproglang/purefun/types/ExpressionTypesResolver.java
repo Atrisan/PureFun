@@ -4,12 +4,14 @@ import de.monticore.expressions.commonexpressions._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun._symboltable.FunctionSymbol;
+import de.simpleproglang.purefun._symboltable.VariableSymbol;
 import de.simpleproglang.purefun.printer.AbstractExpressionPrinter;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<PureFunType>> {
 
@@ -140,10 +142,7 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         return Optional.of(new PureFunTupleType(subTypes.toArray(new PureFunType[0])));
     }
 
-    @Override
-    protected Optional<PureFunType> doPrintAsyncExpression(ASTAsyncExpression exp) {
-        Collection<FunctionSymbol> functions = exp.getEnclosingScope().resolveMany(exp.getName(), FunctionSymbol.KIND);
-
+    private Optional<PureFunType> getCallExpressionType(Collection<FunctionSymbol> functions, List<Optional<PureFunType>> argumentTypes) {
         if (functions.isEmpty()) {
             return Optional.empty();
         }
@@ -151,15 +150,18 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         Optional<PureFunType> type = Optional.empty();
 
         for (FunctionSymbol functionSymbol : functions) {
-            if (functionSymbol.getArgumentTypes().size() != exp.getArguments().getExpressionList().size()) {
+            if (functionSymbol.getArgumentTypes().size() != argumentTypes.size()) {
                 continue;
             }
 
             // check argument types
             boolean wellTyped = true;
             for (int i = 0; i < functionSymbol.getArgumentTypes().size(); i++) {
-                if (!functionSymbol.getArgumentTypes().get(i).equals(resolveType(exp.getArguments().getExpression(i)))) {
+                if (argumentTypes.get(i).isPresent() && !functionSymbol.getArgumentTypes().get(i).equals(argumentTypes.get(i).get())) {
                     wellTyped = false;
+                } else if (!argumentTypes.get(i).isPresent()) {
+                    wellTyped = false;
+                    break;
                 }
             }
 
@@ -170,6 +172,12 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         }
 
         return type;
+    }
+
+    @Override
+    protected Optional<PureFunType> doPrintAsyncExpression(ASTAsyncExpression exp) {
+        Collection<FunctionSymbol> functions = exp.getEnclosingScope().resolveMany(exp.getName(), FunctionSymbol.KIND);
+        return getCallExpressionType(functions, exp.getArguments().streamExpressions().map((expr) -> resolveType(expr)).collect(Collectors.toList()));
     }
 
     @Override
@@ -327,8 +335,14 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
 
     @Override
     protected Optional<PureFunType> doPrintCallExpression(ASTCallExpression exp) {
-        // TODO: need symboltable here for function return types!
-        return Optional.empty();
+        if (!(exp.getExpression() instanceof ASTNameExpression)) {
+            return Optional.empty();
+        }
+
+        ASTNameExpression nameExp = (ASTNameExpression) exp.getExpression();
+
+        Collection<FunctionSymbol> functions = exp.getEnclosingScope().resolveMany(nameExp.getName(), FunctionSymbol.KIND);
+        return getCallExpressionType(functions, exp.getArguments().streamExpressions().map((expr) -> resolveType(expr)).collect(Collectors.toList()));
     }
 
     @Override
