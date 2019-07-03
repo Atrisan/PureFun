@@ -1,0 +1,11 @@
+module ContainerExistsIndexAccess {
+
+    a [Int] = [1,2,3]
+
+    fun testSomething() : Int {
+
+        i Int = a[2]
+         
+        return i
+    }
+}

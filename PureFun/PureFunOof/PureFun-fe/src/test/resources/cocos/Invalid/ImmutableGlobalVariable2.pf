@@ -1,4 +1,4 @@
-module ImmutableGlobalVariable {
+module ImmutableGlobalVariable2 {
 
     i [Int] = [0]
 

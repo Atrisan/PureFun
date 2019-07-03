@@ -1,0 +1,9 @@
+module ContainerExistsLength {
+
+    fun testSomething() : Int {
+
+        i Int = #a
+         
+        return i
+    }
+}

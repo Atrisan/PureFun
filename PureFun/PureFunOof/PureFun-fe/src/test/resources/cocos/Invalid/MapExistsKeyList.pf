@@ -1,0 +1,9 @@
+module MapExistsKeyList {
+
+    fun testSomething() : [Int] {
+
+        i [Int] = @a
+         
+        return i
+    }
+}

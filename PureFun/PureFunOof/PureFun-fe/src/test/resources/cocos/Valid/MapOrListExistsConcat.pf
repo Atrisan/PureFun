@@ -1,0 +1,13 @@
+module MapExistsValueList {
+
+    a [Int] = [1]
+
+    b [Int] = [2]
+
+    fun testSomething() : [Int] {
+
+        i [Int] = a ++ b
+         
+        return i
+    }
+}

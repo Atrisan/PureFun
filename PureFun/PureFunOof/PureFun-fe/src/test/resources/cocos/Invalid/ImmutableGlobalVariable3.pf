@@ -1,4 +1,4 @@
-module ImmutableGlobalVariable {
+module ImmutableGlobalVariable3 {
 
     data Test {
         count : Int

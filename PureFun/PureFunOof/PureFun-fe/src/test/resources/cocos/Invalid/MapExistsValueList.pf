@@ -1,0 +1,9 @@
+module MapExistsValueList {
+
+    fun testSomething() : [Int] {
+
+        i [Int] = $a
+         
+        return i
+    }
+}

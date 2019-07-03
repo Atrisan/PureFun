@@ -2,6 +2,7 @@ package de.simpleproglang.purefun.coco;
 
 import de.monticore.expressions.commonexpressions._ast.ASTNameExpression;
 import de.monticore.expressions.commonexpressions._cocos.CommonExpressionsASTNameExpressionCoCo;
+import de.monticore.symboltable.Symbol;
 import de.se_rwth.commons.logging.Log;
 import de.simpleproglang.purefun._symboltable.VariableSymbol;
 
@@ -12,10 +13,12 @@ public class VariableExistsCoCo implements CommonExpressionsASTNameExpressionCoC
 
     @Override
     public void check(ASTNameExpression node) {
+        boolean erg = true;
         if (node.isPresentEnclosingScope()) {
-            if (node.getEnclosingScope().resolve(node.getName(),VariableSymbol.KIND).isPresent()) {
+            if (node.getEnclosingScope().resolveMany(node.getName(), VariableSymbol.KIND).size() < 1) {
                 Log.error("Variable not defined " + node.getName());
             }
+
         }
     }
 

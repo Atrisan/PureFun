@@ -1,0 +1,11 @@
+module ContainerExistsLength {
+
+    a <Int, String> = <31,"test">
+
+    fun testSomething() : Int {
+
+        i Int = #a
+         
+        return i
+    }
+}

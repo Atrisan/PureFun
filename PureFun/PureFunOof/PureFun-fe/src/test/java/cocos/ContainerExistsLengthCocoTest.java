@@ -7,7 +7,7 @@ import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
 import de.simpleproglang.purefun._symboltable.ModuleSymbol;
 import de.simpleproglang.purefun._symboltable.PureFunScopeCreator;
-import de.simpleproglang.purefun.coco.ImmutableGlobalVariableCoCo;
+import de.simpleproglang.purefun.coco.VariableExistsCoCo;
 import lang.AbstractTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,9 +17,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-public class ImmutableGlobalVariableCocoTest extends AbstractTest {
+public class ContainerExistsLengthCocoTest extends AbstractTest {
 
-    public static final String COCO_MODELS_ROOT_PATH = "./src/test/resources/cocos/Invalid/";
+    public static final String COCO_MODELS_ROOT_PATH = "./src/test/resources/cocos/Valid";
 
     @BeforeAll
     public static void disableFailQuick() {
@@ -28,7 +28,7 @@ public class ImmutableGlobalVariableCocoTest extends AbstractTest {
 
     @ParameterizedTest
     @CsvSource(
-        "ImmutableGlobalVariable2"
+        "ContainerExistsLength"
     )
     public void test(String modelName) {
         ModelPath modelPath = new ModelPath(Paths.get(COCO_MODELS_ROOT_PATH));
@@ -37,12 +37,12 @@ public class ImmutableGlobalVariableCocoTest extends AbstractTest {
         Assert.assertTrue(moduleSymbol.isPresent());
         Assert.assertTrue(moduleSymbol.get().getModuleNode().isPresent());
         ASTModule moduleNode = moduleSymbol.get().getModuleNode().get();
-        Log.info("module loaded", "ImmutableGlobalVariableCocoTest");
+        Log.info("module loaded", "ContainerExistsLengthCoco");
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
-        ImmutableGlobalVariableCoCo returnCoco = new ImmutableGlobalVariableCoCo();
+        VariableExistsCoCo variableCoco = new VariableExistsCoCo();
 
-        checker.addCoCo(returnCoco);
+        checker.addCoCo(variableCoco);
         checker.checkAll(moduleNode);
 
     }
