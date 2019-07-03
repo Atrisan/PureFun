@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class ImmutableGlobalVariableCocoTest extends AbstractTest {
 
-    public static final String COCO_MODELS_ROOT_PATH = "./src/test/resources/cocos/";
+    public static final String COCO_MODELS_ROOT_PATH = "./src/test/resources/cocos/Valid/";
 
     @BeforeAll
     public static void disableFailQuick() {
@@ -28,10 +28,16 @@ public class ImmutableGlobalVariableCocoTest extends AbstractTest {
 
     @ParameterizedTest
     @CsvSource(
-        "Invalid/ImmutableGlobalVariable.pf"
+        "ImmutableGlobalVariable"
     )
-    public void test(String modelPath) {
-        ASTModule moduleNode = parseModel(COCO_MODELS_ROOT_PATH + modelPath);
+    public void test(String modelName) {
+        ModelPath modelPath = new ModelPath(Paths.get(COCO_MODELS_ROOT_PATH));
+        GlobalScope symbolTable = PureFunScopeCreator.createGlobalScope(modelPath);
+        Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve(modelName, ModuleSymbol.KIND);
+        Assert.assertTrue(moduleSymbol.isPresent());
+        Assert.assertTrue(moduleSymbol.get().getModuleNode().isPresent());
+        ASTModule moduleNode = moduleSymbol.get().getModuleNode().get();
+        Log.info("module loaded", "ImmutableGlobalVariableCocoTest");
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
         ImmutableGlobalVariableCoCo returnCoco = new ImmutableGlobalVariableCoCo();
