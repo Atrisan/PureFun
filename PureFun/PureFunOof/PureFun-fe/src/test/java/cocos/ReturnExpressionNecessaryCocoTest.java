@@ -1,5 +1,6 @@
 package cocos;
 
+import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
@@ -9,9 +10,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.nio.file.Paths;
+
 public class ReturnExpressionNecessaryCocoTest extends AbstractTest {
 
-    public static final String COCO_MODELS_ROOT_PATH = "./src/test/resources/cocos/";
+    public static final String COCO_MODELS_ROOT_PATH_VALID = "./src/test/resources/cocos/Valid";
+    public static final String COCO_MODELS_ROOT_PATH_INVALID = "./src/test/resources/cocos/Invalid";
 
     @BeforeAll
     public static void disableFailQuick() {
@@ -20,10 +24,15 @@ public class ReturnExpressionNecessaryCocoTest extends AbstractTest {
 
     @ParameterizedTest
     @CsvSource(
-        "Valid/ReturnExpressionNecessary.pf"
+        "ReturnExpressionNecessary.pf"
     )
-    public void test(String modelPath) {
-        ASTModule moduleNode = parseModel(COCO_MODELS_ROOT_PATH + modelPath);
+    public void setUp(String modelName) {
+        test(modelName,COCO_MODELS_ROOT_PATH_INVALID);
+        test(modelName,COCO_MODELS_ROOT_PATH_VALID);
+    }
+
+    public void test(String modelName, String Path) {
+        ASTModule moduleNode = parseModel(Path + modelName);
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
         ReturnExpressionNecessaryCoCo returnCoco = new ReturnExpressionNecessaryCoCo();

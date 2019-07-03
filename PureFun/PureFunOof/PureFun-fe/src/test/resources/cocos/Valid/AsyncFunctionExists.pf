@@ -1,0 +1,12 @@
+module AsyncFunctionExists {
+
+    fun getInt() : Int {
+        return 1
+    }
+
+    fun testSomething() : Int {
+        i Int = async getInt()
+         
+        return i
+    }
+}
