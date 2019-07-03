@@ -33,27 +33,27 @@ public class LiteralTypesResolver extends AbstractLiteralPrinter<PureFunType> {
 
     @Override
     protected PureFunType doPrintDoubleLiteral(ASTDoubleLiteral literal) {
-        return PureFunPrimitiveType.INT;
+        return PureFunPrimitiveType.DOUBLE;
     }
 
     @Override
     protected PureFunType doPrintSignedFloatLiteral(ASTSignedFloatLiteral literal) {
-        return PureFunPrimitiveType.INT;
+        return PureFunPrimitiveType.FLOAT;
     }
 
     @Override
     protected PureFunType doPrintFloatLiteral(ASTFloatLiteral literal) {
-        return PureFunPrimitiveType.INT;
+        return PureFunPrimitiveType.FLOAT;
     }
 
     @Override
     protected PureFunType doPrintSignedLongliteral(ASTSignedLongLiteral literal) {
-        return PureFunPrimitiveType.INT;
+        return PureFunPrimitiveType.LONG;
     }
 
     @Override
     protected PureFunType doPrintLongLiteral(ASTLongLiteral literal) {
-        return PureFunPrimitiveType.INT;
+        return PureFunPrimitiveType.LONG;
     }
 
     @Override

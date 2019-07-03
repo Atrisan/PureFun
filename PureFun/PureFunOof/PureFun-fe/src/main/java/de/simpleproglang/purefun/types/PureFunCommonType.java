@@ -30,7 +30,7 @@ public class PureFunCommonType implements PureFunType {
 
     private String typeStr;
 
-    private PureFunCommonType(String typeStr) {
+    public PureFunCommonType(String typeStr) {
         this.typeStr = typeStr;
     }
 

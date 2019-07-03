@@ -5,10 +5,14 @@ import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun.printer.TypesPrinter;
+import de.simpleproglang.purefun.types.PureFunType;
+import de.simpleproglang.purefun.types.PureFunTypeConverter;
 
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -66,6 +70,8 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
 
     @Override
     protected FunctionSymbol create_Function(ASTFunction ast) {
-        return new FunctionSymbol(ast.getName(), TypesPrinter.printType(ast.getType()));
+        List<PureFunType> argumentTypes = ast.getFunctionParameters().streamFunctionParameters().map((param) -> PureFunTypeConverter.convertFromAST(param.getType())).collect(Collectors.toList());
+
+        return new FunctionSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()), argumentTypes);
     }
 }
