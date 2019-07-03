@@ -3,9 +3,11 @@ package de.simpleproglang.purefun.types;
 import de.monticore.expressions.commonexpressions._ast.*;
 import de.monticore.expressions.expressionsbasis._ast.ASTExpression;
 import de.simpleproglang.purefun._ast.*;
+import de.simpleproglang.purefun._symboltable.FunctionSymbol;
 import de.simpleproglang.purefun.printer.AbstractExpressionPrinter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -140,8 +142,34 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
 
     @Override
     protected Optional<PureFunType> doPrintAsyncExpression(ASTAsyncExpression exp) {
-        // TODO: need symboltable
-        return Optional.empty();
+        Collection<FunctionSymbol> functions = exp.getEnclosingScope().resolveMany(exp.getName(), FunctionSymbol.KIND);
+
+        if (functions.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Optional<PureFunType> type = Optional.empty();
+
+        for (FunctionSymbol functionSymbol : functions) {
+            if (functionSymbol.getArgumentTypes().size() != exp.getArguments().getExpressionList().size()) {
+                continue;
+            }
+
+            // check argument types
+            boolean wellTyped = true;
+            for (int i = 0; i < functionSymbol.getArgumentTypes().size(); i++) {
+                if (!functionSymbol.getArgumentTypes().get(i).equals(resolveType(exp.getArguments().getExpression(i)))) {
+                    wellTyped = false;
+                }
+            }
+
+            if (wellTyped) {
+                type = Optional.of(functionSymbol.getReturnType());
+                break;
+            }
+        }
+
+        return type;
     }
 
     @Override
@@ -504,7 +532,7 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
             }
         }
 
-        return Optional.of(PureFunPrimitiveType.INT);
+        return Optional.of(PureFunPrimitiveType.DOUBLE);
     }
 
     @SafeVarargs

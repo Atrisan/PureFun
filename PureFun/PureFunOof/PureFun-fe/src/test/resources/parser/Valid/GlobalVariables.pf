@@ -20,7 +20,7 @@ module GlobalVariables{
     character Char = 'F'
     name String = "das ist ein String."
 
-    bo Boolean = True
+    bo Boolean = true
 
     integerliste [Int] = [31,42]
     stringliste [String] = ["mehrere", "Strings"]
@@ -29,8 +29,6 @@ module GlobalVariables{
     dreitupel <Double, Int64, Boolean> = <31.7, 512, False>
 
     map [Int, Char] = {1:'d', 30:'b', 2:'F'}
-
-    person (age:Int, name:String) = (18, "alternate")
 
     fun main() : Int {
         return 0

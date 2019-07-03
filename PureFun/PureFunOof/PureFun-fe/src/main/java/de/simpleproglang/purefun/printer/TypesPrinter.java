@@ -4,7 +4,7 @@ import de.simpleproglang.purefun._ast.*;
 
 import java.util.Iterator;
 
-public class TypesPrinter {
+public class TypesPrinter extends AbstractTypesPrinter<String> {
     private static TypesPrinter instance;
 
     private TypesPrinter() {}
@@ -56,5 +56,10 @@ public class TypesPrinter {
         strBuilder.append(")");
 
         return strBuilder.toString();
+    }
+
+    @Override
+    protected String doPrintNameType(ASTTypeName type) {
+        return type.getName();
     }
 }
