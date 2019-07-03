@@ -1,0 +1,10 @@
+module AsyncFunctionExists {
+
+
+
+    fun testSomething() : Int {
+        i Int = async getInt()
+         
+        return i
+    }
+}

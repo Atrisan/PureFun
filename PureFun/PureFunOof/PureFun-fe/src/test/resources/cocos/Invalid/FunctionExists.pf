@@ -1,0 +1,10 @@
+module FunctionExists {
+
+
+
+    fun testSomething() : Int {
+        i Int = getInt()
+         
+        return i
+    }
+}

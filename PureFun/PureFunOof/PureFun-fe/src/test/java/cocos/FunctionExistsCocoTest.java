@@ -7,7 +7,7 @@ import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
 import de.simpleproglang.purefun._symboltable.ModuleSymbol;
 import de.simpleproglang.purefun._symboltable.PureFunScopeCreator;
-import de.simpleproglang.purefun.coco.ContainerExistsLengthCoCo;
+import de.simpleproglang.purefun.coco.FunctionExistsCoCo;
 import lang.AbstractTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-public class ContainerExistsLengthCocoTest extends AbstractTest {
+public class FunctionExistsCocoTest extends AbstractTest {
 
     public static final String COCO_MODELS_ROOT_PATH_VALID = "./src/test/resources/cocos/Valid";
     public static final String COCO_MODELS_ROOT_PATH_INVALID = "./src/test/resources/cocos/Invalid";
@@ -29,7 +29,7 @@ public class ContainerExistsLengthCocoTest extends AbstractTest {
 
     @ParameterizedTest
     @CsvSource(
-        "ContainerExistsLength"
+        "FunctionExists"
     )
     public void setUp(String modelName) {
         test(modelName,COCO_MODELS_ROOT_PATH_INVALID);
@@ -43,10 +43,10 @@ public class ContainerExistsLengthCocoTest extends AbstractTest {
         Assert.assertTrue(moduleSymbol.isPresent());
         Assert.assertTrue(moduleSymbol.get().getModuleNode().isPresent());
         ASTModule moduleNode = moduleSymbol.get().getModuleNode().get();
-        Log.info("module loaded", "ContainerExistsLengthCoco");
+        Log.info("module loaded", "FunctionExistsCoco");
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
-        ContainerExistsLengthCoCo variableCoco = new ContainerExistsLengthCoCo();
+        FunctionExistsCoCo variableCoco = new FunctionExistsCoCo();
 
         checker.addCoCo(variableCoco);
         checker.checkAll(moduleNode);

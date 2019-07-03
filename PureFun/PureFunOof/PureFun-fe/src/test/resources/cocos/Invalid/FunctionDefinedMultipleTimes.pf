@@ -1,0 +1,16 @@
+module FunctionDefinedMultipleTimes {
+
+    fun getInt() : Int {
+        return 1
+    }
+
+    fun getInt() : Int {
+            return 2
+    }
+
+    fun testSomething() : Int {
+        i Int = getInt()
+         
+        return i
+    }
+}
