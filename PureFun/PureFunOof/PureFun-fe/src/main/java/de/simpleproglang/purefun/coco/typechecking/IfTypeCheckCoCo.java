@@ -1,4 +1,4 @@
-package de.simpleproglang.purefun.coco;
+package de.simpleproglang.purefun.coco.typechecking;
 
 import de.se_rwth.commons.logging.Log;
 import de.simpleproglang.purefun._ast.ASTIfStatement;

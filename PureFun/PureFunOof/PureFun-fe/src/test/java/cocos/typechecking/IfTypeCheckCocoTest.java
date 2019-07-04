@@ -1,9 +1,9 @@
-package cocos;
+package cocos.typechecking;
 
-import de.monticore.io.paths.ModelPath;
+import cocos.AbstractCocoTest;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
-import de.simpleproglang.purefun.coco.IfTypeCheckCoCo;
+import de.simpleproglang.purefun.coco.typechecking.IfTypeCheckCoCo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
