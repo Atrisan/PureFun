@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class AssignmentTypeCheckCoCoTest extends AbstractCocoTest {
 
     public static void check(String modelPath, String modelName) {
-        ASTModule module = parseModel(modelPath, modelName);
+        ASTModule module = parseModel(modelPath, modelName).getModuleNode().get();
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
         AssignmentExpressionTypeCheckCoCo assignmentTypeCheckCoco = new AssignmentExpressionTypeCheckCoCo();

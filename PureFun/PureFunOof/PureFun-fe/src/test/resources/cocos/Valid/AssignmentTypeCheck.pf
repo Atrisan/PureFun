@@ -4,5 +4,6 @@ module AssignmentTypeCheck {
 
     fun foo() : Void {
         x = 6
+        x = #[1, 2, 3]
     }
 }
