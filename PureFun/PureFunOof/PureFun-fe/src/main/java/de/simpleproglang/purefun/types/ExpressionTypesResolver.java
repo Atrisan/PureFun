@@ -565,7 +565,8 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
 
         for (int i = 1; i < types.length; i++) {
             Optional<PureFunType> type = types[i];
-            if (!type.isPresent() || (PureFunCommonType.isNumber(type.get()) && !refTypeIsNumber)) {
+            boolean typeIsNumber = type.map(PureFunCommonType::isNumber).orElse(false);
+            if (!type.isPresent() || (typeIsNumber && !refTypeIsNumber) || (!typeIsNumber && refTypeIsNumber)) {
                 return Optional.empty();
             }
         }
