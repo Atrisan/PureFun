@@ -5,6 +5,7 @@ import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._symboltable.ModuleSymbol;
 import de.simpleproglang.purefun._symboltable.PureFunScopeCreator;
 import de.simpleproglang.purefun._symboltable.VariableSymbol;
+import de.simpleproglang.purefun.generator.PureFunGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 
