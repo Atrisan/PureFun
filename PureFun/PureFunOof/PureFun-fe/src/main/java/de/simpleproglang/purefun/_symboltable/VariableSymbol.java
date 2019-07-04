@@ -8,6 +8,7 @@ public class VariableSymbol extends VariableSymbolTOP {
     private PureFunType type;
     private boolean async;
     private boolean global;
+    private boolean data;
 
     public VariableSymbol(String name) {
         super(name);
@@ -34,6 +35,15 @@ public class VariableSymbol extends VariableSymbolTOP {
         this.global = global;
     }
 
+    public VariableSymbol(String name, PureFunType type, boolean async, boolean global, boolean data) {
+        super(name);
+
+        this.type  = type;
+        this.async = async;
+        this.global = global;
+        this.data = data;
+    }
+
     public PureFunType getType() {
         return type;
     }
@@ -41,4 +51,6 @@ public class VariableSymbol extends VariableSymbolTOP {
     public boolean getHasAsync() { return this.async; }
 
     public boolean getIsGlobal() { return this.global; }
+
+    public boolean isData() { return this.data; }
 }

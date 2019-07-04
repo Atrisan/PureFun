@@ -3,8 +3,10 @@ package de.simpleproglang.purefun._symboltable;
 import de.monticore.symboltable.ArtifactScope;
 import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
+import de.monticore.symboltable.Scopes;
 import de.simpleproglang.purefun._ast.*;
 import de.simpleproglang.purefun.printer.TypesPrinter;
+import de.simpleproglang.purefun.types.PureFunCommonType;
 import de.simpleproglang.purefun.types.PureFunType;
 import de.simpleproglang.purefun.types.PureFunTypeConverter;
 
@@ -41,7 +43,6 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
 
         final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());
         putOnStack(artifactScope);
-
         rootNode.accept(this);
 
         return artifactScope;
@@ -62,10 +63,18 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
                 return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()), false, true);
             }
         }
+
+        boolean async = false;
         if(ast.getExpressionOpt().isPresent() && ast.getExpression() instanceof ASTAsyncExpression) {
-            return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()), true);
+            async = true;
         }
-        return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()));
+
+        boolean data = false;
+        if(!PureFunCommonType.isPrimitive(PureFunTypeConverter.convertFromAST(ast.getType()))) {
+            data = true;
+        }
+
+        return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()), async, false, data);
     }
 
     @Override
