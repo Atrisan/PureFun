@@ -1,15 +1,16 @@
 module FunctionDefinedMultipleTimes {
 
-    fun getInt() : Int {
-        return 1
+    fun getInt(i Int) : Int {
+        return i
     }
 
-    fun getInt() : Int {
-            return 2
+    fun getInt(a Int) : Int {
+        return a
     }
 
     fun testSomething() : Int {
-        i Int = getInt()
+        i Int = 2
+        i = getInt(i)
          
         return i
     }

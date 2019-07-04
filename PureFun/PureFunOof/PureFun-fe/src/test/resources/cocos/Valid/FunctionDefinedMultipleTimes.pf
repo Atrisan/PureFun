@@ -4,6 +4,10 @@ module FunctionDefinedMultipleTimes {
         return 1
     }
 
+    fun getInt(a Int) : Int {
+        return a
+    }
+
     fun testSomething() : Int {
         i Int = getInt()
          
