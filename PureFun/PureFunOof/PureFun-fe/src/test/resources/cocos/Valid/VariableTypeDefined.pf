@@ -1,0 +1,12 @@
+module VariableTypeDefined {
+
+    data Car {
+        name String
+    }
+
+    fun testSomething() : Int {
+        i Car = ("Auto")
+         
+        return 1
+    }
+}

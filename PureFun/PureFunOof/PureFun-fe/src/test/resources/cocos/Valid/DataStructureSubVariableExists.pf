@@ -1,0 +1,15 @@
+module DataStructureSubVariableExists {
+
+    data Car {
+        name String
+        ps Int
+    }
+
+    test Car = ("Auto",70)
+
+    fun testSomething() : Int {
+        i Int = test.ps
+         
+        return 1
+    }
+}
