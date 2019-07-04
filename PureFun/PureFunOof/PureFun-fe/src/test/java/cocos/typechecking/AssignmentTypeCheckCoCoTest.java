@@ -1,10 +1,12 @@
 package cocos.typechecking;
 
 import cocos.AbstractCocoTest;
+import de.se_rwth.commons.logging.Log;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
 import de.simpleproglang.purefun.coco.typechecking.AssignmentExpressionTypeCheckCoCo;
 import de.simpleproglang.purefun.coco.typechecking.IfTypeCheckCoCo;
+import org.junit.Assert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -34,5 +36,6 @@ public class AssignmentTypeCheckCoCoTest extends AbstractCocoTest {
     )
     public void testInvalid(String modelName) {
         check(COCO_MODELS_ROOT_PATH_INVALID, modelName);
+        Assert.assertTrue(Log.getErrorCount() > 0);
     }
 }

@@ -19,7 +19,10 @@ public abstract class AbstractCocoTest {
     public static final String COCO_MODELS_ROOT_PATH_INVALID = "./src/test/resources/cocos/Invalid";
 
     @BeforeAll
-    public static void disableFailQuick() { Log.enableFailQuick(false); }
+    public static void disableFailQuick() {
+        Log.enableFailQuick(false);
+        Log.init();
+    }
 
     protected static ModuleSymbol parseModel(String modelPath, String modelName) {
         ModelPath path = new ModelPath(Paths.get(modelPath));
