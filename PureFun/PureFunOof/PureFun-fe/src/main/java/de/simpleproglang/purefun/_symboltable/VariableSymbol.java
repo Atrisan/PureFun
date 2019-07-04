@@ -1,9 +1,11 @@
 package de.simpleproglang.purefun._symboltable;
 
 
+import de.simpleproglang.purefun.types.PureFunType;
+
 public class VariableSymbol extends VariableSymbolTOP {
 
-    private String type;
+    private PureFunType type;
     private boolean async;
     private boolean global;
 
@@ -11,20 +13,20 @@ public class VariableSymbol extends VariableSymbolTOP {
         super(name);
     }
 
-    public VariableSymbol(String name, String type) {
+    public VariableSymbol(String name, PureFunType type) {
         super(name);
 
         this.type  = type;
     }
 
-    public VariableSymbol(String name, String type, boolean async) {
+    public VariableSymbol(String name, PureFunType type, boolean async) {
         super(name);
 
         this.type  = type;
         this.async = async;
     }
 
-    public VariableSymbol(String name, String type, boolean async, boolean global) {
+    public VariableSymbol(String name, PureFunType type, boolean async, boolean global) {
         super(name);
 
         this.type  = type;
@@ -32,7 +34,7 @@ public class VariableSymbol extends VariableSymbolTOP {
         this.global = global;
     }
 
-    public String getType() {
+    public PureFunType getType() {
         return type;
     }
 

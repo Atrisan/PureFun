@@ -45,7 +45,7 @@ public class SymbolTableCreatorTest {
         Assertions.assertTrue(varSymbol.isPresent());
         Log.info(String.valueOf(varSymbol.isPresent()), "varSymbol present:");
 
-        Assertions.assertTrue(varSymbol.get().getType().equals("Int"));
-        Log.info(varSymbol.get().getType(), "variable " + varSymbol.get().getName() + " type:");
+        Assertions.assertTrue(varSymbol.get().getType().getTypeString().equals("Int"));
+        Log.info(varSymbol.get().getType().getTypeString(), "variable " + varSymbol.get().getName() + " type:");
     }
 }

@@ -59,13 +59,13 @@ public class PureFunSymbolTableCreator extends PureFunSymbolTableCreatorTOP {
     protected VariableSymbol create_Variable(ASTVariable ast) {
         for (ASTDefinition def: module.getDefinitionList()) {
             if (ast == def) {
-                return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()), false, true);
+                return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()), false, true);
             }
         }
         if(ast.getExpressionOpt().isPresent() && ast.getExpression() instanceof ASTAsyncExpression) {
-            return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()), true);
+            return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()), true);
         }
-        return new VariableSymbol(ast.getName(), TypesPrinter.printType(ast.getType()));
+        return new VariableSymbol(ast.getName(), PureFunTypeConverter.convertFromAST(ast.getType()));
     }
 
     @Override

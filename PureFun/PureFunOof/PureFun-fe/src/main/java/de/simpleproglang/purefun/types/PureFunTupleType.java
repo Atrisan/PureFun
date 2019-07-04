@@ -15,12 +15,12 @@ public class PureFunTupleType implements PureFunType {
         StringBuilder res = new StringBuilder();
         String sep = "";
 
-        res.append("<");
+        res.append("(");
         for (int i = 0; i < subTypes.length; i++, sep = ", ") {
             res.append(sep);
             res.append(subTypes[i].getTypeString());
         }
-        res.append(">");
+        res.append(")");
 
         return res.toString();
     }

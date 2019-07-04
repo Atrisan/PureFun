@@ -12,7 +12,7 @@ public class PureFunListType implements PureFunType {
 
     @Override
     public String getTypeString() {
-        return "[" + subType + "]";
+        return "[" + subType.getTypeString() + "]";
     }
 
     public PureFunType getSubType() {

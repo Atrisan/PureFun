@@ -32,11 +32,6 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
     }
 
     @Override
-    protected Optional<PureFunType> doPrintConstructorExpression(ASTConstructorExpression exp) {
-        return Optional.of(PureFunCommonType.CUSTOM);
-    }
-
-    @Override
     protected Optional<PureFunType> doPrintDecrementExpression(ASTDecrementExpression exp) {
         Optional<PureFunType> leftType = resolveType(exp.getLeft());
 
@@ -177,7 +172,7 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
     @Override
     protected Optional<PureFunType> doPrintAsyncExpression(ASTAsyncExpression exp) {
         Collection<FunctionSymbol> functions = exp.getEnclosingScope().resolveMany(exp.getName(), FunctionSymbol.KIND);
-        return getCallExpressionType(functions, exp.getArguments().streamExpressions().map((expr) -> resolveType(expr)).collect(Collectors.toList()));
+        return getCallExpressionType(functions, exp.getArguments().streamExpressions().map(ExpressionTypesResolver::resolveType).collect(Collectors.toList()));
     }
 
     @Override
@@ -342,13 +337,14 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
         ASTNameExpression nameExp = (ASTNameExpression) exp.getExpression();
 
         Collection<FunctionSymbol> functions = exp.getEnclosingScope().resolveMany(nameExp.getName(), FunctionSymbol.KIND);
-        return getCallExpressionType(functions, exp.getArguments().streamExpressions().map((expr) -> resolveType(expr)).collect(Collectors.toList()));
+        return getCallExpressionType(functions, exp.getArguments().streamExpressions().map(ExpressionTypesResolver::resolveType).collect(Collectors.toList()));
     }
 
     @Override
     protected Optional<PureFunType> doPrintNameExpression(ASTNameExpression exp) {
-        // TODO: need symboltable here for variable types!
-        return Optional.empty();
+        Optional<VariableSymbol> symbol = exp.getEnclosingScope().resolve(exp.getName(), VariableSymbol.KIND);
+
+        return symbol.map(VariableSymbol::getType);
     }
 
     @Override
@@ -450,32 +446,32 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
 
     @Override
     protected Optional<PureFunType> doPrintNotEqualsExpression(ASTNotEqualsExpression exp) {
-        return getTypeForEqualExpression(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+        return getComparisonExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
     @Override
     protected Optional<PureFunType> doPrintEqualsExpression(ASTEqualsExpression exp) {
-        return getTypeForEqualExpression(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+        return getComparisonExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
     @Override
     protected Optional<PureFunType> doPrintGreaterThanExpression(ASTGreaterThanExpression exp) {
-        return getInequalityExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+        return getComparisonExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
     @Override
     protected Optional<PureFunType> doPrintLessThanExpression(ASTLessThanExpression exp) {
-        return getInequalityExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+        return getComparisonExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
     @Override
     protected Optional<PureFunType> doPrintGreaterEqualExpression(ASTGreaterEqualExpression exp) {
-        return getInequalityExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+        return getComparisonExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
     @Override
     protected Optional<PureFunType> doPrintLessEqualExpression(ASTLessEqualExpression exp) {
-        return getInequalityExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
+        return getComparisonExpType(resolveType(exp.getLeft()), resolveType(exp.getRight()));
     }
 
     @Override
@@ -546,38 +542,30 @@ public class ExpressionTypesResolver extends AbstractExpressionPrinter<Optional<
             }
         }
 
-        return Optional.of(PureFunPrimitiveType.DOUBLE);
+        if (types.length > 0) {
+            return types[0];
+        }
+
+        return Optional.empty();
     }
 
     @SafeVarargs
-    private static Optional<PureFunType> getTypeForEqualExpression(Optional<PureFunType>... types) {
+    private static Optional<PureFunType> getComparisonExpType(Optional<PureFunType>... types) {
         if (types.length == 0) {
             return Optional.empty();
         }
 
         Optional<PureFunType> refType = types[0];
+
         if (!refType.isPresent()) {
             return Optional.empty();
         }
 
+        boolean refTypeIsNumber = PureFunCommonType.isNumber(refType.get());
+
         for (int i = 1; i < types.length; i++) {
-            Optional<PureFunType> curType = types[i];
-            if (!(curType.isPresent() && refType.get().equals(curType.get()))) {
-                return Optional.empty();
-            }
-        }
-
-        return Optional.of(PureFunPrimitiveType.BOOLEAN);
-    }
-
-    @SafeVarargs
-    private static Optional<PureFunType> getInequalityExpType(Optional<PureFunType>... types) {
-        if (types.length == 0) {
-            return Optional.empty();
-        }
-
-        for (Optional<PureFunType> type : types) {
-            if (!(type.isPresent() && PureFunCommonType.isNumber(type.get()))) {
+            Optional<PureFunType> type = types[i];
+            if (!type.isPresent() || (PureFunCommonType.isNumber(type.get()) && !refTypeIsNumber)) {
                 return Optional.empty();
             }
         }
