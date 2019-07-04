@@ -39,19 +39,6 @@ public class CppExpressionPrinter extends AbstractExpressionPrinter<String> {
     }
 
     @Override
-    protected String doPrintConstructorExpression(ASTConstructorExpression exp) {
-        String erg = "(";
-        for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
-            erg += this.doPrintExpression(exp.getArguments().getExpression(i));
-            if (i < exp.getArguments().sizeExpressions() - 1) {
-                erg += ", ";
-            }
-        }
-        erg += ")";
-        return erg;
-    }
-
-    @Override
     protected String doPrintDecrementExpression(ASTDecrementExpression exp) {
         String erg = this.doPrintExpression(exp.getLeft());
         erg += "--";

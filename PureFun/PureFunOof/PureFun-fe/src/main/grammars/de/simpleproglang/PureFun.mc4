@@ -14,7 +14,7 @@ grammar PureFun extends de.monticore.literals.Literals,
 
     MapType implements Type <170> = "[" keyType:Type "," valueType:Type "]";
 
-    NamedTupleType implements Type <170> = "<" (NamedTuple || ",")* ">";
+    NamedTupleType implements Type <171> = "(" (NamedTuple || ",")* ")";
 
     NamedTuple
         = Type;
@@ -28,8 +28,8 @@ grammar PureFun extends de.monticore.literals.Literals,
     MapKeyValuePair
         = key:Expression ":" value:Expression;
 
-    TupleExpression implements Expression <160>
-        = "<" (Expression || ",")* ">";
+    TupleExpression implements Expression <500>
+        = "(" (Expression || ",")* ")";
 
     interface Definition;
 
@@ -51,7 +51,7 @@ grammar PureFun extends de.monticore.literals.Literals,
     symbol Function implements Definition
         = "fun" Name FunctionParameters ":" Type BlockStatement;
 
-    symbol DataStructure implements Definition
+    symbol scope DataStructure implements Definition
      = "data" Name "{" Variable* "}";
 
     /*=================================================================*/
@@ -107,15 +107,12 @@ grammar PureFun extends de.monticore.literals.Literals,
     /*                    OPERATOR EXPRESSIONS                         */
     /*=================================================================*/
 
-    ConstructorExpression implements Expression <500>
-        = Arguments;
-
     PrintExpression implements Expression
         = "print" "(" PrintElement* ")";
 
     PrintElement = StringLiteral | "{" Expression "}";
 
-    AssignmentExpression implements Expression <200>
+    AssignmentExpression implements Expression <20>
         = left:Expression "=" right:Expression;
 
     BooleanAndOpExpressionDiff implements Expression <120>, InfixExpression

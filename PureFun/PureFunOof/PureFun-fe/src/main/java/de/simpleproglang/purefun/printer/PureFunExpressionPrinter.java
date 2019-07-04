@@ -36,20 +36,6 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> 
     }
 
     @Override
-    protected String doPrintConstructorExpression(ASTConstructorExpression exp) {
-        // TODO
-        String erg = "(";
-        for (int i = 0; i < exp.getArguments().sizeExpressions(); i++) {
-            erg += this.doPrintExpression(exp.getArguments().getExpression(i));
-            if (i < exp.getArguments().sizeExpressions() - 1) {
-                erg += ", ";
-            }
-        }
-        erg += ")";
-        return erg;
-    }
-
-    @Override
     protected String doPrintDecrementExpression(ASTDecrementExpression exp) {
         String erg = this.doPrintExpression(exp.getLeft());
         erg += "--";
@@ -106,14 +92,14 @@ public class PureFunExpressionPrinter extends AbstractExpressionPrinter<String> 
     @Override
     protected String doPrintTupleExpression(ASTTupleExpression exp) {
         StringBuilder res = new StringBuilder();
-        res.append("(");
+        res.append("<");
         String sep = "";
 
         for (Iterator it = exp.iteratorExpressions(); it.hasNext(); sep = ", ") {
             res.append(sep + this.doPrintExpression((ASTExpression) it.next()));
         }
 
-        res.append(")");
+        res.append(">");
         return res.toString();
     }
 

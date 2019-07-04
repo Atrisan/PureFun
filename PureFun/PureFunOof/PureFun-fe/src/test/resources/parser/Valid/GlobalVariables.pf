@@ -25,8 +25,8 @@ module GlobalVariables{
     integerliste [Int] = [31,42]
     stringliste [String] = ["mehrere", "Strings"]
 
-    zweitupel <Int, String> = <42, "Antwort">
-    dreitupel <Double, Int64, Boolean> = <31.7, 512, False>
+    zweitupel (Int, String) = (42, "Antwort")
+    dreitupel (Double, Int64, Boolean) = (31.7, 512, false)
 
     map [Int, Char] = {1:'d', 30:'b', 2:'F'}
 
