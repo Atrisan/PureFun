@@ -1,4 +1,4 @@
-module MapExistsValueList {
+module MapOrListExistsConcat {
 
     a [Int] = [1]
 

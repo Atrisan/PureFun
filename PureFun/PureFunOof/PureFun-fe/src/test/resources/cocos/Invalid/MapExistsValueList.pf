@@ -2,7 +2,7 @@ module MapExistsValueList {
 
     fun testSomething() : [Int] {
 
-        i [Int] = $a
+        i [Int] = $ a
          
         return i
     }

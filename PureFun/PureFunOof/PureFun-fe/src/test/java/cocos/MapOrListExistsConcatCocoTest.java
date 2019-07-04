@@ -31,9 +31,16 @@ public class MapOrListExistsConcatCocoTest extends AbstractTest {
     @CsvSource(
         "MapOrListExistsConcat"
     )
-    public void setUp(String modelName) {
-        test(modelName,COCO_MODELS_ROOT_PATH_INVALID);
+    public void valid(String modelName) {
         test(modelName,COCO_MODELS_ROOT_PATH_VALID);
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            "MapOrListExistsConcat"
+    )
+    public void invalid(String modelName) {
+        test(modelName,COCO_MODELS_ROOT_PATH_INVALID);
     }
 
     public void test(String modelName, String Path) {
@@ -51,5 +58,11 @@ public class MapOrListExistsConcatCocoTest extends AbstractTest {
         checker.addCoCo(variableCoco);
         checker.checkAll(moduleNode);
 
+        if(Path.equals(COCO_MODELS_ROOT_PATH_INVALID)) {
+            Assert.assertTrue(Log.getErrorCount() > 0);
+        } else {
+            Assert.assertFalse(Log.getErrorCount() > 0);
+        }
+        Log.init();
     }
 }

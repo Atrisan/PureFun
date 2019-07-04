@@ -1,6 +1,6 @@
 module ContainerExistsLength {
 
-    a <Int, String> = <31,"test">
+    a (Int, String) = (31,"test")
 
     fun testSomething() : Int {
 

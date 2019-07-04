@@ -6,6 +6,7 @@ import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
 import de.simpleproglang.purefun.coco.ReturnExpressionNecessaryCoCo;
 import lang.AbstractTest;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -32,7 +33,7 @@ public class ReturnExpressionNecessaryCocoTest extends AbstractTest {
     }
 
     public void test(String modelName, String Path) {
-        ASTModule moduleNode = parseModel(Path + modelName);
+        ASTModule moduleNode = parseModel(Path + "/" + modelName);
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
         ReturnExpressionNecessaryCoCo returnCoco = new ReturnExpressionNecessaryCoCo();
@@ -40,5 +41,11 @@ public class ReturnExpressionNecessaryCocoTest extends AbstractTest {
         checker.addCoCo(returnCoco);
         checker.checkAll(moduleNode);
 
+        if(Path.equals(COCO_MODELS_ROOT_PATH_INVALID)) {
+            Assert.assertTrue(Log.getErrorCount() > 0);
+        } else {
+            Assert.assertFalse(Log.getErrorCount() > 0);
+        }
+        Log.init();
     }
 }

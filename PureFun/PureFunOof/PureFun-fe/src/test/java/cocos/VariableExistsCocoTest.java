@@ -52,5 +52,11 @@ public class VariableExistsCocoTest extends AbstractTest {
         checker.addCoCo(variableCoco);
         checker.checkAll(moduleNode);
 
+        if(Path.equals(COCO_MODELS_ROOT_PATH_INVALID)) {
+            Assert.assertTrue(Log.getErrorCount() > 0);
+        } else {
+            Assert.assertFalse(Log.getErrorCount() > 0);
+        }
+        Log.init();
     }
 }
