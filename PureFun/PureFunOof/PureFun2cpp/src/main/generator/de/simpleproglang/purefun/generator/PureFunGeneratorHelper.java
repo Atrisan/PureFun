@@ -1,4 +1,4 @@
-
+package de.simpleproglang.purefun.generator;
 
 import de.monticore.expressions.commonexpressions._ast.ASTNameExpression;
 import de.monticore.expressions.prettyprint.MCExpressionsPrettyPrinter;

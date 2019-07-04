@@ -1,3 +1,4 @@
+package de.simpleproglang.purefun.generator;
 
 import de.monticore.generating.GeneratorSetup;
 import de.monticore.generating.GeneratorEngine;
