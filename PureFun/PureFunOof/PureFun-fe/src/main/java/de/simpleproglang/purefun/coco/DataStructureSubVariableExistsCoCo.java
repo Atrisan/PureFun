@@ -43,7 +43,7 @@ public class DataStructureSubVariableExistsCoCo implements CommonExpressionsASTQ
                 if (node.getEnclosingScope().resolveMany(name,VariableSymbol.KIND).size() == 1) {
                     Symbol sym = node.getEnclosingScope().resolve(name,VariableSymbol.KIND).get();
                     if (sym instanceof VariableSymbol) {
-                        TypeName = ((VariableSymbol) sym).getType();
+                        TypeName = ((VariableSymbol) sym).getType().getTypeString();
                     }
                 } else {
                     Log.warn("Please rename/create Variable " + name);

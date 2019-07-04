@@ -31,13 +31,19 @@ public class PureFunGenerator {
         //Generate include
         gs.setDefaultFileExtension("hxx");
 
+
         engine = new GeneratorEngine(gs);
+
+        //Data Struct includes
         for (ASTDefinition definition: ast.getDefinitionList()) {
             if (definition instanceof ASTDataStructure) {
                 engine.generate("definition/DataStructures.ftl", Paths.get("includes",((ASTDataStructure) definition).getName() + ".hxx"), definition, definition, ast.getName(), ast);
             }
         }
 
+        //Function includes
+        String name = filename.replaceAll(".cxx", "");
+        engine.generate("Functionheader.ftl", Paths.get("includes",name + ".hxx"),ast,ast);
 
 
     }
