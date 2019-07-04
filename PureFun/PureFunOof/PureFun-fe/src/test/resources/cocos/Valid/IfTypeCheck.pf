@@ -1,0 +1,12 @@
+module IfTypeCheck {
+
+    test Int = 5
+
+    fun testFive(): Boolean {
+        if test == 5 {
+            return true
+        }
+
+        return false
+    }
+}

@@ -47,6 +47,16 @@ public class PureFunGeneratorHelper{
 
     public String printExpression(ASTExpression expression) { return CppExpressionPrinter.printExpression(expression); }
 
+    public List<ASTFunction> getFunctionList(ASTModule module) {
+        List<ASTFunction> res = new ArrayList<>();
+        for (ASTDefinition def: module.getDefinitionList()) {
+            if (def instanceof ASTFunction) {
+                res.add((ASTFunction) def);
+            }
+        }
+        return res;
+    }
+
     public String toCAPS(String in){
         return in.toUpperCase();
     }

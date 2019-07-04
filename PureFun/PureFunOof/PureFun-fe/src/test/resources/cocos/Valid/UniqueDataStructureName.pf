@@ -1,0 +1,17 @@
+module UniqueDataStructureName {
+
+    data Car {
+        name String
+        ps Int
+    }
+
+    data Person {
+        name String
+    }
+
+    fun testSomething() : Int {
+        i Int = 1
+         
+        return 1
+    }
+}

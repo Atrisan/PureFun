@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 #include "../../../splcxx/purefun.hxx"
+#include "includes/${ast.getName()}.hxx"
 <#assign gh=glex.getGlobalVar("pfHelper")> <#-- GeneratorHelper -->
 <#assign mods=ast.getDefinitionList()>
 

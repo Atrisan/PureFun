@@ -1,0 +1,8 @@
+module AssignmentTypeCheck {
+
+    x Int = 5
+
+    fun foo() : Void {
+        x = "error"
+    }
+}
