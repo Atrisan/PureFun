@@ -1,0 +1,5 @@
+module VariableAssignmentTypeCheck {
+
+    counter Int = 5
+    str String = "Test"
+}

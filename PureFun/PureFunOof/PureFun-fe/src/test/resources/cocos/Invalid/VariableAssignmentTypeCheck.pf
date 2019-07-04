@@ -1,0 +1,4 @@
+module VariableAssignmentTypeCheck {
+
+    counter Int = "error"
+}

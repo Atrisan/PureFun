@@ -12,6 +12,7 @@ import de.simpleproglang.purefun.coco.*;
 import de.simpleproglang.purefun.coco.typechecking.AssignmentExpressionTypeCheckCoCo;
 import de.simpleproglang.purefun.coco.typechecking.CommonForControlTypeCheckCoCo;
 import de.simpleproglang.purefun.coco.typechecking.IfTypeCheckCoCo;
+import de.simpleproglang.purefun.coco.typechecking.VariableAssignmentTypeCheckCoCo;
 
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -49,6 +50,9 @@ public class PureFunTool {
 
         IfTypeCheckCoCo CoCoIfTypeCheckCoCo = new IfTypeCheckCoCo();
         checker.addCoCo(CoCoIfTypeCheckCoCo);
+
+        VariableAssignmentTypeCheckCoCo variableAssignmentTypeCheckCoCo = new VariableAssignmentTypeCheckCoCo(moduleSymbol.get());
+        checker.addCoCo(variableAssignmentTypeCheckCoCo);
 
 
         // NON-typechecking CoCos

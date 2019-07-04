@@ -19,17 +19,19 @@ public abstract class AbstractCocoTest {
     public static final String COCO_MODELS_ROOT_PATH_INVALID = "./src/test/resources/cocos/Invalid";
 
     @BeforeAll
-    public static void disableFailQuick() { Log.enableFailQuick(false); }
+    public static void disableFailQuick() {
+        Log.enableFailQuick(false);
+        Log.init();
+    }
 
-    protected static ASTModule parseModel(String modelPath, String modelName) {
+    protected static ModuleSymbol parseModel(String modelPath, String modelName) {
         ModelPath path = new ModelPath(Paths.get(modelPath));
         GlobalScope symbolTable = PureFunScopeCreator.createGlobalScope(path);
         Optional<ModuleSymbol> moduleSymbol = symbolTable.resolve(modelName, ModuleSymbol.KIND);
         Assert.assertTrue(moduleSymbol.isPresent());
         Assert.assertTrue(moduleSymbol.get().getModuleNode().isPresent());
-        ASTModule moduleNode = moduleSymbol.get().getModuleNode().get();
-        Log.info("module loaded", "FunctionExistsCoco");
+        Log.info("module loaded", "CoCoTest");
 
-        return moduleNode;
+        return moduleSymbol.get();
     }
 }

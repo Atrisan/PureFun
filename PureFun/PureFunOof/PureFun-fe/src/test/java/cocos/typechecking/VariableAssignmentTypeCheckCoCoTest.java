@@ -3,25 +3,28 @@ package cocos.typechecking;
 import cocos.AbstractCocoTest;
 import de.simpleproglang.purefun._ast.ASTModule;
 import de.simpleproglang.purefun._cocos.PureFunCoCoChecker;
-import de.simpleproglang.purefun.coco.typechecking.IfTypeCheckCoCo;
+import de.simpleproglang.purefun._symboltable.ModuleSymbol;
+import de.simpleproglang.purefun.coco.typechecking.AssignmentExpressionTypeCheckCoCo;
+import de.simpleproglang.purefun.coco.typechecking.VariableAssignmentTypeCheckCoCo;
+import org.junit.Assert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class IfTypeCheckCocoTest extends AbstractCocoTest {
+public class VariableAssignmentTypeCheckCoCoTest extends AbstractCocoTest {
 
     public static void check(String modelPath, String modelName) {
-        ASTModule module = parseModel(modelPath, modelName).getModuleNode().get();
+        ModuleSymbol moduleSymbol = parseModel(modelPath, modelName);
 
         PureFunCoCoChecker checker = new PureFunCoCoChecker();
-        IfTypeCheckCoCo ifTypeCheckCoCo = new IfTypeCheckCoCo();
+        VariableAssignmentTypeCheckCoCo assignmentTypeCheckCoco = new VariableAssignmentTypeCheckCoCo(moduleSymbol);
 
-        checker.addCoCo(ifTypeCheckCoCo);
-        checker.checkAll(module);
+        checker.addCoCo(assignmentTypeCheckCoco);
+        checker.checkAll(moduleSymbol.getModuleNode().get());
     }
 
     @ParameterizedTest
     @CsvSource(
-            "IfTypeCheck"
+            "VariableAssignmentTypeCheck"
     )
     public void testValid(String modelName) {
         check(COCO_MODELS_ROOT_PATH_VALID, modelName);
@@ -29,7 +32,7 @@ public class IfTypeCheckCocoTest extends AbstractCocoTest {
 
     @ParameterizedTest
     @CsvSource(
-            "IfTypeCheck"
+            "VariableAssignmentTypeCheck"
     )
     public void testInvalid(String modelName) {
         check(COCO_MODELS_ROOT_PATH_INVALID, modelName);
