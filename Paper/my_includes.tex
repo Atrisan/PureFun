@@ -18,7 +18,6 @@
         commentstyle=\color{gray!100},
         escapeinside=||,
         basicstyle=\footnotesize\ttfamily,
-        morecomment=[l][{\color{red!100}}]{\#},
         backgroundcolor=\color{gray!10},
         numbers=left,
         numbersep=8pt,
@@ -29,7 +28,10 @@
         frame=lines,
         tabsize=1,
         captionpos=b,
-        numberbychapter=false
+        numberbychapter=false,
+        emph={%  
+    	Int, Void, fun, module, String, async},
+    	emphstyle={\color{blue}}%
 }
 
 \emergencystretch = 0 pt

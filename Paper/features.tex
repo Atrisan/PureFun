@@ -1,4 +1,66 @@
 \section{Features}
+In this section we introduce the major features of PureFun. These features include the container types, the type checking and the async feature.
 \subsection{Container Types}
+The support for the container types list, tuple and map are natively embedded in PureFun. Other than data structures container are mutable.
+\subsubsection{List}
+Lists are similar to arrays. They contain an arbitrary number of elements sharing the same type.
+
+\begin{figure}
+\begin{lstlisting}[caption={PureFun code with a list and its predefined functions.},label={ListEx}]
+module List {
+  list : [Int] = [42,31,69,420]
+  fun f () : Void {
+    length : Int = #list
+    first : Int = list[0]
+    newList : [Int] = list ++ [666]
+  }
+}
+\end{lstlisting}
+\end{figure}
+In listing \ref{ListEx} an example of a list and its predefined functions can be observed. The second line of the listing declares a new global variable named \texttt{list} as a list of \texttt{Int}, which is a 32 bit integer. The variable is instantiated by the list containing the numbers: 42, 31, 69, 420. A list can be instantiated by listing the elements separated by a comma and enclosed by brackets.\\
+In line 4-6 the predefined functions are used. The first function using the \texttt{\#} symbol is a short hand notation for the length of a list. The access to individual elements of the list is the same as for the access of array elements in C, using the name of the variable followed by the index in brackets. The last function in line 6 is a short hand notation for the concatenation of two list. In this example the list \texttt{newList} = [42,31,69,420,666].\\
+PureFun lists are mapped to C++ vectors during the code generation to avoid out of bounds access. Since the size of a list can change, out of bounds access can only be checked during runtime, to avoid large overheads during code generation.
+\subsubsection{Tuple}
+Tuples are container types, which contain a fixed number of elements. The elements of a tuple do not need to have the same type.
+
+Listing \ref{TupleEx} depicts a tuple declaration and its predefined functions. Line 2 declares a tuple with two elements named \texttt{student}, the first element is of type integer and the second one of type string. It is instantiated by the tuple (235212, "Mustermann"). In general a tuple is instantiated by listing the elements enclosed in round brackets.\\
+The predefined functions in line 4 and 5 are the same as for the list type. Where the first is a shorthand for the number of elements and the second one is the notation to access a specific element in the tuple.\\
+PureFun tuples are mapped to C++ tuples during code generation, for performance reasons and simplicity.
+\begin{figure}
+\begin{lstlisting}[caption={PureFun code with a tuple and its predefined functions.},label={TupleEx}]
+module Tuple {
+  student : (Int,String) = (235212, "Mustermann")
+  fun f () : Void {
+    length : Int = #student
+    name : String = student[1]
+  }
+}
+\end{lstlisting}
+\end{figure}
+\subsubsection{Map}
+Maps are a list of key value pairs, where all keys and all values share the same type respectively.
+
+Listing \ref{MapEx} shows the declaration and instantiation of a map in PureFun. Similar to the other container types the map \texttt{students} is declared in line 2. The map has keys of type integer and values of type string, which is denoted as [\textit{key}:\textit{value}]. The instantiation is done by listing the key value pairs (\textit{key}:\textit{value}) in curly brackets.\\
+The predefined functions in lines 4-7 are defined as follows:
+\begin{itemize}
+\item \texttt{\#students}: the number of key value pairs.
+\item \texttt{students[235212]}: the value corresponding to the key \texttt{235212}
+\item \texttt{@students}: the list of all keys
+\item \texttt{\$students}: the list of all values
+\end{itemize}
+PureFun maps are mapped to C++ unordered maps for performance reasons and simplicity.
+\begin{figure}
+\begin{lstlisting}[caption={PureFun code with a map and its predefined functions.},label={MapEx}]
+module Map {
+  students : [Int:String] = {235212: "Mustermann", 123456:"Test"}
+  fun f () : Void {
+    length : Int = #students
+    name : String = students[235212]
+    keys : [Int] = @students
+    values: [String] = $students
+  }
+}
+\end{lstlisting}
+\end{figure}
 \subsection{Type Checking}
 \subsection{Async}
