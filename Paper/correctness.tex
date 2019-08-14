@@ -1,1 +1,41 @@
 \section{Pureness}
+In this section we discuss the foundation of PureFun, the pure functions. Pure functions do not induce any form of side effects during execution. To further elaborate on the term side effect we introduce the term idempotence.\\
+A function is idempotent, if it can be called multiple times with the same arguments and always returns the same result. We define functions fulfilling  the criteria of idempotence as pure.\\
+As an example for a non-pure function we take a look at a naive implementation of the length function for lists in Java. 
+\begin{figure}[h]
+\begin{lstlisting}[caption={Java code that deletes its input list as a side effect.},label={JavaEx}]
+class List {
+  Data value;
+  List next;
+  static int len (List l) {
+    int n = 1;
+    while (l.next != null) {
+      l = l.next;
+      n = n + 1;
+    }
+    return n;
+  }
+}
+\end{lstlisting}
+\end{figure}
+In Listing \ref{JavaEx} we defined a new class List and the member function len, which returns the length of the list. Java utilizes references when using objects as arguments. Thus, the function len operates on the original and deletes all elements other than the last element of the list. The overwriting happens in line 8, where the list l becomes l.next. This results in a successive deletion of the first element until only one element remains. Since this function changes its environment a second call would result in a length of 1. Therefore, this function is not pure.\\
+To prevent functions from changing their environment we embedded 3 strategies into PureFun:
+\begin{enumerate}
+\item Immutable global variables
+\item Immutable data structures
+\item Call-by-value functions
+\end{enumerate}
+\subsection{Immutable global variables}
+\begin{figure}[h]
+\begin{lstlisting}[caption={C++ code that uses a global variable.},label={C++Ex}]
+int n = 0;
+bool f() {
+  if (n < 1) {
+    n++;
+    return true;
+  }
+  return false;
+}
+\end{lstlisting}
+\end{figure}
+Global variables in PureFun allow the declaration of constants. In other programming languages global variables can be access by any function. Since especially write accesses are problematic for pure functions. In listing \ref{C++Ex} the function \texttt{f} tests whether the global variable \texttt{n} is smaller than zero, if that is the case n is incremented and \texttt{f} returns true. The second execution of \texttt{f} will return false, since \texttt{n=1} now holds. Thus, f is not pure. By ...

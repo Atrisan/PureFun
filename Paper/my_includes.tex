@@ -1,7 +1,39 @@
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{xcolor}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
 % If you use the hyperref package, please uncomment the following line
 % to display URLs in blue roman font according to Springer's eBook style:
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\lstset{%
+        language=C,
+        breaklines=true,
+        showstringspaces=false,
+        keywordstyle=\color{blue},
+        commentstyle=\color{gray!100},
+        escapeinside=||,
+        basicstyle=\footnotesize\ttfamily,
+        morecomment=[l][{\color{red!100}}]{\#},
+        backgroundcolor=\color{gray!10},
+        numbers=left,
+        numbersep=8pt,
+        numberstyle=\scriptsize,
+        framexleftmargin=1em,
+        xrightmargin=1em,
+        xleftmargin=2em,
+        frame=lines,
+        tabsize=1,
+        captionpos=b,
+        numberbychapter=false
+}
+
+\emergencystretch = 0 pt
+\pretolerance = 150
+\tolerance = 10000
+\hbadness = 9999
+\hfuzz = 0 pt
