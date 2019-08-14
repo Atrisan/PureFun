@@ -64,7 +64,7 @@ module Map {
 \end{figure}
 \subsection{Type Checking}
 
-Since we have different types in the PureFun language, it's obligatory to think about implementing type checking in our generator tool. Due to time limitations, we decided to implement type checking partially. We only check primitive types like Int, Strings etc. and our built in container types lists, maps and tuple as well. The only types we don't check yet are user-defined data structures defined with the \texttt{data} keyword. We leave the rest of type checking to the C++ compiler.\\
+Since we have different types in the PureFun language, it's obligatory to think about implementing type checking in our generator tool. Due to time limitations, we decided to implement type checking partially. We only check primitive types like Int, Strings etc. and our built in container types lists, maps and tuple as well in context conditions. The only types we don't check yet are user-defined data structures defined with the \texttt{data} keyword. We leave the rest of type checking to the C++ compiler.\\
 At the time we developed this version of the PureFun language, MontiCore was not capable to generate a rough infrastructure for type resolving. Hence we had to implement the whole type system infrastructure in Java ourselves. Fig. \ref{typeinfrfig1} shows the type infrastructure we implemented in an UML diagram with the most important methods.
 
 \begin{figure}[h]
@@ -81,5 +81,24 @@ Lastly there is the \texttt{PureFunTupleType} which is similar to \texttt{PureFu
 Now that we have our type system infrastructure, we can compare our types. Before we can implement our type checking context conditions, we have to resolve the types. What we get from the AST are only the \texttt{ASTType}s for definitions of variables and functions, \texttt{ASTExpression}s from all the expressions in our language like for example our built in functions for lists and last but not least \texttt{ASTLiteral}s like \texttt{5}, \texttt{31.0}, \texttt{"Hello"} and so on. We have to resolve all the AST classes and map our \texttt{PureFunType}s to them. For that, we created the classes \texttt{PureFunTypeConverter}, \texttt{ExpressionTypesResolver} and \texttt{LiteralTypesResolver}.\\
 \texttt{PureFunTypeConverter} has a method \texttt{convertFromAST} which takes an \texttt{ASTType} and returns the corresponding \texttt{PureFunType} object. If the method gets an \texttt{ASTListType} for example, it returns a new \texttt{PureFunListType} object and calls \texttt{convertFromAST} recursively for the sub type. Map and tuple types work analogous. For all other type names, it returns a \texttt{PureFunCommonType} object which has the type name as the type string.\\
 \texttt{LiteralTypesResolver} works similar as \texttt{PureFunTypeConverter} but with \texttt{ASTLiteral}. The class provides a method \texttt{resolveType} which takes an \texttt{ASTLiteral} and resolves the type for it corresponding to its subclass. For example if \texttt{resolveType} gets an \texttt{ASTIntLiteral}, then \texttt{resolveType} returns the \texttt{INT} constant from the \texttt{PureFunPrimitiveType} enum. The method works analogous for all other \texttt{ASTLiteral} subclasses.\\
+The crucial part of type checking is determining the types of expressions. Consider the assignment expression \texttt{x = calcResult()}. We need to keep two things in mind with that expression. Firstly we need to get the type of the left and the right part in our \texttt{ExpressionTypesResolver}. For that we have to store the types of variables and functions in the symboltable and look it up in the \texttt{ExpressionTypesResolver} which is not a problem with MontiCore. Secondly we need to specify what happens in the resolver if the types do not match (i.e. if \texttt{x} is a \texttt{String} and \texttt{calcResult} has the return type \texttt{Int}). If we return a type in that case, there is no way to check if the expression is well typed in our context conditions. Hence we use the \texttt{Optional} class from Java which allows us to return \texttt{empty} for expressions which are not well typed. For the symboltable MontiCore provides the necessary infrastructure, we simply store the type inferred from the \texttt{ASTType} using our \texttt{PureFunTypeConverter} in \texttt{VariableSymbol} and \texttt{FunctionSymbol}.\\
+With this setup we created the \texttt{ExpressionTypesResolver} with a method \texttt{resolveType} which takes an \texttt{ASTExpression} and returns an \texttt{Optional<PureFunType>}. For each expression \texttt{resolveType} calls an internal method matching the subclass of the \texttt{ASTExpression} which resolves the actual type. In our example \texttt{x = calcResult()}, \texttt{resolveType} would call the internal \texttt{doPrintAssignmentExpression} which returns the type of \texttt{x} if the types of the left and right expressions are equal specified by the \texttt{PureFunType} (meaning for example that \texttt{Double = Float} would return true). For the types of \texttt{x} and \texttt{calcResult}, \texttt{resolveType} will be called recursively and calls again internal methods which lookup the return type of \texttt{calcResult} and the type of \texttt{x}. Furthermore if \texttt{calcResult} had parameters, they would have been checked as well.\\
+With our type infrastructure, we can now implement all context conditions regarding type checking. As an illustration listing \ref{IfTypeCheckCoco} shows the implementation of type checking on If-Statements. The CoCo is first resolving the type of the condition in an if-Statement using \texttt{ExpressionTypesResolver}. Then it checks if the type is empty (meaning the expression in the condition is not well typed) or if the type is not \texttt{Boolean}. If one of the two cases is true, the user will see an error message with the line number where the type error has occured.
+
+\begin{figure}[h]
+\begin{lstlisting}[caption={Implementation of If-Statement type checking CoCo},label={IfTypeCheckCoco}]
+public void check(ASTIfStatement node) {
+    Optional<PureFunType> conditionType =
+       	ExpressionTypesResolver.resolveType(node.getCondition());
+
+    if (!conditionType.isPresent() ||
+        	!conditionType.get().equals(PureFunPrimitiveType.BOOLEAN)) {
+        Log.error("if condition on line " + 
+           node.getCondition().get_SourcePositionStart().getLine() + 
+           " has not type Boolean");
+        }
+}
+\end{lstlisting}
+\end{figure}
 
 \subsection{Async}
