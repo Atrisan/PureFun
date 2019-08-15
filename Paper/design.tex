@@ -15,14 +15,14 @@ In a few words: PureFun is a imperative, pure and strongly typed programming lan
 \subsection{Grammar}
 Without a doubt, programming languages like C, C++ and Python had and still have major influence in the design of new (domain specific) languages. In accordance with tradition, PureFun also takes major influence from C-like languages like C++ and Python. Obvious benefits are the familiar syntax and the fast-to-learn features of Python. Of course our language also has constructs for common expressions like increment, increment assignment etc. These are not listed below. Similarly, container types such as dictionaries, lists and tuples are discussed in details in section 4.1.\\
 In the following, we briefly introduce and discuss our philosophy and design choices in PureFun.
-\subsubsection{Functions} Functions are essential elements of imperative programming languages. We choose a natural syntax for function declarations that is not much different from C-like languages. One important difference is that the return type of the function comes after the parameter list prefixed by a colon. This improves readability and is analogous to variable declarations. An example is \ref{lst:simple_ex}, line 2.
+\subsubsection{Functions} Functions are essential elements of imperative programming languages. We choose a natural syntax for function declarations that is not much different from C-like languages. One important difference is that the return type of the function comes after the parameter list prefixed by a colon. This improves readability and is analogous to variable declarations. An example is in listing \ref{lst:simple_ex}, line 2.
 \subsubsection{Code Blocks} In order to differentiate code blocks and scopes we use curly brackets, as opposed to Python, which uses tabs and spaces for this purpose. We believe by using brackets explicitly, we can achieve similar levels of, in some cases even improve, readability and maintainability; one could easily forget to indent in Python without noticing it at first. This cannot happen in PureFun as the opening and closing brackets are mandatory in any case for each code block.\\
 Another important point is the fact that we do not use any kind of separator between two declarations or expressions. Our recommendation is to use a newline to improve readability. This may indeed be a possible hazard. An example is \ref{lst:simple_ex}
-\subsubsection{Variable declaration} In essence, a variable declaration requires a name followed by a type and optional assignment of the same type. Between name and type there can be an optional colon to improve readability. An example is \ref{lst:simple_ex} line 2 and 3.\\
+\subsubsection{Variable declaration} In essence, a variable declaration requires a name followed by a type and optional assignment of the same type. Between name and type there can be an optional colon to improve readability. An example is listing \ref{lst:simple_ex} line 2 and 3.\\
 One difference is the running variable in a for-each loop (line 4). Here we do not explicitly require a type declaration in favour of readability as it should be inherently clear from the given expression.
 
 \begin{figure}
-	\label{lst:simple_ex}\begin{lstlisting}[caption={A simple example calculating the mean for a sequence of double precision floating point values in PureFun.}]
+	\begin{lstlisting}[caption={A simple example calculating the mean for a sequence of double precision floating point values in PureFun.}, label={lst:simple_ex}]
 module Example {
 	fun reduce_mean(input : [Float64]) : Float64 {
 		accumulator Float64 = 0.0
@@ -33,10 +33,10 @@ module Example {
 	\end{lstlisting}
 \end{figure} 
 
-\subsubsection{Control statements} Because PureFun is a imperative programming language we also introduce common control statements, like loops, branch and jump statements such as break and return. The different statements are shown in \ref{lst:ex_flow} respectively. We choose to not include brackets in the branch and loop statements to improve readability. Other than that these are very similar to the ones in Python and C++.
+\subsubsection{Control statements} Because PureFun is a imperative programming language we also introduce common control statements, like loops, branch and jump statements such as break and return. The different statements are shown in listing \ref{lst:ex_flow} respectively. We choose to not include brackets in the branch and loop statements to improve readability. Other than that these are very similar to the ones in Python and C++.
 
 \begin{figure}
-	\label{lst:ex_flow}\begin{lstlisting}[caption={Some examples of control statements in PureFun}]
+	\begin{lstlisting}[caption={Some examples of control statements in PureFun}, label={lst:ex_flow}]
 module Example {
 	fun main() : Int32 {
 		x : int32 = 0
@@ -50,10 +50,10 @@ module Example {
 	\end{lstlisting}
 \end{figure}
 
-\subsubsection{Data structures} Data structures are algebraic and immutable in PureFun. We only allow variable declarations but no function definitions. The reasoning behind this is explained in details in section 3.2; this is to prevent side effects. This is a major difference to Python or C++, where class objects are mutable in principle. As consequence, data structures are semantically equivalent to tuples. This is reflected in the syntax for initializing a data structure object. An example of declaration and use can be seen in \ref{lst:data}.
+\subsubsection{Data structures} Data structures are algebraic and immutable in PureFun. We only allow variable declarations but no function definitions. The reasoning behind this is explained in details in section 3.2; this is to prevent side effects. This is a major difference to Python or C++, where class objects are mutable in principle. As consequence, data structures are semantically equivalent to tuples. This is reflected in the syntax for initializing a data structure object. An example of declaration and use can be seen in listing \ref{lst:data}.
 
 \begin{figure}
-	\label{lst:data}\begin{lstlisting}[caption={Simple example of declaration and use of user defined data structures.}]
+	\begin{lstlisting}[caption={Simple example of declaration and use of user defined data structures.}, label={lst:data}]
 module Example {
 	data Person {
 		name : String
@@ -65,10 +65,10 @@ module Example {
 	\end{lstlisting}
 \end{figure}
 
-\subsubsection{Container} PureFun supports list, tuple and dictionary types natively. We follow a similar syntax to the one in Python. The major difference is we require explicit types to be declared. One nuance of PureFun is the declaration of the dictionary type, which is similar to a list declaration but with an additional type parameter which is to be understood as \textbf{key type, value type}. We think that this is a natural syntax and extends nicely from a list declaration. See \ref{lst:cont} for some examples.
+\subsubsection{Container} PureFun supports list, tuple and dictionary types naively. We follow a similar syntax to the one in Python. The major difference is we require explicit types to be declared. One nuance of PureFun is the declaration of the dictionary type, which is similar to a list declaration but with an additional type parameter which is to be understood as \textbf{key type, value type}. We think that this is a natural syntax and extends nicely from a list declaration. See listing \ref{lst:cont} for some examples.
 
 \begin{figure}
-	\label{lst:cont}\begin{lstlisting}[caption={Some examples of container types supported in PureFun.}]
+	\begin{lstlisting}[caption={Some examples of container types supported in PureFun.},label={lst:cont}]
 	module Example {
 		tuple : (String, Int32) = ("Albert", 31)
 		list : [Int32] = [1,2,3]
@@ -81,3 +81,6 @@ module Example {
 \end{figure}
 
 \subsection{Performance}
+One of our core requirements is scalability. This means that it is necessary to introduce language constructs that aid parallel programming. We introduce async functions and code blocks. The details are discussed in sections 3.4 and 4.3.\\
+In order to achieve good performance our choice is to generate C++ code, which is then compiled into machine code by a C++ compiler. Interpreting the code directly would be too slow for our purpose. This satisfies our scalability requirement and enables efficient use of computational resources.\\
+In addition we can make use of modern C++ language features like std::futures and std::promises, std::async, etc. and leverage highly efficient code optimizations and generation capabilities apparent in modern C++ compilers. This makes the development of PureFun easier.
