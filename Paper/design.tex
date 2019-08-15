@@ -53,7 +53,7 @@ module Example {
 \subsubsection{Data structures} Data structures are algebraic and immutable in PureFun. We only allow variable declarations but no function definitions. The reasoning behind this is explained in details in section 3.2; this is to prevent side effects. This is a major difference to Python or C++, where class objects are mutable in principle. As consequence, data structures are semantically equivalent to tuples. This is reflected in the syntax for initializing a data structure object. An example of declaration and use can be seen in \ref{lst:data}.
 
 \begin{figure}
-	\label{lst:data}\begin{lstlisting}[caption={Some examples of control statements in PureFun}]
+	\label{lst:data}\begin{lstlisting}[caption={Simple example of declaration and use of user defined data structures.}]
 module Example {
 	data Person {
 		name : String
@@ -68,7 +68,7 @@ module Example {
 \subsubsection{Container} PureFun supports list, tuple and dictionary types natively. We follow a similar syntax to the one in Python. The major difference is we require explicit types to be declared. One nuance of PureFun is the declaration of the dictionary type, which is similar to a list declaration but with an additional type parameter which is to be understood as \textbf{key type, value type}. We think that this is a natural syntax and extends nicely from a list declaration. See \ref{lst:cont} for some examples.
 
 \begin{figure}
-	\label{lst:cont}\begin{lstlisting}[caption={Some examples of control statements in PureFun}]
+	\label{lst:cont}\begin{lstlisting}[caption={Some examples of container types supported in PureFun.}]
 	module Example {
 		tuple : (String, Int32) = ("Albert", 31)
 		list : [Int32] = [1,2,3]
