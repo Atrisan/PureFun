@@ -106,7 +106,7 @@ As already mentioned previously the async feature allows the execution with mult
 \item Async block: a set of statements (block) is executed asynchronously.
 \end{enumerate}
 At the end of this section we introduce some best practices when handling the async feature, since some might increase the runtime of your code.
-\subsubsection{function}
+\subsubsection{Function}
 \begin{figure}[h]
 \begin{lstlisting}[caption={Example for the async feature on functions.},label={AsyncFun}]
 module AsyncFun {
@@ -121,7 +121,7 @@ module AsyncFun {
 \end{figure}
 Asynchronous function calls can be used with the keyword async in front of a function call. Listing \ref{AsyncFun} depicts an example for the async on functions. In line 3 the function \texttt{doSth()} is called asynchronously using the async keyword. By utilizing futures from the C++ standard library a new thread is created, which executes \texttt{doSth()} and maps the result to the variable \texttt{left}. Since the function is now executed on another thread the execution of \texttt{f} can continue with line 4. Thus, the call for \texttt{doSth()} in line 3 and 4 can be executed in parallel. This can reduce the overall runtime, if the functions need sufficient time to finish.\\
 In line 5 the two partial results \texttt{left} and \texttt{right} are combined to get the result of f. Because the value of left is determined on another thread, we make use of C++ promises to ensure, that all necessary results from different threads are present. If not the execution pauses until all results are present.\\
-\subsubsection{block}
+\subsubsection{Block}
 \begin{figure}[h]
 \begin{lstlisting}[caption={Example for the async feature on a set of statements (block).},label={AsyncBlock}]
 module AsyncBolck {
