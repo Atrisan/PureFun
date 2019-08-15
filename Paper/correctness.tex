@@ -42,7 +42,7 @@ Global variables in PureFun allow the declaration of constants. In other program
 \subsection{Immutable data structures}
 Data structures can become the reason for side effects easily, as seen in listing \ref{JavaEx}. Even if the argument \texttt{l} was a local variable, the process in lines 6-9 would still be undesired behaviour. To prevent such an undesired behaviour data structures are also restricted to read-only access. Thus, recursive data structures, are enforced to be evaluated recursively and as such being covered by the next strategy.
 \subsection{Call-by-value functions}
-The last strategy utilizes a feature by C++, which uses copies of the argument and not a reference to the argument. The call-by-value feature in the generated C++ code ensures, that the argument both allows read and write access.\\
+The last strategy utilizes a feature by C++ \cite{C++STD}, which uses copies of the argument and not a reference to the argument. The call-by-value feature in the generated C++ code ensures, that the argument both allows read and write access.\\
 Using the call-by-value functions in combination with both the immutable global variables and data structures, it can be ensured, that no function is able to change their environment. Thus, leading to pure functions during serial execution.
 \subsection{Async functions/blocks}
 The async feature allows the asynchronous execution of a single function as well as a structured block. Since data races are a common error when regarding code execution with more than one execution unit, we need to introduce an additional strategy to prevent those. \\

@@ -102,3 +102,58 @@ public void check(ASTIfStatement node) {
 \end{figure}
 
 \subsection{Async}
+As already mentioned previously the async feature allows the execution with multiple threads without breaking the pureness of the function. Furthermore, async is supported in two different ways:
+
+\begin{enumerate}
+\item Async function: a function is called asynchronously.
+\item Async block: a set of statements (block) is executed asynchronously.
+\end{enumerate}
+At the end of this section we introduce some best practices when handling the async feature, since some might increase the runtime of your code.
+\subsubsection{function}
+\begin{figure}[h]
+\begin{lstlisting}[caption={Example for the async feature on functions.},label={AsyncFun}]
+module AsyncFun {
+  fun f() : Int {
+    left Int = async doSth()
+    right Int = doSth()
+    return left + right 
+  }
+}
+
+\end{lstlisting}
+\end{figure}
+Asynchronous function calls can be used with the keyword async in front of a function call. Listing \ref{AsyncFun} depicts an example for the async on functions. In line 3 the function \texttt{doSth()} is called asynchronously using the async keyword. By utilizing futures from the C++ standard library a new thread is created, which executes \texttt{doSth()} and maps the result to the variable \texttt{left}. Since the function is now executed on another thread the execution of \texttt{f} can continue with line 4. Thus, the call for \texttt{doSth()} in line 3 and 4 can be executed in parallel. This can reduce the overall runtime, if the functions need sufficient time to finish.\\
+In line 5 the two partial results \texttt{left} and \texttt{right} are combined to get the result of f. Because the value of left is determined on another thread, we make use of C++ promises to ensure, that all necessary results from different threads are present. If not the execution pauses until all results are present.\\
+\subsubsection{block}
+\begin{figure}[h]
+\begin{lstlisting}[caption={Example for the async feature on a set of statements (block).},label={AsyncBlock}]
+module AsyncBolck {
+  fun f() : Int {
+    left : Int = 0
+    rigth : Int = 0
+    async { 
+      for i Int = 0; i < genLargeInt(); i++ {
+        left = left++ 
+      }
+    }
+    for i Int = 0; i < genLargeInt(); i++ {
+      right = right++ 
+    }
+    return left + right 
+  }
+}
+\end{lstlisting}
+\end{figure}
+The execution of asynchronous block works similar to the asynchronous functions. The async keyword is used to declare asynchronous execution and the desired block is enclosed in curly brackets. Note that this generates a new scope. Therefore, all variables declared within this block are not available outside of it.\\
+In Listing \ref{AsyncBlock} the async block in lines 5-9 executes the enclosed for-loop on a new thread. Similar to the asynchronous functions. Resulting in a parallel execution of both the for-loop in lines 6-8 and the for-loop in lines 10-12. By using the C++ promises it is ensured, that no data races are possible.
+\subsubsection{Best Practice}
+Parallel execution is generally more complex, than serial execution. This holds both for correctness and runtime predictions for the code. Since data races are covered in chapter 3 on pureness the best practices will focus on the optimization of the runtime. \\
+To leverage the async feature appropriately there are a few things to keep in mind:
+\begin{itemize}
+\item The asynchronous part can overlap with other parts of the execution, e.g. both parts use different variables.
+\item The asynchronous part is detached, e.g. it does not need to be evaluated on the spot.
+\item The asynchronous part is declared before the part to overlap with.
+\item Both the asynchronous part and the part on the main thread are of sufficient runtime to hide the overhead of the thread creation.
+\end{itemize}
+For example in listing \ref{AsyncFun} the function calls in line 3 and 4 can overlap, because the result is saved in different variables. Furthermore, the result for \texttt{left} is not needed until line 5. The async call for \texttt{left} is declared before line 5, allowing the instantiation of \texttt{left} and \texttt{right} in parallel. At last, if we consider \texttt{doSth()} to be a sufficiently long running function, the runtime of \texttt{f} will be shorter with the async in line 4.\\
+By following these best practices most of the overhead induced by the thread creation and the synchronization can be avoided.
